@@ -10,6 +10,7 @@
 
 "use client";
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 
@@ -56,7 +57,7 @@ export default function AdminDashboard() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
           <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4">
             📦
@@ -86,6 +87,24 @@ export default function AdminDashboard() {
             <p className="text-gray-500 font-medium">Clients inscrits</p>
           </div>
         </div>
+        <Link href="/admin/categories" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+            🏷️
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
+            <p className="text-gray-500 font-medium">Catégories Phares</p>
+          </div>
+        </Link>
+        <Link href="/admin/featured-products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+            ⭐
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
+            <p className="text-gray-500 font-medium">Pièces Maîtresses</p>
+          </div>
+        </Link>
       </div>
     </div>
   );

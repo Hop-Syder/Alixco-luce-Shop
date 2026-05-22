@@ -12,6 +12,25 @@ class ProductBase(BaseModel):
 class Product(ProductBase):
     id: str = Field(alias="_id")
 
+class CategoryBase(BaseModel):
+    title: str
+    desc: str
+    img: str
+    order: int = 0
+
+class Category(CategoryBase):
+    id: str = Field(alias="_id")
+
+class FeaturedProductBase(BaseModel):
+    name: str
+    price: str
+    badge: Optional[str] = None
+    img: str
+    order: int = 0
+
+class FeaturedProduct(FeaturedProductBase):
+    id: str = Field(alias="_id")
+
 class CartItem(BaseModel):
     productId: str
     quantity: int
