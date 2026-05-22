@@ -15,8 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="h-full antialiased overflow-x-hidden">
-      <body className="min-h-full flex flex-col overflow-x-hidden">
+    <html lang="fr" className="antialiased">
+      <body className="min-h-screen flex flex-col bg-[hsl(var(--background))] text-[hsl(var(--text-main))]">
         <AuthProvider>
           <Header />
           <main className="flex-grow">

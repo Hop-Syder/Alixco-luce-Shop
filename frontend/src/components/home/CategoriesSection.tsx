@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
 import { api } from '@/services/api';
+import Image from 'next/image';
 
 interface Category {
   _id?: string;
@@ -40,8 +41,8 @@ export function CategoriesSection() {
         if (response.data && response.data.length > 0) {
           setCategories(response.data);
         }
-      } catch (error: any) {
-        if (error.isAxiosError && error.message === 'Network Error') {
+      } catch (error: unknown) {
+        if (error && typeof error === 'object' && 'isAxiosError' in error && (error as {message?: string}).message === 'Network Error') {
           console.warn("Le backend n'est pas accessible, utilisation des catégories par défaut.");
         } else {
           console.error("Erreur lors de la récupération des catégories:", error);
@@ -55,7 +56,7 @@ export function CategoriesSection() {
     <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <FadeUp className="text-center mb-20 flex flex-col items-center">
         <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Notre Expertise</span>
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">L'Univers Alixco</h2>
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">L&apos;Univers Alixco</h2>
         <div className="accent-line"></div>
       </FadeUp>
       
@@ -63,8 +64,7 @@ export function CategoriesSection() {
         {categories.map((cat, idx) => (
           <FadeUp key={cat._id || idx} delay={idx * 0.15}>
             <Link href={`/products?category=${cat.title.toLowerCase()}`} className="group relative h-[450px] overflow-hidden block border border-white/10 hover:border-[hsl(var(--primary))]/50 transition-colors duration-500">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={cat.img} alt={cat.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
+              <Image src={cat.img} alt={cat.title} fill className="object-cover transition-transform duration-1000 group-hover:scale-110 opacity-70 group-hover:opacity-100" unoptimized />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
               
               <div className="absolute inset-0 p-8 flex flex-col justify-end">

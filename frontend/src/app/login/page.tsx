@@ -35,8 +35,9 @@ export default function Login() {
       });
       
       router.push('/dashboard');
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Une erreur est survenue lors de la connexion.');
+    } catch (err: unknown) {
+      const e = err as { response?: { data?: { detail?: string } } };
+      setError(e.response?.data?.detail || 'Une erreur est survenue lors de la connexion.');
     }
   };
 
@@ -87,7 +88,7 @@ export default function Login() {
         <p className="text-center text-sm text-zinc-400">
           Pas encore de compte ?{' '}
           <Link href="/register" className="font-medium text-amber-500 hover:text-amber-400">
-            S'inscrire
+            S&apos;inscrire
           </Link>
         </p>
       </div>

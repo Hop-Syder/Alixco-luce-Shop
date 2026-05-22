@@ -41,8 +41,9 @@ export default function Register() {
       login(access_token, user);
       
       router.push('/');
-    } catch (err: any) {
-      setError(err.response?.data?.detail || 'Une erreur est survenue lors de l\'inscription.');
+    } catch (err: unknown) {
+      const e = err as { response?: { data?: { detail?: string } } };
+      setError(e.response?.data?.detail || 'Une erreur est survenue lors de l\'inscription.');
     }
   };
 
@@ -51,7 +52,7 @@ export default function Register() {
       <div className="max-w-md w-full bg-black border border-zinc-800 rounded-xl shadow-2xl p-8 space-y-6">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white tracking-tight">Créer un compte</h2>
-          <p className="text-zinc-400 mt-2 text-sm">Rejoignez l'univers Alixco Luxe.</p>
+          <p className="text-zinc-400 mt-2 text-sm">Rejoignez l&apos;univers Alixco Luxe.</p>
         </div>
         
         {error && (
@@ -96,7 +97,7 @@ export default function Register() {
             type="submit" 
             className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
           >
-            S'inscrire
+            S&apos;inscrire
           </button>
         </form>
         

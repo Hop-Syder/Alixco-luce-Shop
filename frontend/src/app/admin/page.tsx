@@ -42,7 +42,7 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       <div className="bg-white shadow rounded-2xl p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-2">Tableau de bord Administrateur</h2>
-        <p className="text-gray-500 mb-6">Vue d'ensemble de la plateforme Alixco Luxe.</p>
+        <p className="text-gray-500 mb-6">Vue d&apos;ensemble de la plateforme Alixco Luxe.</p>
         
         {loading ? (
           <div className="text-gray-500">Vérification des droits...</div>

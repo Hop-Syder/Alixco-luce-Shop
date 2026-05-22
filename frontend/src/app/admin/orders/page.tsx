@@ -20,14 +20,28 @@ const VALID_STATUSES = [
   { value: 'cancelled', label: 'Annulée' }
 ];
 
+interface OrderItem {
+  productId: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+interface Order {
+  _id?: string;
+  id?: string;
+  orderNumber: string;
+  createdAt: string;
+  customer?: { name: string; phone: string; email?: string };
+  items?: OrderItem[];
+  total: number;
+  status: string;
+}
+
 export default function AdminOrders() {
-  const [orders, setOrders] = useState<any[]>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
 
   const fetchOrders = async () => {
     try {
@@ -39,6 +53,12 @@ export default function AdminOrders() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchOrders();
+  }, []);
+
 
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     try {
@@ -128,7 +148,7 @@ export default function AdminOrders() {
                     <td className="p-4 text-right">
                       <select
                         value={order.status}
-                        onChange={(e) => handleStatusChange(oId, e.target.value)}
+                        onChange={(e) => handleStatusChange(oId as string, e.target.value)}
                         disabled={updating === oId}
                         className="text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50"
                       >

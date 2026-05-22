@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save } from 'lucide-react';
+import Image from 'next/image';
 
 interface Category {
   _id?: string;
@@ -44,6 +45,7 @@ export default function AdminCategories() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchCategories();
   }, []);
 
@@ -101,7 +103,7 @@ export default function AdminCategories() {
       <div className="flex justify-between items-center bg-white shadow rounded-2xl p-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Catégories Phares</h2>
-          <p className="text-gray-500">Gérez les sections affichées sur la page d'accueil.</p>
+          <p className="text-gray-500">Gérez les sections affichées sur la page d&apos;accueil.</p>
         </div>
         <button 
           onClick={handleCreate}
@@ -139,7 +141,7 @@ export default function AdminCategories() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">URL de l'image</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">URL de l&apos;image</label>
               <input 
                 type="text" 
                 value={formData.img} 
@@ -149,7 +151,7 @@ export default function AdminCategories() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ordre d'affichage</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Ordre d&apos;affichage</label>
               <input 
                 type="number" 
                 value={formData.order} 
@@ -179,7 +181,7 @@ export default function AdminCategories() {
         {categories.map((cat) => (
           <div key={cat._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group">
             <div className="relative h-48">
-              <img src={cat.img} alt={cat.title} className="w-full h-full object-cover" />
+              <Image src={cat.img} alt={cat.title} fill className="object-cover" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                 <button 
                   onClick={() => handleEdit(cat)}

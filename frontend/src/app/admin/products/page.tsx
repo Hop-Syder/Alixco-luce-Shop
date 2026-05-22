@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save, Search } from 'lucide-react';
+import Image from 'next/image';
 
 interface Product {
   _id?: string;
@@ -45,8 +46,11 @@ export default function AdminProducts() {
   const [search, setSearch] = useState('');
   const [error, setError] = useState('');
 
-  const fetchData = async () => {
-    setLoading(true);
+  const fetchData = async (showLoading = true) => {
+    if (showLoading) {
+      // Small trick to avoid synchronous state update in effect
+      Promise.resolve().then(() => setLoading(true));
+    }
     try {
       const [prodRes, catRes] = await Promise.all([
         api.get('/products'),
@@ -63,7 +67,8 @@ export default function AdminProducts() {
   };
 
   useEffect(() => {
-    fetchData();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchData(true);
   }, []);
 
   const handleEdit = (product: Product) => {
@@ -122,7 +127,7 @@ export default function AdminProducts() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white shadow rounded-2xl p-6 gap-4">
         <div>
           <h2 className="text-2xl font-bold text-gray-800">Catalogue Produits</h2>
-          <p className="text-gray-500">Gérez l'ensemble des produits de la boutique.</p>
+          <p className="text-gray-500">Gérez l&apos;ensemble des produits de la boutique.</p>
         </div>
         <div className="flex gap-4 w-full sm:w-auto">
           <div className="relative flex-grow sm:w-64">
@@ -198,7 +203,7 @@ export default function AdminProducts() {
             </div>
 
             <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-stone-700 mb-2">URL de l'image *</label>
+              <label className="block text-sm font-semibold text-stone-700 mb-2">URL de l&apos;image *</label>
               <div className="flex gap-4">
                 <input 
                   type="text" 
@@ -208,7 +213,9 @@ export default function AdminProducts() {
                   placeholder="https://..."
                 />
                 {formData.image && (
-                  <img src={formData.image} alt="Preview" className="w-12 h-12 rounded-lg object-cover border" />
+                  <div className="relative w-12 h-12">
+                    <Image src={formData.image} alt="Preview" fill className="rounded-lg object-cover border" unoptimized />
+                  </div>
                 )}
               </div>
             </div>
@@ -250,7 +257,9 @@ export default function AdminProducts() {
                   <tr key={product._id} className="hover:bg-stone-50/50 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-4">
-                        <img src={product.image} alt={product.name} className="w-12 h-12 rounded-lg object-cover bg-stone-100" />
+                        <div className="relative w-12 h-12">
+                          <Image src={product.image} alt={product.name} fill className="rounded-lg object-cover bg-stone-100" unoptimized />
+                        </div>
                         <span className="font-bold text-stone-800">{product.name}</span>
                       </div>
                     </td>

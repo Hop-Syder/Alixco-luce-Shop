@@ -3,7 +3,7 @@
 /**
  * @author @hopsyder
  * @organization Nexus Partners
- * @description Global Navigation Header (Liquid Glass style) with Mobile Menu
+ * @description Global Navigation Header with Mobile Bottom Nav
  * @created 2026-05-22
  * @updated 2026-05-22
  * 🌐 ceo.nexuspartners.xyz
@@ -11,86 +11,80 @@
  * ──────────────────────────────────
  */
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useCartStore } from '@/store/cartStore';
-import { Menu, X, ShoppingBag, User, LogOut, ChevronRight } from 'lucide-react';
+import { ShoppingBag, User, LogOut, Home, Grid, PenTool, Bell } from 'lucide-react';
 
 const Header: React.FC = () => {
   const { isAuthenticated, logout, user } = useAuth();
   const cartItems = useCartStore(state => state.items);
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    // Using a microtask prevents the synchronous setState warning
-    Promise.resolve().then(() => setIsMobileMenuOpen(false));
-  }, [pathname]);
-
-  // Prevent scrolling when mobile menu is open
-  useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isMobileMenuOpen]);
-
+  // Navigation principale (utilisée en desktop top-nav et mobile bottom-nav)
   const navLinks = [
-    { name: 'Accueil', path: '/' },
-    { name: 'Catalogue', path: '/products' },
-    { name: "L'Atelier", path: '/about' },
+    { name: 'Accueil', path: '/', icon: Home },
+    { name: 'Catalogue', path: '/products', icon: Grid },
+    { name: "L'Atelier", path: '/about', icon: PenTool },
   ];
 
   return (
     <>
-      <header className="glass-nav z-50">
+      {/* 
+        HEADER TOP (Visible sur Mobile & Desktop) 
+        - Desktop : Contient Logo, Liens Principaux, Actions (Compte, Panier)
+        - Mobile : Contient Logo (gauche), Actions spécifiques (droite)
+      */}
+      <header className="glass-nav z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
+            
+            {/* Logo (Gauche) */}
             <div className="flex-shrink-0 flex items-center z-50">
               <Link href="/" className="font-heading text-2xl md:text-3xl font-bold tracking-wider text-[hsl(var(--text-main))] hover:text-[hsl(var(--primary))] transition-colors relative z-50">
                 ALIXCO <span className="text-[hsl(var(--primary))]">LUXE</span>
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Navigation Desktop (Centrée, cachée sur mobile) */}
             <nav className="hidden md:flex space-x-8">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.path} 
-                  className={`text-sm uppercase tracking-widest font-medium transition-colors ${
-                    pathname === link.path ? 'text-[hsl(var(--primary))]' : 'text-stone-600 hover:text-[hsl(var(--primary))]'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = pathname === link.path;
+                return (
+                  <Link 
+                    key={link.name} 
+                    href={link.path} 
+                    className={`relative text-sm uppercase tracking-widest font-medium transition-colors group py-2 ${
+                      isActive ? 'text-[hsl(var(--primary))]' : 'text-stone-400 hover:text-[hsl(var(--text-main))]'
+                    }`}
+                  >
+                    {link.name}
+                    {/* Indicateur actif desktop */}
+                    <span className={`absolute bottom-0 left-0 w-full h-0.5 bg-[hsl(var(--primary))] origin-left transition-transform duration-300 ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                    }`} />
+                  </Link>
+                );
+              })}
             </nav>
 
-            {/* Desktop Actions & Mobile Toggles */}
+            {/* Actions (Droite) */}
             <div className="flex items-center space-x-4 md:space-x-6 z-50">
               
-              {/* Cart Icon (Visible on both) */}
-              <Link href="/cart" className="relative text-stone-600 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
-                <ShoppingBag className="w-6 h-6" strokeWidth={1.5} />
-                {cartItemCount > 0 && (
-                  <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold text-white transform translate-x-1/4 -translate-y-1/4 bg-[hsl(var(--primary))] rounded-full border-2 border-white">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Link>
+              {/* Notification - Uniquement Mobile (Fixé en haut à droite) */}
+              <button className="md:hidden relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
+                <Bell className="w-5 h-5" strokeWidth={1.5} />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[hsl(var(--primary))] rounded-full border border-black"></span>
+              </button>
 
-              {/* Desktop Auth */}
+              {/* Actions de compte (Desktop) */}
               <div className="hidden md:flex items-center space-x-4">
                 {isAuthenticated ? (
                   <>
-                    <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-sm uppercase tracking-widest font-semibold text-stone-800 hover:text-[hsl(var(--primary))] transition-colors flex items-center">
+                    <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-sm uppercase tracking-widest font-semibold text-stone-300 hover:text-[hsl(var(--primary))] transition-colors flex items-center">
                       <User className="w-4 h-4 mr-2" />
                       Mon Compte
                     </Link>
@@ -100,7 +94,7 @@ const Header: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <Link href="/login" className="text-sm uppercase tracking-widest font-medium text-stone-600 hover:text-[hsl(var(--primary))] transition-colors">
+                    <Link href="/login" className="text-sm uppercase tracking-widest font-medium text-stone-400 hover:text-[hsl(var(--text-main))] transition-colors">
                       Connexion
                     </Link>
                     <Link href="/register" className="btn-primary text-xs uppercase tracking-widest px-5 py-2.5">
@@ -110,81 +104,78 @@ const Header: React.FC = () => {
                 )}
               </div>
 
-              {/* Mobile Menu Toggle */}
-              <button 
-                className="md:hidden p-2 text-stone-800 hover:text-[hsl(var(--primary))] transition-colors"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={1.5} /> : <Menu className="w-7 h-7" strokeWidth={1.5} />}
-              </button>
+              {/* Action de compte (Mobile - Mon Compte en haut à droite) */}
+              <div className="md:hidden flex items-center">
+                 {isAuthenticated ? (
+                  <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
+                    <User className="w-5 h-5" strokeWidth={1.5} />
+                  </Link>
+                ) : (
+                  <Link href="/login" className="text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
+                    <User className="w-5 h-5" strokeWidth={1.5} />
+                  </Link>
+                )}
+              </div>
+
+              {/* Panier (Visible Desktop & Mobile) */}
+              <Link href="/cart" className="relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
+                <ShoppingBag className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
+                {cartItemCount > 0 && (
+                  <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[9px] font-bold text-white transform translate-x-1/4 -translate-y-1/4 bg-[hsl(var(--primary))] rounded-full border border-black md:w-5 md:h-5 md:text-[10px] md:border-2">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Link>
+              
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
-      <div 
-        className={`fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
-          isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setIsMobileMenuOpen(false)}
-      />
-
-      {/* Mobile Menu Drawer */}
-      <div 
-        className={`fixed top-0 right-0 h-full w-full max-w-sm bg-white z-40 shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden flex flex-col pt-24 ${
-          isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col">
-          <nav className="flex flex-col space-y-6 mb-12">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                href={link.path} 
-                className={`text-2xl font-heading font-bold transition-colors flex items-center justify-between group ${
-                  pathname === link.path ? 'text-[hsl(var(--primary))]' : 'text-stone-800 hover:text-[hsl(var(--primary))]'
-                }`}
+      {/* 
+        BOTTOM NAVIGATION (Uniquement sur Mobile) 
+        - Design "Pro UI" : Floating Dock / Pill
+      */}
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[360px] bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full z-50 shadow-2xl px-2">
+        <div className="flex justify-between items-center h-[60px] px-2">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.path;
+            const Icon = link.icon;
+            
+            return (
+              <Link
+                key={link.name}
+                href={link.path}
+                className="group relative flex flex-col items-center justify-center w-full h-full"
               >
-                {link.name}
-                <ChevronRight className={`w-5 h-5 transition-transform group-hover:translate-x-1 ${pathname === link.path ? 'text-[hsl(var(--primary))] opacity-100' : 'text-stone-300 opacity-0 group-hover:opacity-100'}`} />
-              </Link>
-            ))}
-          </nav>
+                {/* Active Pill Background */}
+                <div className={`absolute w-12 h-10 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  isActive ? 'bg-[hsl(var(--primary))]/15 scale-100 opacity-100' : 'scale-50 opacity-0 group-hover:scale-75 group-hover:bg-white/5 group-hover:opacity-100'
+                }`} />
 
-          <div className="mt-auto border-t border-stone-100 pt-8 flex flex-col space-y-4">
-            {isAuthenticated ? (
-              <>
-                <div className="flex items-center space-x-3 mb-4 text-stone-500">
-                  <div className="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center">
-                    <User className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-stone-800">{user?.full_name || 'Utilisateur'}</p>
-                    <p className="text-xs">{user?.email}</p>
-                  </div>
+                {/* Conteneur Icône */}
+                <div className={`relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  isActive ? '-translate-y-2' : 'translate-y-0 group-hover:-translate-y-1'
+                }`}>
+                  <Icon 
+                    className={`w-[22px] h-[22px] transition-colors duration-300 ${
+                      isActive ? 'text-[hsl(var(--primary))]' : 'text-stone-400'
+                    }`} 
+                    strokeWidth={isActive ? 2.5 : 1.5} 
+                  />
                 </div>
-                <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="w-full py-3 px-4 border border-[hsl(var(--primary))] text-[hsl(var(--primary))] text-center rounded-sm font-bold uppercase tracking-widest text-sm hover:bg-[hsl(var(--primary))]/5 transition-colors">
-                  Mon Compte
-                </Link>
-                <button onClick={() => { logout(); setIsMobileMenuOpen(false); }} className="w-full py-3 px-4 flex items-center justify-center text-red-500 font-bold uppercase tracking-widest text-sm hover:bg-red-50 transition-colors rounded-sm">
-                  <LogOut className="w-4 h-4 mr-2" /> Déconnexion
-                </button>
-              </>
-            ) : (
-              <>
-                <Link href="/login" className="w-full py-4 text-center font-bold uppercase tracking-widest text-sm text-stone-800 hover:text-[hsl(var(--primary))] transition-colors">
-                  Connexion
-                </Link>
-                <Link href="/register" className="btn-primary w-full py-4 text-center font-bold uppercase tracking-widest text-sm">
-                  Créer un compte
-                </Link>
-              </>
-            )}
-          </div>
+                
+                {/* Libellé Texte */}
+                <span className={`absolute bottom-1.5 z-10 text-[10px] tracking-wide font-medium transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                  isActive ? 'text-[hsl(var(--primary))] opacity-100 translate-y-0' : 'text-stone-500 opacity-0 translate-y-2'
+                }`}>
+                  {link.name}
+                </span>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      </nav>
     </>
   );
 };

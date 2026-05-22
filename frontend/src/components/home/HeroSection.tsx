@@ -50,7 +50,7 @@ export function HeroSection() {
           
           <FadeUp delay={0.4}>
             <p className="text-lg md:text-xl text-stone-300 max-w-2xl font-light leading-relaxed">
-              Sublimez la matière. Nous transformons le bois, le verre, le métal et le cuir en véritables œuvres d'art grâce à une précision absolue. Des créations uniques, raffinées et résolument sur-mesure.
+              Sublimez la matière. Nous transformons le bois, le verre, le métal et le cuir en véritables œuvres d&apos;art grâce à une précision absolue. Des créations uniques, raffinées et résolument sur-mesure.
             </p>
           </FadeUp>
 

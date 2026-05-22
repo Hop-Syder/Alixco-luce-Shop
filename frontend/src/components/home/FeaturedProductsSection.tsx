@@ -15,6 +15,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
 import { api } from '@/services/api';
+import Image from 'next/image';
 
 interface FeaturedProduct {
   _id?: string;
@@ -42,8 +43,9 @@ export function FeaturedProductsSection() {
         if (response.data && response.data.length > 0) {
           setProducts(response.data);
         }
-      } catch (error: any) {
-        if (error.isAxiosError && error.message === 'Network Error') {
+      } catch (error: unknown) {
+        const err = error as { isAxiosError?: boolean, message?: string };
+        if (err.isAxiosError && err.message === 'Network Error') {
           console.warn("Le backend n'est pas accessible, utilisation des pièces maîtresses par défaut.");
         } else {
           console.error("Erreur lors de la récupération des pièces maîtresses:", error);
@@ -76,8 +78,7 @@ export function FeaturedProductsSection() {
                       {product.badge}
                     </div>
                   )}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={product.img} alt={product.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 opacity-80 group-hover:opacity-100" />
+                  <Image src={product.img} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000 opacity-80 group-hover:opacity-100" unoptimized />
                   
                   {/* Overlay interaction */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">

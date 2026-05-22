@@ -24,8 +24,9 @@ export default function ProductList() {
       try {
         const response = await api.get('/products');
         setProducts(response.data);
-      } catch (error: any) {
-        if (error.isAxiosError && error.message === 'Network Error') {
+      } catch (error: unknown) {
+        const err = error as { isAxiosError?: boolean, message?: string };
+        if (err.isAxiosError && err.message === 'Network Error') {
           console.warn("Le backend n'est pas accessible pour récupérer les produits.");
         } else {
           console.error('Error fetching products', error);

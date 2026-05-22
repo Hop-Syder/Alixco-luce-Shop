@@ -13,10 +13,34 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 
+interface Address {
+  street: string;
+  city: string;
+  country: string;
+  details?: string;
+}
+
+interface Profile {
+  email: string;
+  phone: string;
+  role: string;
+  created_at?: string;
+  addresses?: Address[];
+}
+
+interface Order {
+  _id?: string;
+  id?: string;
+  orderNumber: string;
+  createdAt: string;
+  status: string;
+  total: number;
+}
+
 export default function ClientDashboard() {
   const { user, token } = useAuth();
-  const [profile, setProfile] = useState<any>(null);
-  const [orders, setOrders] = useState<any[]>([]);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -65,11 +89,11 @@ export default function ClientDashboard() {
         <div className="border border-gray-100 rounded-xl p-6 bg-gray-50 shadow-sm">
           <h3 className="font-semibold text-xl text-gray-800 mb-4 flex items-center">
             <span className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-sm">📍</span>
-            Adresses d'expédition
+            Adresses d&apos;expédition
           </h3>
           {profile?.addresses && profile.addresses.length > 0 ? (
             <ul className="space-y-3">
-              {profile.addresses.map((addr: any, index: number) => (
+              {profile.addresses.map((addr: Address, index: number) => (
                 <li key={index} className="text-gray-600 bg-white p-3 rounded border border-gray-200">
                   <p className="font-medium text-gray-800">{addr.street}</p>
                   <p>{addr.city}, {addr.country}</p>
@@ -107,7 +131,7 @@ export default function ClientDashboard() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
-                {orders.map((order: any) => (
+                {orders.map((order: Order) => (
                   <tr key={order._id || order.id} className="text-gray-700 text-sm">
                     <td className="py-4 font-medium">{order.orderNumber}</td>
                     <td className="py-4">{new Date(order.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
@@ -135,7 +159,7 @@ export default function ClientDashboard() {
           </div>
         ) : (
           <div className="text-center py-8">
-            <p className="text-gray-500 italic mb-4">Vous n'avez passé aucune commande pour le moment.</p>
+            <p className="text-gray-500 italic mb-4">Vous n&apos;avez passé aucune commande pour le moment.</p>
           </div>
         )}
       </div>

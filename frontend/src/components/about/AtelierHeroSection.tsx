@@ -28,7 +28,7 @@ export function AtelierHeroSection() {
       <div className="max-w-4xl mx-auto z-10 w-full space-y-6">
         <FadeUp delay={0.1} className="flex flex-col items-center">
           <span className="text-[hsl(var(--primary))] uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4 block">
-            L'Antre de la Précision
+            L&apos;Antre de la Précision
           </span>
           <div className="accent-line mx-auto"></div>
         </FadeUp>
@@ -43,7 +43,7 @@ export function AtelierHeroSection() {
         
         <FadeUp delay={0.4}>
           <p className="text-lg md:text-xl text-stone-300 font-light leading-relaxed mt-6">
-            Plongez au cœur de notre atelier, là où vos idées prennent forme. Chaque faisceau laser, chaque geste est guidé par notre quête absolue d'excellence.
+            Plongez au cœur de notre atelier, là où vos idées prennent forme. Chaque faisceau laser, chaque geste est guidé par notre quête absolue d&apos;excellence.
           </p>
         </FadeUp>
       </div>

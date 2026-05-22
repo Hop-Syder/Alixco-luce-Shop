@@ -18,7 +18,7 @@ export function TestimonialsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <FadeUp className="flex flex-col items-center">
           <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Témoignages</span>
-          <h2 className="text-4xl font-heading font-bold text-white mb-6">L'Excellence Reconnue</h2>
+          <h2 className="text-4xl font-heading font-bold text-white mb-6">L&apos;Excellence Reconnue</h2>
           <div className="accent-line mb-20"></div>
         </FadeUp>
         
@@ -34,7 +34,7 @@ export function TestimonialsSection() {
                   <div className="flex text-[hsl(var(--primary))] mb-8">
                     {[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 fill-current mr-1" />)}
                   </div>
-                  <p className="text-stone-300 font-light leading-relaxed mb-8">"{review.text}"</p>
+                  <p className="text-stone-300 font-light leading-relaxed mb-8">&quot;{review.text}&quot;</p>
                 </div>
                 <div className="pt-6 border-t border-white/5">
                   <h4 className="font-heading text-lg text-white">{review.name}</h4>

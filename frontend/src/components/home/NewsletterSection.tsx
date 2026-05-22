@@ -30,7 +30,7 @@ export function NewsletterSection() {
             required
           />
           <button type="submit" className="text-sm uppercase tracking-widest font-bold text-[hsl(var(--primary))] hover:text-white transition-colors px-6 whitespace-nowrap">
-            S'inscrire
+            S&apos;inscrire
           </button>
         </form>
       </FadeUp>

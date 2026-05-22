@@ -14,6 +14,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/services/api';
+import Image from 'next/image';
 
 import { useCartStore } from '@/store/cartStore';
 
@@ -106,10 +107,12 @@ export default function ProductDetail() {
             {/* Image */}
             <div className="w-full md:w-1/2">
               <div className="rounded-[2rem] overflow-hidden bg-stone-100 aspect-[4/5] relative shadow-inner">
-                <img 
+                <Image 
                   src={product.image || 'https://via.placeholder.com/600x750?text=Alixco+Luxe'} 
                   alt={product.name} 
-                  className="w-full h-full object-cover object-center"
+                  fill
+                  className="object-cover object-center"
+                  unoptimized
                 />
               </div>
             </div>
@@ -126,7 +129,7 @@ export default function ProductDetail() {
               <div className="border-t border-stone-200 py-8 mb-8">
                 <h3 className="text-sm font-bold tracking-widest uppercase text-stone-900 mb-4">Description</h3>
                 <p className="text-stone-600 leading-relaxed font-light text-lg">
-                  Ce chef-d'œuvre incarne l'excellence artisanale d'Alixco Luxe. 
+                  Ce chef-d&apos;œuvre incarne l&apos;excellence artisanale d&apos;Alixco Luxe. 
                   Conçu avec des matériaux nobles pour une expérience et une élégance intemporelles. 
                   Chaque détail a été pensé pour sublimer votre quotidien.
                 </p>

@@ -12,40 +12,42 @@ import React from 'react';
 import Link from 'next/link';
 import { Clock, CheckCircle2, ChevronRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
+import Image from 'next/image';
 
 export function PromoSection() {
   return (
-    <section className="py-20 w-full relative">
+    <section className="py-12 w-full relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <FadeUp>
           <div className="relative border border-white/5 overflow-hidden rounded-sm shadow-2xl bg-[#0a0a0a]">
             {/* Background Image */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
+            <Image 
               src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600" 
               alt="Promo" 
-              className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen pointer-events-none" 
+              fill
+              className="object-cover opacity-30 mix-blend-screen pointer-events-none" 
+              unoptimized
             />
             
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 to-black/20 pointer-events-none"></div>
             
             {/* Content Container */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 p-8 md:p-16 lg:p-20 gap-12 lg:gap-20 items-center">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 p-8 md:p-12 lg:p-16 gap-8 lg:gap-12 items-center">
               {/* Text Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
+            <div className="space-y-6">
+              <div className="space-y-3">
                 <div className="inline-flex items-center text-[hsl(var(--primary))] text-xs font-bold uppercase tracking-[0.3em]">
                   <Clock className="w-4 h-4 mr-3" /> Vente Flash Exclusive
                 </div>
                 
-                <h2 className="text-5xl md:text-6xl font-heading font-bold text-white leading-none tracking-tight">
-                  L'Édition Limitée <br/>
-                  <span className="text-gradient-gold mt-1 block">"Noir &amp; Or"</span>
+                <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-none tracking-tight">
+                  L&apos;Édition Limitée <br/>
+                  <span className="text-gradient-gold mt-1 block">&quot;Noir &amp; Or&quot;</span>
                 </h2>
                 
-                <p className="text-stone-400 text-lg md:text-xl font-light leading-snug max-w-lg">
-                  Profitez de privilèges sur notre collection la plus exclusive. Une fusion parfaite entre la chaleur du bois noble et l'éclat de l'or, taillée avec une précision millimétrique.
+                <p className="text-stone-400 text-base md:text-lg font-light leading-snug max-w-lg">
+                  Profitez de privilèges sur notre collection la plus exclusive. Une fusion parfaite entre la chaleur du bois noble et l&apos;éclat de l&apos;or, taillée avec une précision millimétrique.
                 </p>
               </div>
               
@@ -54,13 +56,13 @@ export function PromoSection() {
                   <span className="bg-white/5 p-2 rounded-full mr-4 group-hover:bg-[hsl(var(--primary))]/20 transition-colors">
                     <CheckCircle2 className="w-4 h-4 text-[hsl(var(--primary))]" />
                   </span>
-                  Finitions artisanales à la feuille d'or
+                  Finitions artisanales à la feuille d&apos;or
                 </li>
                 <li className="flex items-center group">
                   <span className="bg-white/5 p-2 rounded-full mr-4 group-hover:bg-[hsl(var(--primary))]/20 transition-colors">
                     <CheckCircle2 className="w-4 h-4 text-[hsl(var(--primary))]" />
                   </span>
-                  Certificat d'authenticité inclus
+                  Certificat d&apos;authenticité inclus
                 </li>
                 <li className="flex items-center group">
                   <span className="bg-white/5 p-2 rounded-full mr-4 group-hover:bg-[hsl(var(--primary))]/20 transition-colors">

@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
+import Image from 'next/image';
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
@@ -75,7 +76,7 @@ export default function CartPage() {
             </svg>
           </div>
           <h2 className="text-3xl font-heading font-bold text-[hsl(var(--text-main))] mb-4">Votre Écrin est Vide</h2>
-          <p className="text-stone-500 mb-10 text-lg font-light">Découvrez notre collection pour trouver l'inspiration.</p>
+          <p className="text-stone-500 mb-10 text-lg font-light">Découvrez notre collection pour trouver l&apos;inspiration.</p>
           <Link href="/products" className="btn-primary w-full inline-block">
             Explorer le Catalogue
           </Link>
@@ -102,7 +103,9 @@ export default function CartPage() {
           <div className="space-y-6">
             {items.map((item) => (
               <div key={item.productId} className="glass-card flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem]">
-                <img src={item.image || 'https://via.placeholder.com/300'} alt={item.name} className="w-32 h-32 object-cover rounded-2xl shadow-sm" />
+                <div className="relative w-32 h-32">
+                  <Image src={item.image || 'https://via.placeholder.com/300'} alt={item.name} fill className="object-cover rounded-2xl shadow-sm" unoptimized />
+                </div>
                 
                 <div className="flex-1 text-center sm:text-left">
                   <h3 className="font-heading font-bold text-2xl text-stone-900 mb-1">{item.name}</h3>
@@ -206,7 +209,7 @@ export default function CartPage() {
               </button>
               
               <p className="text-xs text-center text-stone-400 mt-4">
-                En validant, vous serez redirigé vers WhatsApp pour finaliser l'achat avec un conseiller.
+                En validant, vous serez redirigé vers WhatsApp pour finaliser l&apos;achat avec un conseiller.
               </p>
             </form>
           </div>
