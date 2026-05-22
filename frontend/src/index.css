@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: 21 90% 48%; /* #EA580C Orange brûlé/Cuir */
+    --secondary: 24 10% 10%; /* #1C1917 Stone 900 */
+    --background: 60 9% 98%; /* #FAFAF9 Stone 50 */
+    --surface-light: 0 0% 100%; /* #FFFFFF Blanc */
+    --surface-neutral: 24 6% 90%; /* #E7E5E4 Stone 200 */
+    --text-main: 20 14% 4%; /* #0C0A09 Stone 950 */
+    --text-light: 24 5% 40%; /* #78716C Stone 500 */
+    --success: 145 63% 42%;
+    --error: 6 78% 57%;
+    --warning: 37 90% 51%;
+  }
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--text-main));
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Cormorant', serif;
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/50 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+  }
+  
+  .glass-nav {
+    @apply bg-white/80 backdrop-blur-lg border-b border-white/60 shadow-sm sticky top-0 z-50;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 15px rgba(234, 88, 12, 0.4);
+  }
+  
+  .btn-primary {
+    @apply bg-[hsl(var(--primary))] text-white px-6 py-3 rounded-xl shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 hover:-translate-y-0.5 transition-all duration-300 font-semibold;
+  }
+  
+  .btn-secondary {
+    @apply bg-[hsl(var(--secondary))] text-white px-6 py-3 rounded-xl shadow-lg shadow-stone-900/20 hover:shadow-stone-900/40 hover:-translate-y-0.5 transition-all duration-300 font-semibold;
+  }
+}
