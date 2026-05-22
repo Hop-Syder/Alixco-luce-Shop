@@ -16,7 +16,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from bson import ObjectId
 
 from app.api import deps
-from app.models.schemas import Product, ProductBase
+from app.models.schemas import Product, ProductBase, ProductUpdate
 
 router = APIRouter()
 
@@ -71,3 +71,54 @@ async def create_product(
     
     created_product = await db.products.find_one({"_id": result.inserted_id})
     return serialize_product(created_product)
+
+@router.put("/{product_id}", response_model=Product)
+async def update_product(
+    product_id: str,
+    product_in: ProductUpdate,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db),
+    current_admin: dict = Depends(deps.get_current_active_admin)
+):
+    """
+    Update a product (Admin only).
+    """
+    try:
+        obj_id = ObjectId(product_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid product ID format")
+
+    update_data = {k: v for k, v in product_in.model_dump().items() if v is not None}
+    
+    if update_data:
+        result = await db.products.update_one(
+            {"_id": obj_id},
+            {"$set": update_data}
+        )
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Product not found")
+
+    updated_product = await db.products.find_one({"_id": obj_id})
+    if not updated_product:
+        raise HTTPException(status_code=404, detail="Product not found")
+        
+    return serialize_product(updated_product)
+
+@router.delete("/{product_id}")
+async def delete_product(
+    product_id: str,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db),
+    current_admin: dict = Depends(deps.get_current_active_admin)
+):
+    """
+    Delete a product (Admin only).
+    """
+    try:
+        obj_id = ObjectId(product_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid product ID format")
+
+    result = await db.products.delete_one({"_id": obj_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Product not found")
+        
+    return {"message": "Product deleted successfully"}

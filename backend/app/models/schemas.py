@@ -12,6 +12,13 @@ class ProductBase(BaseModel):
 class Product(ProductBase):
     id: str = Field(alias="_id")
 
+class ProductUpdate(BaseModel):
+    name: Optional[str] = None
+    price: Optional[float] = None
+    image: Optional[str] = None
+    stock: Optional[int] = None
+    category: Optional[str] = None
+
 class CategoryBase(BaseModel):
     title: str
     desc: str
@@ -59,3 +66,6 @@ class Order(BaseModel):
     whatsappMessage: str
     createdAt: datetime
     updatedAt: datetime
+
+class OrderStatusUpdate(BaseModel):
+    status: str

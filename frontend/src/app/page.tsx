@@ -20,7 +20,7 @@ import { NewsletterSection } from '@/components/home/NewsletterSection';
 
 export default function Home() {
   return (
-    <div className="flex flex-col relative overflow-hidden bg-[hsl(var(--background))]">
+    <div className="flex flex-col relative bg-[hsl(var(--background))]">
       <HeroSection />
       <TrustBannerSection />
       <CategoriesSection />

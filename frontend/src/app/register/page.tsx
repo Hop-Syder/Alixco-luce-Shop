@@ -47,7 +47,7 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-zinc-900 p-4">
+    <div className="py-20 min-h-[calc(100vh-16rem)] flex items-center justify-center bg-[hsl(var(--background))] px-4">
       <div className="max-w-md w-full bg-black border border-zinc-800 rounded-xl shadow-2xl p-8 space-y-6">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white tracking-tight">Créer un compte</h2>

@@ -16,17 +16,20 @@ import { api } from '@/services/api';
 export default function ClientDashboard() {
   const { user, token } = useAuth();
   const [profile, setProfile] = useState<any>(null);
+  const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await api.get('/users/me', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setProfile(response.data);
+        const [profileRes, ordersRes] = await Promise.all([
+          api.get('/users/me', { headers: { Authorization: `Bearer ${token}` } }),
+          api.get('/orders/my-orders', { headers: { Authorization: `Bearer ${token}` } }).catch(() => ({ data: [] }))
+        ]);
+        setProfile(profileRes.data);
+        setOrders(ordersRes.data);
       } catch (error) {
-        console.error('Error fetching profile', error);
+        console.error('Error fetching dashboard data', error);
       } finally {
         setLoading(false);
       }
@@ -83,6 +86,58 @@ export default function ClientDashboard() {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Section Commandes */}
+      <div className="mt-10 border border-gray-100 rounded-xl p-6 bg-gray-50 shadow-sm">
+        <h3 className="font-semibold text-xl text-gray-800 mb-6 flex items-center">
+          <span className="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-3 text-sm">📦</span>
+          Historique des commandes
+        </h3>
+        
+        {orders.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-gray-200 text-gray-500 text-sm">
+                  <th className="pb-3 font-medium">N° Commande</th>
+                  <th className="pb-3 font-medium">Date</th>
+                  <th className="pb-3 font-medium">Statut</th>
+                  <th className="pb-3 font-medium text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-100">
+                {orders.map((order: any) => (
+                  <tr key={order._id || order.id} className="text-gray-700 text-sm">
+                    <td className="py-4 font-medium">{order.orderNumber}</td>
+                    <td className="py-4">{new Date(order.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
+                    <td className="py-4">
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold
+                        ${order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : ''}
+                        ${order.status === 'processing' ? 'bg-blue-100 text-blue-700' : ''}
+                        ${order.status === 'shipped' ? 'bg-indigo-100 text-indigo-700' : ''}
+                        ${order.status === 'delivered' ? 'bg-emerald-100 text-emerald-700' : ''}
+                        ${order.status === 'cancelled' ? 'bg-red-100 text-red-700' : ''}
+                      `}>
+                        {order.status === 'pending' && 'En attente'}
+                        {order.status === 'processing' && 'En traitement'}
+                        {order.status === 'shipped' && 'Expédiée'}
+                        {order.status === 'delivered' && 'Livrée'}
+                        {order.status === 'cancelled' && 'Annulée'}
+                        {!['pending', 'processing', 'shipped', 'delivered', 'cancelled'].includes(order.status) && order.status}
+                      </span>
+                    </td>
+                    <td className="py-4 text-right font-bold">{order.total.toLocaleString()} FCFA</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-gray-500 italic mb-4">Vous n'avez passé aucune commande pour le moment.</p>
+          </div>
+        )}
       </div>
     </div>
   );

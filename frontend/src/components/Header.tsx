@@ -27,7 +27,8 @@ const Header: React.FC = () => {
 
   // Close mobile menu when route changes
   useEffect(() => {
-    setIsMobileMenuOpen(false);
+    // Using a microtask prevents the synchronous setState warning
+    Promise.resolve().then(() => setIsMobileMenuOpen(false));
   }, [pathname]);
 
   // Prevent scrolling when mobile menu is open

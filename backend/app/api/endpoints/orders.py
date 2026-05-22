@@ -20,7 +20,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from app.api import deps
 from app.api.deps import get_current_active_user
-from app.models.schemas import OrderCreate, Order
+from app.models.schemas import OrderCreate, Order, OrderStatusUpdate
 from app.core.config import settings
 
 router = APIRouter()
@@ -153,3 +153,41 @@ async def list_all_orders(
     cursor = db.orders.find({}).sort("createdAt", -1).skip(skip).limit(limit)
     orders = await cursor.to_list(length=limit)
     return [serialize_order(o) for o in orders]
+
+@router.patch("/{id}/status", response_model=dict)
+async def update_order_status(
+    id: str,
+    status_update: OrderStatusUpdate,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db),
+    current_admin: dict = Depends(deps.get_current_active_admin)
+):
+    """
+    Update order status (Admin only).
+    Valid statuses: pending, processing, shipped, delivered, cancelled
+    """
+    valid_statuses = ["pending", "processing", "shipped", "delivered", "cancelled"]
+    if status_update.status not in valid_statuses:
+        raise HTTPException(status_code=400, detail=f"Statut invalide. Utilisez: {', '.join(valid_statuses)}")
+        
+    try:
+        obj_id = ObjectId(id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Format d'ID invalide")
+
+    result = await db.orders.update_one(
+        {"_id": obj_id},
+        {"$set": {
+            "status": status_update.status,
+            "updatedAt": datetime.now(timezone.utc)
+        }}
+    )
+    
+    if result.modified_count == 0:
+        # Check if order exists
+        order = await db.orders.find_one({"_id": obj_id})
+        if not order:
+            raise HTTPException(status_code=404, detail="Commande non trouvée")
+        # If it exists but wasn't modified, it means the status was already the same
+        return {"message": "Statut inchangé", "status": status_update.status}
+        
+    return {"message": "Statut mis à jour avec succès", "status": status_update.status}

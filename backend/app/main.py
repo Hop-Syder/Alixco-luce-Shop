@@ -18,16 +18,21 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+import os
+
 # CORS config
-origins = [
-    "http://localhost:5173", # Vite default port
-    "http://127.0.0.1:5173",
-]
+# On autorise les origines via une variable d'environnement ou on permet un fallback générique pour la prod et le local
+env_origins = os.getenv("ALLOW_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,https://alixcoluxe.com")
+origins = [origin.strip() for origin in env_origins.split(",") if origin.strip()]
+
+# Si on veut temporairement tout autoriser en attendant le vrai domaine de production
+if os.getenv("ALLOW_ALL_ORIGINS", "true").lower() == "true":
+    origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    allow_credentials=True if origins != ["*"] else False, # allow_credentials=True is not compatible with allow_origins=["*"]
     allow_methods=["*"],
     allow_headers=["*"],
 )

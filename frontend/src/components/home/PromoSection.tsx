@@ -79,27 +79,27 @@ export function PromoSection() {
             </div>
             
             {/* Countdown / Visual Element */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="glass-card p-12 md:p-16 flex gap-8 md:gap-12 text-center border border-white/10 backdrop-blur-md relative overflow-hidden group">
+            <div className="flex justify-center lg:justify-end w-full">
+              <div className="glass-card p-6 sm:p-10 md:p-12 flex items-center justify-center gap-3 sm:gap-6 md:gap-8 text-center border border-white/10 backdrop-blur-md relative overflow-hidden group w-full max-w-lg">
                 <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
                 <div className="flex flex-col relative z-10">
-                  <span className="text-6xl md:text-7xl font-heading text-white tabular-nums tracking-tighter">02</span>
-                  <span className="text-xs text-[hsl(var(--primary))] uppercase tracking-[0.3em] mt-6 font-bold">Jours</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">02</span>
+                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">Jours</span>
                 </div>
                 
-                <span className="text-5xl md:text-6xl font-light text-white/20 mt-1 relative z-10">:</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white/20 relative z-10 -mt-6 sm:-mt-8">:</span>
                 
                 <div className="flex flex-col relative z-10">
-                  <span className="text-6xl md:text-7xl font-heading text-white tabular-nums tracking-tighter">14</span>
-                  <span className="text-xs text-[hsl(var(--primary))] uppercase tracking-[0.3em] mt-6 font-bold">Heures</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">14</span>
+                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">Heures</span>
                 </div>
                 
-                <span className="text-5xl md:text-6xl font-light text-white/20 mt-1 relative z-10">:</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white/20 relative z-10 -mt-6 sm:-mt-8">:</span>
                 
                 <div className="flex flex-col relative z-10">
-                  <span className="text-6xl md:text-7xl font-heading text-white tabular-nums tracking-tighter">45</span>
-                  <span className="text-xs text-[hsl(var(--primary))] uppercase tracking-[0.3em] mt-6 font-bold">Min</span>
+                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">45</span>
+                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">Min</span>
                 </div>
               </div>
             </div>

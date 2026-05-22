@@ -87,6 +87,15 @@ export default function AdminDashboard() {
             <p className="text-gray-500 font-medium">Clients inscrits</p>
           </div>
         </div>
+        <Link href="/admin/products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+            📦
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
+            <p className="text-gray-500 font-medium">Catalogue Produits</p>
+          </div>
+        </Link>
         <Link href="/admin/categories" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
             🏷️
@@ -103,6 +112,15 @@ export default function AdminDashboard() {
           <div>
             <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
             <p className="text-gray-500 font-medium">Pièces Maîtresses</p>
+          </div>
+        </Link>
+        <Link href="/admin/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+            📋
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
+            <p className="text-gray-500 font-medium">Les Commandes</p>
           </div>
         </Link>
       </div>
