@@ -6,7 +6,7 @@
  * @updated 2026-05-22
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
-*/──────────────────────────────────
+ */
 
 import React from 'react';
 import { Link } from 'react-router-dom';
