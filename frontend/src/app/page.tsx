@@ -29,17 +29,14 @@ export default function Home() {
       
       {/* ================= SECTION 1: HERO IMPACTANT (DARK MODE LUXE) ================= */}
       <section className="relative min-h-screen flex flex-col justify-center items-start px-4 sm:px-6 lg:px-12 xl:px-24 text-left pt-20">
-        {/* Background Video & Overlay */}
+        {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full h-full object-cover opacity-60 mix-blend-screen"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img 
+            src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&q=80&w=2000" 
+            alt="Laser cutting wood macro" 
+            className="w-full h-full object-cover opacity-30"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/80 via-transparent to-[hsl(var(--background))]"></div>
           {/* Glowing Accents */}
           <div className="absolute top-[30%] left-[30%] -translate-x-1/2 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] rounded-full bg-[hsl(var(--primary))]/10 blur-[150px] pointer-events-none mix-blend-screen"></div>
