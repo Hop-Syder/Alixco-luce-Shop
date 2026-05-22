@@ -148,9 +148,9 @@ const Header: React.FC = () => {
                 href={link.path}
                 className="group relative flex flex-col items-center justify-center w-full h-full"
               >
-                {/* Active Pill Background */}
+                {/* Effet de survol uniquement (sans fond orange actif) */}
                 <div className={`absolute w-12 h-10 rounded-full transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] ${
-                  isActive ? 'bg-[hsl(var(--primary))]/15 scale-100 opacity-100' : 'scale-50 opacity-0 group-hover:scale-75 group-hover:bg-white/5 group-hover:opacity-100'
+                  isActive ? 'opacity-0' : 'scale-50 opacity-0 group-hover:scale-75 group-hover:bg-white/5 group-hover:opacity-100'
                 }`} />
 
                 {/* Conteneur Icône */}
