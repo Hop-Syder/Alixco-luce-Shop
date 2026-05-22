@@ -42,15 +42,15 @@ export function HeroSection() {
           
           <div className="relative">
             <AnimatedTitle 
-              text1="L'Art de la" 
-              text2="Précision Laser" 
+              text1="L'Art de l'Unique" 
+              text2="& du Sur-Mesure" 
               className="text-4xl md:text-6xl lg:text-7xl text-white text-left" 
             />
           </div>
           
           <FadeUp delay={0.4}>
             <p className="text-lg md:text-xl text-stone-300 max-w-2xl font-light leading-relaxed">
-              Sublimez la matière. Nous transformons le bois, le verre, le métal et le cuir en véritables œuvres d&apos;art grâce à une précision absolue. Des créations uniques, raffinées et résolument sur-mesure.
+              Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception. De la décoration d'art à la joaillerie, nous façonnons des créations uniques qui portent votre empreinte.
             </p>
           </FadeUp>
 
@@ -74,10 +74,9 @@ export function HeroSection() {
           <div className="relative rounded-xl overflow-hidden border-2 border-orange-600 shadow-[0_0_20px_rgba(234,88,12,0.6)] aspect-[4/5] p-1.5 bg-[#1a0800]">
             {/* Le contour intérieur en pointillés pour l'effet "trace laser sur bois" */}
             <div className="w-full h-full border-2 border-dashed border-amber-500/80 rounded-lg overflow-hidden relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img 
-                src="https://images.unsplash.com/photo-1611077544831-29e20a0279c6?auto=format&fit=crop&q=80&w=800" 
-                alt="Gravure Laser sur Bois" 
+                src="https://images.unsplash.com/photo-1618220179428-22790b46a015?auto=format&fit=crop&q=80&w=800" 
+                alt="Art et personnalisation AlixcoLuxe" 
                 className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-105 transition-all duration-700"
               />
             </div>

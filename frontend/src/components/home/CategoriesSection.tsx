@@ -26,9 +26,9 @@ interface Category {
 }
 
 const defaultCategories: Category[] = [
-  { title: "Gravure Laser", desc: "L'empreinte de l'élégance sur vos objets", img: "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?auto=format&fit=crop&q=80&w=800" },
-  { title: "Découpe Sur-Mesure", desc: "Des formes complexes d'une netteté absolue", img: "https://images.unsplash.com/photo-1563207153-f4040a459385?auto=format&fit=crop&q=80&w=800" },
-  { title: "Objets d'Art & Cadeaux", desc: "Trophées, accessoires et cadeaux d'entreprise", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" }
+  { title: "Art & Décoration", desc: "Création d'objets d'art et de tableaux pour sublimer vos intérieurs", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" },
+  { title: "Joaillerie & Accessoires", desc: "Personnalisation de bijoux pour une allure qui ne ressemble qu'à vous", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" },
+  { title: "Mode Customisée", desc: "Transformation de vêtements pour affirmer votre style unique", img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" }
 ];
 
 export function CategoriesSection() {

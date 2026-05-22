@@ -28,22 +28,22 @@ export function AtelierHeroSection() {
       <div className="max-w-4xl mx-auto z-10 w-full space-y-6">
         <FadeUp delay={0.1} className="flex flex-col items-center">
           <span className="text-[hsl(var(--primary))] uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4 block">
-            L&apos;Antre de la Précision
+            Savoir-Faire Artisanal
           </span>
           <div className="accent-line mx-auto"></div>
         </FadeUp>
         
         <div className="relative">
           <AnimatedTitle 
-            text1="Où la Technologie" 
-            text2="Rencontre l'Artisanat" 
+            text1="Où l'Imagination" 
+            text2="Devient Réalité" 
             className="text-4xl md:text-6xl lg:text-7xl text-white text-center" 
           />
         </div>
         
         <FadeUp delay={0.4}>
           <p className="text-lg md:text-xl text-stone-300 font-light leading-relaxed mt-6">
-            Plongez au cœur de notre atelier, là où vos idées prennent forme. Chaque faisceau laser, chaque geste est guidé par notre quête absolue d&apos;excellence.
+            Bienvenue dans l'univers d'AlixcoLuxe. Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception qui allient authenticité et luxe.
           </p>
         </FadeUp>
       </div>
