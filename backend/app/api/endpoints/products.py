@@ -1,0 +1,73 @@
+"""
+/**
+ * @author @hopsyder
+ * @organization Nexus Partners
+ * @description Product catalog endpoints
+ * @created 2026-05-22
+ * @updated 2026-05-22
+ * 🌐 ceo.nexuspartners.xyz
+ * 📧 daoudaabassichristian@gmail.com
+*/──────────────────────────────────
+"""
+
+from typing import List
+from fastapi import APIRouter, Depends, HTTPException
+from motor.motor_asyncio import AsyncIOMotorDatabase
+from bson import ObjectId
+
+from app.api import deps
+from app.models.schemas import Product, ProductBase
+
+router = APIRouter()
+
+def serialize_product(db_product: dict) -> dict:
+    """Helper to convert MongoDB _id to id string."""
+    db_product["_id"] = str(db_product["_id"])
+    return db_product
+
+@router.get("/", response_model=List[Product])
+async def list_products(
+    skip: int = 0,
+    limit: int = 100,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db)
+):
+    """
+    Retrieve products list.
+    """
+    cursor = db.products.find({}).skip(skip).limit(limit)
+    products = await cursor.to_list(length=limit)
+    return [serialize_product(p) for p in products]
+
+@router.get("/{product_id}", response_model=Product)
+async def get_product(
+    product_id: str,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db)
+):
+    """
+    Get product by ID.
+    """
+    try:
+        obj_id = ObjectId(product_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="Invalid product ID format")
+        
+    product = await db.products.find_one({"_id": obj_id})
+    if not product:
+        raise HTTPException(status_code=404, detail="Product not found")
+        
+    return serialize_product(product)
+
+@router.post("/", response_model=Product)
+async def create_product(
+    product_in: ProductBase,
+    db: AsyncIOMotorDatabase = Depends(deps.get_db),
+    current_admin: dict = Depends(deps.get_current_active_admin)
+):
+    """
+    Create new product (Admin only).
+    """
+    new_product = product_in.model_dump()
+    result = await db.products.insert_one(new_product)
+    
+    created_product = await db.products.find_one({"_id": result.inserted_id})
+    return serialize_product(created_product)
