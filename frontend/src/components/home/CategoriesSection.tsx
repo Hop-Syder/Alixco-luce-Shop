@@ -28,7 +28,8 @@ interface Category {
 const defaultCategories: Category[] = [
   { title: "Art & Décoration", desc: "Création d'objets d'art et de tableaux pour sublimer vos intérieurs", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" },
   { title: "Joaillerie & Accessoires", desc: "Personnalisation de bijoux pour une allure qui ne ressemble qu'à vous", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" },
-  { title: "Mode Customisée", desc: "Transformation de vêtements pour affirmer votre style unique", img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" }
+  { title: "Mode Customisée", desc: "Transformation de vêtements pour affirmer votre style unique", img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" },
+  { title: "Coffrets & Gravure Laser", desc: "Boîtes personnalisées et gravure sur bois, chaînes et tissus", img: "https://images.unsplash.com/photo-1611077544831-29e20a0279c6?auto=format&fit=crop&q=80&w=800" }
 ];
 
 export function CategoriesSection() {
@@ -60,7 +61,7 @@ export function CategoriesSection() {
         <div className="accent-line"></div>
       </FadeUp>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
         {categories.map((cat, idx) => (
           <FadeUp key={cat._id || idx} delay={idx * 0.15}>
             <Link href={`/products?category=${cat.title.toLowerCase()}`} className="group relative h-[450px] overflow-hidden block border border-white/10 hover:border-[hsl(var(--primary))]/50 transition-colors duration-500">

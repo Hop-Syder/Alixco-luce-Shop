@@ -13,6 +13,7 @@ import { AtelierPhilosophySection } from '@/components/about/AtelierPhilosophySe
 import { AtelierMaterialsSection } from '@/components/about/AtelierMaterialsSection';
 import { AtelierProcessSection } from '@/components/about/AtelierProcessSection';
 import { AtelierMachinesSection } from '@/components/about/AtelierMachinesSection';
+import { AtelierLocationSection } from '@/components/about/AtelierLocationSection';
 import { AtelierCTASection } from '@/components/about/AtelierCTASection';
 
 export default function AboutPage() {
@@ -23,6 +24,7 @@ export default function AboutPage() {
       <AtelierMaterialsSection />
       <AtelierProcessSection />
       <AtelierMachinesSection />
+      <AtelierLocationSection />
       <AtelierCTASection />
     </div>
   );

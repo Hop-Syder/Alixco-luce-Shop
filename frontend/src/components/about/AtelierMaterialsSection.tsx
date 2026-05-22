@@ -11,10 +11,10 @@ import React from 'react';
 import { FadeUp } from '@/components/ui/FadeUp';
 
 const materials = [
-  { name: "Bois Noble", desc: "Chaleur et authenticité. Nous sculptons l'âme de chaque essence.", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800" },
-  { name: "Verre Pur", desc: "Transparence et élégance. La gravure y dépose un voile de lumière.", img: "https://images.unsplash.com/photo-1623861214040-d9d10e5f2cf9?auto=format&fit=crop&q=80&w=800" },
-  { name: "Cuir Véritable", desc: "Caractère et patine. Une empreinte indélébile sur des pièces intemporelles.", img: "https://images.unsplash.com/photo-1590740537021-39659b9e5d48?auto=format&fit=crop&q=80&w=800" },
-  { name: "Métal Brut", desc: "Force et durabilité. Le marquage inaltérable de l'industrie sublimée.", img: "https://images.unsplash.com/photo-1501166222995-ff437b789be3?auto=format&fit=crop&q=80&w=800" }
+  { name: "Le Bois & Les Coffrets", desc: "Création de boîtes personnalisées et gravure d'une précision absolue sur diverses essences de bois.", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800" },
+  { name: "Les Chaînes & Métaux", desc: "Personnalisation et gravure laser inaltérable sur vos chaînes, bijoux et accessoires métalliques.", img: "https://images.unsplash.com/photo-1501166222995-ff437b789be3?auto=format&fit=crop&q=80&w=800" },
+  { name: "Les Tissus & Textiles", desc: "Transformation et marquage de vos vêtements et tissus pour affirmer votre style unique.", img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=80&w=800" },
+  { name: "Le Cuir Véritable", desc: "Caractère et patine. Une empreinte indélébile sur des pièces intemporelles.", img: "https://images.unsplash.com/photo-1590740537021-39659b9e5d48?auto=format&fit=crop&q=80&w=800" }
 ];
 
 export function AtelierMaterialsSection() {

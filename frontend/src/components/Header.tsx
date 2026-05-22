@@ -13,6 +13,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useCartStore } from '@/store/cartStore';
@@ -44,8 +45,15 @@ const Header: React.FC = () => {
             
             {/* Logo (Gauche) */}
             <div className="flex-shrink-0 flex items-center z-50">
-              <Link href="/" className="font-heading text-2xl md:text-3xl font-bold tracking-wider text-[hsl(var(--text-main))] hover:text-[hsl(var(--primary))] transition-colors relative z-50">
-                ALIXCO <span className="text-[hsl(var(--primary))]">LUXE</span>
+              <Link href="/" className="relative z-50 flex items-center">
+                <Image 
+                  src="/logo.png" 
+                  alt="AlixcoLuxe Logo" 
+                  width={150} 
+                  height={50} 
+                  className="object-contain h-10 w-auto md:h-12"
+                  priority
+                />
               </Link>
             </div>
 

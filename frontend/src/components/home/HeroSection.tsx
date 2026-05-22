@@ -50,7 +50,7 @@ export function HeroSection() {
           
           <FadeUp delay={0.4}>
             <p className="text-lg md:text-xl text-stone-300 max-w-2xl font-light leading-relaxed">
-              Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception. De la décoration d'art à la joaillerie, nous façonnons des créations uniques qui portent votre empreinte.
+              Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception. Maîtres de la gravure laser sur chaînes, bois et tissus, nous créons vos coffrets personnalisés et façonnons des œuvres uniques qui portent votre empreinte.
             </p>
           </FadeUp>
 
