@@ -16,20 +16,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
+import { useTranslation } from '@/context/LanguageContext';
 import { useCartStore } from '@/store/cartStore';
 import { ShoppingBag, User, LogOut, Home, Grid, PenTool, Bell } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
   const { isAuthenticated, logout, user } = useAuth();
+  const { t } = useTranslation();
   const cartItems = useCartStore(state => state.items);
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const pathname = usePathname();
 
   // Navigation principale (utilisée en desktop top-nav et mobile bottom-nav)
   const navLinks = [
-    { name: 'Accueil', path: '/', icon: Home },
-    { name: 'Catalogue', path: '/products', icon: Grid },
-    { name: "L'Atelier", path: '/about', icon: PenTool },
+    { name: t('nav.home'), path: '/', icon: Home },
+    { name: t('nav.catalog'), path: '/products', icon: Grid },
+    { name: t('nav.workshop'), path: '/about', icon: PenTool },
   ];
 
   return (
@@ -41,7 +44,7 @@ const Header: React.FC = () => {
       */}
       <header className="glass-nav z-50 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-20 -translate-y-[5px]">
             
             {/* Logo (Gauche) */}
             <div className="flex-shrink-0 flex items-center z-50">
@@ -83,7 +86,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-4 md:space-x-6 z-50">
               
               {/* Notification - Uniquement Mobile (Fixé en haut à droite) */}
-              <button className="md:hidden relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
+              <button type="button" aria-label="Notifications" className="md:hidden relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
                 <Bell className="w-5 h-5" strokeWidth={1.5} />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[hsl(var(--primary))] rounded-full border border-black"></span>
               </button>
@@ -94,39 +97,29 @@ const Header: React.FC = () => {
                   <>
                     <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-sm uppercase tracking-widest font-semibold text-stone-300 hover:text-[hsl(var(--primary))] transition-colors flex items-center">
                       <User className="w-4 h-4 mr-2" />
-                      Mon Compte
+                      {t('nav.account')}
                     </Link>
-                    <button onClick={logout} className="text-stone-400 hover:text-red-500 transition-colors p-2" title="Déconnexion">
+                    <button type="button" aria-label={t('nav.logout')} onClick={logout} className="text-stone-400 hover:text-red-500 transition-colors p-2" title={t('nav.logout')}>
                       <LogOut className="w-5 h-5" strokeWidth={1.5} />
                     </button>
                   </>
                 ) : (
                   <>
                     <Link href="/login" className="text-sm uppercase tracking-widest font-medium text-stone-400 hover:text-[hsl(var(--text-main))] transition-colors">
-                      Connexion
+                      {t('nav.login')}
                     </Link>
                     <Link href="/register" className="btn-primary text-xs uppercase tracking-widest px-5 py-2.5">
-                      Créer un compte
+                      {t('nav.register')}
                     </Link>
                   </>
                 )}
               </div>
 
-              {/* Action de compte (Mobile - Mon Compte en haut à droite) */}
-              <div className="md:hidden flex items-center">
-                 {isAuthenticated ? (
-                  <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
-                    <User className="w-5 h-5" strokeWidth={1.5} />
-                  </Link>
-                ) : (
-                  <Link href="/login" className="text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
-                    <User className="w-5 h-5" strokeWidth={1.5} />
-                  </Link>
-                )}
-              </div>
+              {/* Action de compte supprimée du Header Top (Mobile) et déplacée en bas */}
+
 
               {/* Panier (Visible Desktop & Mobile) */}
-              <Link href="/cart" className="relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
+              <Link href="/cart" aria-label={`Panier avec ${cartItemCount} articles`} className="relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
                 <ShoppingBag className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                 {cartItemCount > 0 && (
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[9px] font-bold text-white transform translate-x-1/4 -translate-y-1/4 bg-[hsl(var(--primary))] rounded-full border border-black md:w-5 md:h-5 md:text-[10px] md:border-2">
@@ -135,6 +128,7 @@ const Header: React.FC = () => {
                 )}
               </Link>
               
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
@@ -144,9 +138,16 @@ const Header: React.FC = () => {
         BOTTOM NAVIGATION (Uniquement sur Mobile) 
         - Design "Pro UI" : Floating Dock / Pill
       */}
-      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[360px] bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full z-50 shadow-2xl px-2">
+      <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[380px] bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full z-50 shadow-2xl px-2">
         <div className="flex justify-between items-center h-[60px] px-2">
-          {navLinks.map((link) => {
+          {[
+            ...navLinks,
+            { 
+              name: isAuthenticated ? t('nav.account') : t('nav.login'), 
+              path: isAuthenticated ? (user?.role === 'admin' ? '/admin' : '/dashboard') : '/login', 
+              icon: User 
+            }
+          ].map((link) => {
             const isActive = pathname === link.path;
             const Icon = link.icon;
             

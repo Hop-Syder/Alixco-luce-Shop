@@ -8,25 +8,29 @@
  * 📧 daoudaabassichristian@gmail.com
  * ──────────────────────────────────
  */
+"use client";
 import React from 'react';
 import { Star } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
+import { useTranslation } from '@/context/LanguageContext';
 
 export function TestimonialsSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-32 bg-[hsl(var(--surface-light))] border-y border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <FadeUp className="flex flex-col items-center">
-          <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Témoignages</span>
-          <h2 className="text-4xl font-heading font-bold text-white mb-6">L&apos;Excellence Reconnue</h2>
+          <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">{t('testimonials.subtitle')}</span>
+          <h2 className="text-4xl font-heading font-bold text-white mb-6">{t('testimonials.title')}</h2>
           <div className="accent-line mb-20"></div>
         </FadeUp>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { name: "Sophie L.", role: "Architecte d'intérieur", text: "La finesse de la découpe laser pour notre cloison en bois est époustouflante. Un véritable travail d'orfèvre qui a sublimé notre projet." },
-            { name: "Marc D.", role: "Directeur Marketing", text: "Nous avons fait graver nos trophées d'entreprise en verre. Le rendu est ultra-premium et la précision des lettres est impressionnante." },
-            { name: "Élise M.", role: "Cliente Vérifiée", text: "Le porte-clés en cuir gravé sur-mesure a fait un cadeau d'une élégance rare. L'expérience AlixcoLuxe est premium du début à la fin." }
+            { name: "Sophie L.", role: t('testimonials.review1_role'), text: t('testimonials.review1_text') },
+            { name: "Marc D.", role: t('testimonials.review2_role'), text: t('testimonials.review2_text') },
+            { name: "Élise M.", role: t('testimonials.review3_role'), text: t('testimonials.review3_text') }
           ].map((review, i) => (
             <FadeUp key={i} delay={i * 0.15}>
               <div className="p-10 text-left flex flex-col justify-between h-full border border-white/5 bg-[hsl(var(--surface-neutral))]/30 hover:bg-[hsl(var(--surface-neutral))]/50 transition-colors">

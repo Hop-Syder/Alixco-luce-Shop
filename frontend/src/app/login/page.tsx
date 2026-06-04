@@ -4,6 +4,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/services/api';
+import { useTranslation } from '@/context/LanguageContext';
 
 export default function Login() {
   const [phone, setPhone] = useState('');
@@ -11,6 +12,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const { login } = useAuth();
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +39,7 @@ export default function Login() {
       router.push('/dashboard');
     } catch (err: unknown) {
       const e = err as { response?: { data?: { detail?: string } } };
-      setError(e.response?.data?.detail || 'Une erreur est survenue lors de la connexion.');
+      setError(e.response?.data?.detail || t('auth.login_error'));
     }
   };
 
@@ -45,8 +47,8 @@ export default function Login() {
     <div className="py-20 min-h-[calc(100vh-16rem)] flex items-center justify-center bg-[hsl(var(--background))] px-4">
       <div className="max-w-md w-full bg-black border border-zinc-800 rounded-xl shadow-2xl p-8 space-y-6">
         <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-white tracking-tight">Bienvenue</h2>
-          <p className="text-zinc-400 mt-2 text-sm">Connectez-vous à votre espace exclusif.</p>
+          <h2 className="text-3xl font-extrabold text-white tracking-tight">{t('auth.welcome')}</h2>
+          <p className="text-zinc-400 mt-2 text-sm">{t('auth.login_subtitle')}</p>
         </div>
         
         {error && (
@@ -57,7 +59,7 @@ export default function Login() {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-zinc-300">Numéro de téléphone</label>
+            <label className="block text-sm font-medium text-zinc-300">{t('auth.phone')}</label>
             <input 
               type="tel" 
               value={phone}
@@ -67,7 +69,7 @@ export default function Login() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-300">Mot de passe</label>
+            <label className="block text-sm font-medium text-zinc-300">{t('auth.password')}</label>
             <input 
               type="password" 
               value={password}
@@ -81,14 +83,14 @@ export default function Login() {
             type="submit" 
             className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-black bg-amber-500 hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
           >
-            Se connecter
+            {t('auth.login')}
           </button>
         </form>
         
         <p className="text-center text-sm text-zinc-400">
-          Pas encore de compte ?{' '}
+          {t('auth.no_account')} {' '}
           <Link href="/register" className="font-medium text-amber-500 hover:text-amber-400">
-            S&apos;inscrire
+            {t('auth.register')}
           </Link>
         </p>
       </div>

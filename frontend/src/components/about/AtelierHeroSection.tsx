@@ -7,11 +7,15 @@
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
+"use client";
 import React from 'react';
 import { AnimatedTitle } from '@/components/ui/AnimatedTitle';
 import { FadeUp } from '@/components/ui/FadeUp';
+import { useTranslation } from '@/context/LanguageContext';
 
 export function AtelierHeroSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 text-center pt-20">
       <div className="absolute inset-0 z-0">
@@ -28,22 +32,22 @@ export function AtelierHeroSection() {
       <div className="max-w-4xl mx-auto z-10 w-full space-y-6">
         <FadeUp delay={0.1} className="flex flex-col items-center">
           <span className="text-[hsl(var(--primary))] uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4 block">
-            Savoir-Faire Artisanal
+            {t('about.hero_subtitle')}
           </span>
           <div className="accent-line mx-auto"></div>
         </FadeUp>
         
         <div className="relative">
           <AnimatedTitle 
-            text1="Où l'Imagination" 
-            text2="Devient Réalité" 
+            text1={t('about.hero_title1')} 
+            text2={t('about.hero_title2')} 
             className="text-4xl md:text-6xl lg:text-7xl text-white text-center" 
           />
         </div>
         
         <FadeUp delay={0.4}>
           <p className="text-lg md:text-xl text-stone-300 font-light leading-relaxed mt-6">
-            Bienvenue dans l'univers d'AlixcoLuxe. Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception qui allient authenticité et luxe.
+            {t('about.hero_description')}
           </p>
         </FadeUp>
       </div>

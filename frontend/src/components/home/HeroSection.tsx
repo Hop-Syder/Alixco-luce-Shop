@@ -1,94 +1,220 @@
 /**
  * @author @hopsyder
  * @organization Nexus Partners
- * @description Hero Section for Home Page
+ * @description Hero Section for Home Page (Premium & Interactive 3D design)
  * @created 2026-05-22
- * @updated 2026-05-22
+ * @updated 2026-06-04
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  * ──────────────────────────────────
  */
-import React from 'react';
+"use client";
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { AnimatedTitle } from '@/components/ui/AnimatedTitle';
+import { ArrowRight, Crown, Sparkles, Cpu, Award } from 'lucide-react';
+import { useTranslation } from '@/context/LanguageContext';
 import { FadeUp } from '@/components/ui/FadeUp';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 export function HeroSection() {
+  const { t } = useTranslation();
+
+  // Mouse Parallax values using Framer Motion
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Map values for 3D card tilt & parallax
+  const rotateX = useTransform(y, [-300, 300], [15, -15]);
+  const rotateY = useTransform(x, [-300, 300], [-15, 15]);
+  
+  // Parallax translation for floating elements
+  const floatX1 = useTransform(x, [-300, 300], [-25, 25]);
+  const floatY1 = useTransform(y, [-300, 300], [-25, 25]);
+  
+  const floatX2 = useTransform(x, [-300, 300], [20, -20]);
+  const floatY2 = useTransform(y, [-300, 300], [20, -20]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left - width / 2;
+    const mouseY = e.clientY - rect.top - height / 2;
+    x.set(mouseX);
+    y.set(mouseY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-start px-4 sm:px-6 lg:px-12 xl:px-24 text-left pt-20">
+    <section 
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-screen flex flex-col justify-center items-start px-4 sm:px-6 lg:px-12 xl:px-24 text-left pt-24 pb-16 overflow-hidden bg-[hsl(var(--background))]"
+    >
       {/* Background Image & Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src="https://images.unsplash.com/photo-1506806732259-39c2d0268443?auto=format&fit=crop&q=80&w=2000" 
-          alt="Laser cutting wood macro" 
-          className="w-full h-full object-cover opacity-30"
+          src="/hearder.jpg" 
+          alt="AlixcoLuxe Header Background" 
+          className="w-full h-full object-cover opacity-20 filter grayscale contrast-125"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/80 via-transparent to-[hsl(var(--background))]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/95 via-transparent to-[hsl(var(--background))]"></div>
         {/* Glowing Accents */}
-        <div className="absolute top-[30%] left-[30%] -translate-x-1/2 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] rounded-full bg-[hsl(var(--primary))]/10 blur-[150px] pointer-events-none mix-blend-screen"></div>
+        <div className="absolute top-[25%] left-[25%] w-[65vw] h-[65vw] md:w-[45vw] md:h-[45vw] rounded-full bg-[hsl(var(--primary))]/10 blur-[160px] pointer-events-none mix-blend-screen animate-pulse"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto z-10 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center -mt-10 md:-mt-20">
-        {/* DIV GAUCHE: TEXTES ET BOUTONS */}
-        <div className="space-y-6 flex flex-col items-start">
-          <FadeUp delay={0.1} className="flex flex-col items-start">
-            <span className="text-[hsl(var(--primary))] uppercase tracking-[0.3em] text-sm md:text-base font-bold mb-4 block">
-              Maison de Personnalisation
-            </span>
-            <div className="accent-line"></div>
-          </FadeUp>
+      <div className="max-w-7xl mx-auto z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mt-6">
+        
+        {/* GAUCHE : TEXTES ET BOUTONS */}
+        <div className="lg:col-span-7 xl:col-span-7 space-y-6 flex flex-col items-start">
           
-          <div className="relative">
-            <AnimatedTitle 
-              text1="L'Art de l'Unique" 
-              text2="& du Sur-Mesure" 
-              className="text-4xl md:text-6xl lg:text-7xl text-white text-left" 
-            />
+          {/* Badge de Confiance Flottant en Verre Dépoli */}
+          <FadeUp delay={0.1}>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.3)] group hover:border-[hsl(var(--primary))]/30 transition-all duration-300">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+              </span>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-stone-200 flex items-center gap-1.5">
+                {t('hero.subtitle')}
+                <Crown className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+                <span className="text-stone-500 font-light px-1">|</span>
+                <span className="text-[hsl(var(--primary))] font-bold text-[10px] tracking-wider">Artisanat d'Art</span>
+              </span>
+            </div>
+          </FadeUp>
+
+          {/* Titre Principal avec Gradients HSL Premium */}
+          <div className="space-y-3">
+            <FadeUp delay={0.25}>
+              <h1 className="text-4xl sm:text-6xl xl:text-7xl font-heading font-extrabold tracking-tight text-white leading-[1.05]">
+                L'Art de la <span className="bg-gradient-to-r from-amber-500 via-amber-200 to-orange-500 bg-clip-text text-transparent filter drop-shadow-[0_2px_10px_rgba(245,158,11,0.2)]">Personnalisation</span>
+              </h1>
+            </FadeUp>
+            <FadeUp delay={0.35}>
+              <h2 className="text-2xl sm:text-4xl xl:text-5xl font-heading font-medium tracking-tight text-stone-300">
+                Gravure & Découpe au <span className="text-[hsl(var(--primary))] font-bold">Laser</span>
+              </h2>
+            </FadeUp>
           </div>
           
-          <FadeUp delay={0.4}>
-            <p className="text-lg md:text-xl text-stone-300 max-w-2xl font-light leading-relaxed">
-              Installés au cœur du Bénin, nous donnons vie à vos émotions à travers des pièces d'exception. Maîtres de la gravure laser sur chaînes, bois et tissus, nous créons vos coffrets personnalisés et façonnons des œuvres uniques qui portent votre empreinte.
+          <FadeUp delay={0.45}>
+            <p className="text-lg text-stone-300 max-w-xl font-light leading-relaxed">
+              {t('hero.description')}
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.6} className="flex flex-col sm:flex-row items-start sm:items-center justify-start gap-6 pt-2 w-full">
-            <Link href="/products" className="btn-primary w-full sm:w-auto flex items-center justify-center group">
-              Découvrir la Collection
+          <FadeUp delay={0.65} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-5 pt-4 w-full sm:w-auto">
+            <Link href="/products" className="btn-primary flex items-center justify-center group text-center py-4 px-8 rounded-full font-semibold">
+              {t('hero.cta_collection')}
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-            <Link href="/about" className="btn-secondary w-full sm:w-auto flex items-center justify-center">
-              Notre Savoir-Faire
+            <Link href="/about" className="btn-secondary flex items-center justify-center text-center py-4 px-8 rounded-full font-semibold">
+              {t('hero.cta_about')}
             </Link>
           </FadeUp>
         </div>
 
-        {/* DIV DROIT: CARTE IMAGE AVEC BORDURE "FEU DE BOIS" */}
-        <FadeUp delay={0.8} className="relative w-full max-w-md mx-auto lg:ml-auto group">
-          {/* Effet lueur de feu en arrière plan */}
-          <div className="absolute -inset-2 bg-gradient-to-tr from-orange-600 via-amber-500 to-red-600 rounded-xl blur-lg opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse"></div>
+        {/* DROIT : CARTE INTERACTIVE MULTICOUCHE (3D + Floating Elements) */}
+        <div className="lg:col-span-5 xl:col-span-5 relative flex justify-center items-center py-12">
           
-          {/* L'image elle-même avec la trace de feu (bordure) de 2px */}
-          <div className="relative rounded-xl overflow-hidden border-2 border-orange-600 shadow-[0_0_20px_rgba(234,88,12,0.6)] aspect-[4/5] p-1.5 bg-[#1a0800]">
-            {/* Le contour intérieur en pointillés pour l'effet "trace laser sur bois" */}
-            <div className="w-full h-full border-2 border-dashed border-amber-500/80 rounded-lg overflow-hidden relative">
-              <img 
-                src="https://images.unsplash.com/photo-1618220179428-22790b46a015?auto=format&fit=crop&q=80&w=800" 
-                alt="Art et personnalisation AlixcoLuxe" 
-                className="w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-105 transition-all duration-700"
-              />
+          {/* Lueur de feu 3D dynamique en arrière-plan */}
+          <motion.div 
+            style={{ x: floatX1, y: floatY1 }}
+            className="absolute -inset-4 bg-gradient-to-tr from-orange-600 via-amber-500 to-red-600 rounded-3xl blur-[40px] opacity-35 pointer-events-none"
+          />
+
+          {/* Conteneur principal 3D */}
+          <motion.div
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            transition={{ type: 'spring', stiffness: 150, damping: 20 }}
+            className="relative w-full max-w-[340px] aspect-[4/5] rounded-[2.5rem] p-1 bg-gradient-to-br from-orange-600/30 to-amber-500/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/10 overflow-visible group cursor-grab active:cursor-grabbing"
+          >
+            {/* Contenu intérieur */}
+            <div className="w-full h-full rounded-[2.3rem] overflow-hidden bg-[#120804] p-2 relative flex flex-col justify-between">
+              
+              {/* Bordure laser intérieure */}
+              <div className="absolute inset-2 border border-dashed border-amber-500/40 rounded-[1.8rem] pointer-events-none z-10"></div>
+              
+              {/* Image principale */}
+              <div className="w-full h-full rounded-[1.8rem] overflow-hidden relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="https://images.unsplash.com/photo-1618220179428-22790b46a015?auto=format&fit=crop&q=80&w=800" 
+                  alt="Art et personnalisation AlixcoLuxe" 
+                  className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 pointer-events-none"
+                />
+                
+                {/* Overlay sombre progressif */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#120804]/90 via-transparent to-transparent pointer-events-none"></div>
+              </div>
+
+              {/* Texte overlay sur l'image en bas */}
+              <div className="absolute bottom-6 left-6 right-6 z-20" style={{ transform: 'translateZ(30px)' }}>
+                <span className="text-[10px] uppercase tracking-widest text-[hsl(var(--primary))] font-bold flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-amber-500" /> Précision Ultime
+                </span>
+                <h3 className="text-lg font-heading font-bold text-white mt-1">Conception sur-mesure</h3>
+              </div>
             </div>
-          </div>
-        </FadeUp>
+          </motion.div>
+
+          {/* Floating Element 1: Haute Précision (Top Left) */}
+          <motion.div
+            style={{ x: floatX1, y: floatY1, transform: 'translateZ(50px)' }}
+            className="absolute -top-4 -left-6 z-30 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-white/10 bg-[hsl(var(--background))]/70 backdrop-blur-xl shadow-xl pointer-events-none"
+          >
+            <div className="w-8 h-8 rounded-lg bg-[hsl(var(--primary))]/20 flex items-center justify-center text-[hsl(var(--primary))]">
+              <Cpu className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">Gravure Laser</div>
+              <div className="text-[10px] text-stone-400">Précision 0.01mm</div>
+            </div>
+          </motion.div>
+
+          {/* Floating Element 2: Pièces Uniques (Bottom Right) */}
+          <motion.div
+            style={{ x: floatX2, y: floatY2, transform: 'translateZ(40px)' }}
+            className="absolute -bottom-2 -right-8 z-30 flex items-center gap-2.5 px-4 py-3 rounded-2xl border border-white/10 bg-[hsl(var(--background))]/70 backdrop-blur-xl shadow-xl pointer-events-none"
+          >
+            <div className="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400">
+              <Award className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-white">100% Unique</div>
+              <div className="text-[10px] text-stone-400">Signé & Certifié</div>
+            </div>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-50 animate-pulse">
-        <span className="text-xs uppercase tracking-widest text-white mb-2">Découvrir</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+      {/* Indicateur de Défilement (Scroll) Dynamique et Stylisé */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-10">
+        <span className="text-[10px] uppercase tracking-[0.25em] text-stone-400 mb-2 font-medium">
+          {t('hero.scroll')}
+        </span>
+        <div className="w-6 h-10 rounded-full border border-white/20 p-1 flex justify-center">
+          <motion.div 
+            animate={{ 
+              y: [0, 14, 0],
+              opacity: [1, 0.2, 1]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--primary))]"
+          />
+        </div>
       </div>
     </section>
   );
 }
+

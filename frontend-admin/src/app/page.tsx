@@ -3,7 +3,7 @@
  * @organization Nexus Partners
  * @description Admin Dashboard Page
  * @created 2026-05-22
- * @updated 2026-05-22
+ * @updated 2026-05-23
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
@@ -41,18 +41,18 @@ export default function AdminDashboard() {
   return (
     <div className="space-y-6">
       <div className="bg-white shadow rounded-2xl p-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Tableau de bord Administrateur</h2>
-        <p className="text-gray-500 mb-6">Vue d&apos;ensemble de la plateforme Alixco Luxe.</p>
+        <h2 className="text-3xl font-bold text-gray-800 mb-2">Tableau de bord Admin</h2>
+        <p className="text-gray-500 mb-6">Vue d'ensemble de l'activité</p>
         
         {loading ? (
-          <div className="text-gray-500">Vérification des droits...</div>
+          <div className="text-gray-500">Vérification des droits en cours...</div>
         ) : (
           <div className={`p-4 rounded-lg border font-medium ${
             adminStatus.includes('Erreur') 
               ? 'bg-red-50 text-red-800 border-red-200' 
               : 'bg-green-50 text-green-800 border-green-200'
           } inline-block`}>
-            Statut RBAC : {adminStatus}
+            Statut des droits : {adminStatus}
           </div>
         )}
       </div>
@@ -64,7 +64,7 @@ export default function AdminDashboard() {
           </div>
           <div>
             <h3 className="text-2xl font-bold text-gray-800">0</h3>
-            <p className="text-gray-500 font-medium">Commandes à traiter</p>
+            <p className="text-gray-500 font-medium">Commandes en attente</p>
           </div>
         </div>
         
@@ -87,43 +87,43 @@ export default function AdminDashboard() {
             <p className="text-gray-500 font-medium">Clients inscrits</p>
           </div>
         </div>
-        <Link href="/admin/products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+        <Link href="/products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
             📦
           </div>
           <div>
             <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Catalogue Produits</p>
+            <p className="text-gray-500 font-medium">Catalogue</p>
           </div>
         </Link>
-        <Link href="/admin/categories" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+        <Link href="/categories" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
             🏷️
           </div>
           <div>
             <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Catégories Phares</p>
+            <p className="text-gray-500 font-medium">Catégories</p>
           </div>
         </Link>
-        <Link href="/admin/featured-products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+        <Link href="/featured-products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
             ⭐
           </div>
           <div>
             <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Pièces Maîtresses</p>
+            <p className="text-gray-500 font-medium">Mis en avant</p>
           </div>
         </Link>
-        <Link href="/admin/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
+        <Link href="/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
             📋
           </div>
           <div>
             <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Les Commandes</p>
+            <p className="text-gray-500 font-medium">Commandes</p>
           </div>
         </Link>
       </div>
     </div>
   );
-};
+}

@@ -7,22 +7,26 @@
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
+"use client";
 import React from 'react';
 import { FadeUp } from '@/components/ui/FadeUp';
-
-const materials = [
-  { name: "Le Bois & Les Coffrets", desc: "Création de boîtes personnalisées et gravure d'une précision absolue sur diverses essences de bois.", img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800" },
-  { name: "Les Chaînes & Métaux", desc: "Personnalisation et gravure laser inaltérable sur vos chaînes, bijoux et accessoires métalliques.", img: "https://images.unsplash.com/photo-1501166222995-ff437b789be3?auto=format&fit=crop&q=80&w=800" },
-  { name: "Les Tissus & Textiles", desc: "Transformation et marquage de vos vêtements et tissus pour affirmer votre style unique.", img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=80&w=800" },
-  { name: "Le Cuir Véritable", desc: "Caractère et patine. Une empreinte indélébile sur des pièces intemporelles.", img: "https://images.unsplash.com/photo-1590740537021-39659b9e5d48?auto=format&fit=crop&q=80&w=800" }
-];
+import { useTranslation } from '@/context/LanguageContext';
 
 export function AtelierMaterialsSection() {
+  const { t } = useTranslation();
+
+  const materials = [
+    { name: t('about.materials_wood_title'), desc: t('about.materials_wood_desc'), img: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800" },
+    { name: t('about.materials_metal_title'), desc: t('about.materials_metal_desc'), img: "https://images.unsplash.com/photo-1501166222995-ff437b789be3?auto=format&fit=crop&q=80&w=800" },
+    { name: t('about.materials_textile_title'), desc: t('about.materials_textile_desc'), img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=80&w=800" },
+    { name: t('about.materials_leather_title'), desc: t('about.materials_leather_desc'), img: "https://images.unsplash.com/photo-1590740537021-39659b9e5d48?auto=format&fit=crop&q=80&w=800" }
+  ];
+
   return (
     <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <FadeUp className="text-center mb-20 flex flex-col items-center">
-        <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Savoir-Faire</span>
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">La Maîtrise des Matières</h2>
+        <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">{t('about.materials_subtitle')}</span>
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">{t('about.materials_title')}</h2>
         <div className="accent-line"></div>
       </FadeUp>
 

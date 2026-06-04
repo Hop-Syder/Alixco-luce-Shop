@@ -10,8 +10,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { Product } from '@/types/product';
+import { useTranslation } from '@/context/LanguageContext';
 
 export function ProductCard({ product }: { product: Product }) {
+  const { t } = useTranslation();
   return (
     <Link href={`/products/${product._id}`} className="group">
       <div className="glass-card rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-900/10 h-full flex flex-col">
@@ -25,7 +27,7 @@ export function ProductCard({ product }: { product: Product }) {
           />
           {product.stock <= 0 && (
             <div className="absolute top-4 right-4 bg-stone-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
-              Rupture
+              {t('products.out_of_stock')}
             </div>
           )}
         </div>

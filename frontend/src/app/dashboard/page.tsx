@@ -12,6 +12,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface Address {
   street: string;
@@ -42,6 +43,7 @@ export default function ClientDashboard() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -64,48 +66,48 @@ export default function ClientDashboard() {
   }, [token]);
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Chargement...</div>;
+    return <div className="p-8 text-center text-stone-400 font-medium tracking-wider uppercase text-sm">{t('common.loading')}</div>;
   }
 
   return (
-    <div className="bg-white shadow rounded-2xl p-8">
-      <h2 className="text-3xl font-bold text-gray-800 mb-2">Bienvenue, {user?.full_name}</h2>
-      <p className="text-gray-500 mb-8">Gérez vos commandes, votre profil et vos adresses.</p>
+    <div className="glass-card rounded-2xl p-8 max-w-7xl mx-auto my-12">
+      <h2 className="text-3xl font-heading text-[hsl(var(--text-main))] mb-2">{t('dashboard.welcome')} <span className="text-[hsl(var(--primary))]">{user?.full_name}</span></h2>
+      <p className="text-stone-400 mb-8">{t('dashboard.subtitle')}</p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="border border-gray-100 rounded-xl p-6 bg-gray-50 shadow-sm">
-          <h3 className="font-semibold text-xl text-gray-800 mb-4 flex items-center">
-            <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 text-sm">👤</span>
-            Informations du compte
+        <div className="border border-white/10 rounded-xl p-6 bg-[hsl(var(--surface-neutral))] shadow-sm">
+          <h3 className="font-semibold text-xl text-[hsl(var(--text-main))] mb-4 flex items-center">
+            <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] flex items-center justify-center mr-3 text-sm">👤</span>
+            {t('dashboard.account_info')}
           </h3>
           <div className="space-y-3">
-            <p className="text-gray-600 flex justify-between"><span className="font-medium text-gray-700">Email</span> <span>{profile?.email || 'Non renseigné'}</span></p>
-            <p className="text-gray-600 flex justify-between"><span className="font-medium text-gray-700">Téléphone</span> <span>{profile?.phone}</span></p>
-            <p className="text-gray-600 flex justify-between"><span className="font-medium text-gray-700">Rôle</span> <span className="capitalize">{profile?.role}</span></p>
-            <p className="text-gray-600 flex justify-between"><span className="font-medium text-gray-700">Membre depuis</span> <span>{profile?.created_at ? new Date(profile.created_at).toLocaleDateString('fr-FR') : 'N/A'}</span></p>
+            <p className="text-stone-400 flex justify-between"><span className="font-medium text-[hsl(var(--text-main))]">Email</span> <span>{profile?.email || t('dashboard.not_provided')}</span></p>
+            <p className="text-stone-400 flex justify-between"><span className="font-medium text-[hsl(var(--text-main))]">{t('dashboard.phone')}</span> <span>{profile?.phone}</span></p>
+            <p className="text-stone-400 flex justify-between"><span className="font-medium text-[hsl(var(--text-main))]">{t('dashboard.role')}</span> <span className="capitalize">{profile?.role}</span></p>
+            <p className="text-stone-400 flex justify-between"><span className="font-medium text-[hsl(var(--text-main))]">{t('dashboard.member_since')}</span> <span>{profile?.created_at ? new Date(profile.created_at).toLocaleDateString('fr-FR') : 'N/A'}</span></p>
           </div>
         </div>
         
-        <div className="border border-gray-100 rounded-xl p-6 bg-gray-50 shadow-sm">
-          <h3 className="font-semibold text-xl text-gray-800 mb-4 flex items-center">
-            <span className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-sm">📍</span>
-            Adresses d&apos;expédition
+        <div className="border border-white/10 rounded-xl p-6 bg-[hsl(var(--surface-neutral))] shadow-sm">
+          <h3 className="font-semibold text-xl text-[hsl(var(--text-main))] mb-4 flex items-center">
+            <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] flex items-center justify-center mr-3 text-sm">📍</span>
+            {t('dashboard.addresses')}
           </h3>
           {profile?.addresses && profile.addresses.length > 0 ? (
             <ul className="space-y-3">
               {profile.addresses.map((addr: Address, index: number) => (
-                <li key={index} className="text-gray-600 bg-white p-3 rounded border border-gray-200">
-                  <p className="font-medium text-gray-800">{addr.street}</p>
+                <li key={index} className="text-stone-400 bg-black/20 p-3 rounded border border-white/5">
+                  <p className="font-medium text-[hsl(var(--text-main))]">{addr.street}</p>
                   <p>{addr.city}, {addr.country}</p>
-                  {addr.details && <p className="text-sm text-gray-500 mt-1">{addr.details}</p>}
+                  {addr.details && <p className="text-sm text-stone-500 mt-1">{addr.details}</p>}
                 </li>
               ))}
             </ul>
           ) : (
             <div className="text-center py-6">
-              <p className="text-gray-500 italic mb-4">Aucune adresse enregistrée.</p>
-              <button className="text-sm text-blue-600 font-medium hover:text-blue-800">
-                + Ajouter une adresse
+              <p className="text-stone-400 italic mb-4">{t('dashboard.no_address')}</p>
+              <button type="button" className="text-sm text-[hsl(var(--primary))] font-medium hover:text-white transition-colors">
+                {t('dashboard.add_address')}
               </button>
             </div>
           )}
@@ -113,45 +115,45 @@ export default function ClientDashboard() {
       </div>
 
       {/* Section Commandes */}
-      <div className="mt-10 border border-gray-100 rounded-xl p-6 bg-gray-50 shadow-sm">
-        <h3 className="font-semibold text-xl text-gray-800 mb-6 flex items-center">
-          <span className="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center mr-3 text-sm">📦</span>
-          Historique des commandes
+      <div className="mt-10 border border-white/10 rounded-xl p-6 bg-[hsl(var(--surface-neutral))] shadow-sm">
+        <h3 className="font-semibold text-xl text-[hsl(var(--text-main))] mb-6 flex items-center">
+          <span className="w-8 h-8 rounded-full bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] flex items-center justify-center mr-3 text-sm">📦</span>
+          {t('dashboard.orders')}
         </h3>
         
         {orders.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-200 text-gray-500 text-sm">
+                <tr className="border-b border-white/10 text-stone-400 text-sm">
                   <th className="pb-3 font-medium">N° Commande</th>
                   <th className="pb-3 font-medium">Date</th>
                   <th className="pb-3 font-medium">Statut</th>
                   <th className="pb-3 font-medium text-right">Total</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-white/5">
                 {orders.map((order: Order) => (
-                  <tr key={order._id || order.id} className="text-gray-700 text-sm">
+                  <tr key={order._id || order.id} className="text-stone-300 text-sm">
                     <td className="py-4 font-medium">{order.orderNumber}</td>
                     <td className="py-4">{new Date(order.createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
                     <td className="py-4">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-semibold
-                        ${order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : ''}
-                        ${order.status === 'processing' ? 'bg-blue-100 text-blue-700' : ''}
-                        ${order.status === 'shipped' ? 'bg-indigo-100 text-indigo-700' : ''}
-                        ${order.status === 'delivered' ? 'bg-emerald-100 text-emerald-700' : ''}
-                        ${order.status === 'cancelled' ? 'bg-red-100 text-red-700' : ''}
+                        ${order.status === 'pending' ? 'bg-yellow-500/20 text-yellow-500 border border-yellow-500/30' : ''}
+                        ${order.status === 'processing' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : ''}
+                        ${order.status === 'shipped' ? 'bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] border border-[hsl(var(--primary))]/30' : ''}
+                        ${order.status === 'delivered' ? 'bg-green-500/20 text-green-400 border border-green-500/30' : ''}
+                        ${order.status === 'cancelled' ? 'bg-red-500/20 text-red-400 border border-red-500/30' : ''}
                       `}>
-                        {order.status === 'pending' && 'En attente'}
-                        {order.status === 'processing' && 'En traitement'}
-                        {order.status === 'shipped' && 'Expédiée'}
-                        {order.status === 'delivered' && 'Livrée'}
-                        {order.status === 'cancelled' && 'Annulée'}
+                        {order.status === 'pending' && t('dashboard.status.pending')}
+                        {order.status === 'processing' && t('dashboard.status.processing')}
+                        {order.status === 'shipped' && t('dashboard.status.shipped')}
+                        {order.status === 'delivered' && t('dashboard.status.delivered')}
+                        {order.status === 'cancelled' && t('dashboard.status.cancelled')}
                         {!['pending', 'processing', 'shipped', 'delivered', 'cancelled'].includes(order.status) && order.status}
                       </span>
                     </td>
-                    <td className="py-4 text-right font-bold">{order.total.toLocaleString()} FCFA</td>
+                    <td className="py-4 text-right font-bold text-[hsl(var(--primary))]">{order.total.toLocaleString()} FCFA</td>
                   </tr>
                 ))}
               </tbody>
@@ -159,7 +161,7 @@ export default function ClientDashboard() {
           </div>
         ) : (
           <div className="text-center py-8">
-            <p className="text-gray-500 italic mb-4">Vous n&apos;avez passé aucune commande pour le moment.</p>
+            <p className="text-stone-400 italic mb-4">{t('dashboard.no_orders')}</p>
           </div>
         )}
       </div>

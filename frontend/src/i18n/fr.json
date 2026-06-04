@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "catalog": "Catalogue",
+    "workshop": "L'Atelier",
+    "login": "Connexion",
+    "account": "Compte",
+    "register": "Créer un compte",
+    "logout": "Déconnexion"
+  },
+  "hero": {
+    "subtitle": "AlixcoLuxe",
+    "title1": "L'Art de la Personnalisation",
+    "title2": "Gravure & Découpe au Laser",
+    "description": "Atelier spécialisé dans la création d'objets d'art personnalisés, nous concevons des pièces uniques, raffinées et sur-mesure. Alliant élégance et précision, nous personnalisons le bois, le verre, le métal et le cuir pour sublimer vos cadeaux d'entreprise et accessoires de mode.",
+    "cta_collection": "Découvrir la collection",
+    "cta_about": "Notre Savoir-Faire",
+    "scroll": "Défiler"
+  },
+  "trust": {
+    "delivery_title": "Expédition Sécurisée",
+    "delivery_desc": "Livraison soignée et suivie pour toutes vos créations.",
+    "quality_title": "Savoir-Faire Artisanal",
+    "quality_desc": "Chaque pièce est gravée et conçue avec une précision d'orfèvre.",
+    "payment_title": "Paiement Protégé",
+    "payment_desc": "Transactions entièrement chiffrées pour votre sérénité."
+  },
+  "categories": {
+    "subtitle": "Collections Exclusives",
+    "title": "L'Excellence du Sur-Mesure"
+  },
+  "featured": {
+    "subtitle": "Pièces Maîtresses",
+    "title": "Créations d'Exception",
+    "view_all": "Voir tout le catalogue",
+    "discover": "Découvrir la pièce"
+  },
+  "promo": {
+    "badge": "Offre Exclusive",
+    "title1": "Créations Uniques",
+    "title2": "Séries Limitées",
+    "description": "Découvrez notre collection capsule exclusive gravée sur bois précieux. Chaque pièce est numérotée et livrée avec son certificat d'authenticité.",
+    "feature1": "Bois précieux labellisé",
+    "feature2": "Numérotation unique",
+    "feature3": "Certificat fourni",
+    "cta": "Voir la collection",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Minutes"
+  },
+  "testimonials": {
+    "subtitle": "Avis Clients",
+    "title": "Leur Expérience Alixco Luxe",
+    "review1_role": "Collectionneuse d'Art",
+    "review1_text": "La gravure sur le verre est d'une finesse incroyable. Une pièce d'exception dans mon salon.",
+    "review2_role": "Directeur Marketing",
+    "review2_text": "Cadeaux d'affaires parfaits. Nos partenaires ont adoré l'élégance et la qualité de la personnalisation.",
+    "review3_role": "Designer d'Intérieur",
+    "review3_text": "Un travail d'orfèvre sur le bois. Les détails sont d'une précision remarquable."
+  },
+  "newsletter": {
+    "title": "Rejoignez le Cercle Privé",
+    "description": "Inscrivez-vous pour recevoir nos invitations aux ventes privées et découvrir en avant-première nos nouvelles créations artisanales.",
+    "placeholder": "Votre adresse email",
+    "button": "S'inscrire"
+  },
+  "footer": {
+    "brand_desc": "L'Art de l'Unique et le Raffinement du Sur-Mesure. Spécialistes de la personnalisation en art, joaillerie et mode pour affirmer votre style unique.",
+    "explore": "Explorer",
+    "collections": "Collections",
+    "our_workshop": "Notre Atelier",
+    "custom_made": "Sur-Mesure",
+    "journal": "Journal",
+    "legal": "Légal",
+    "terms": "Conditions Générales de Vente",
+    "privacy": "Mentions Légales",
+    "shipping": "Livraison & Retours",
+    "faq": "Questions Fréquentes",
+    "contact": "Contact",
+    "rights": "Tous droits réservés."
+  },
+  "common": {
+    "loading": "Chargement..."
+  },
+  "products": {
+    "not_found": "Création introuvable",
+    "back_to_catalog": "Retour au catalogue",
+    "description": "Description",
+    "placeholder_desc": "Ce chef-d'œuvre incarne l'excellence artisanale d'Alixco Luxe. Conçu avec des matériaux nobles pour une expérience et une élégance intemporelles. Chaque détail a été pensé pour sublimer votre quotidien.",
+    "in_stock": "En stock",
+    "out_of_stock": "Rupture de stock",
+    "add_to_cart": "Ajouter au panier"
+  },
+  "cart": {
+    "added": "Ajouté au panier",
+    "success_msg": "Commande préparée. Redirection vers WhatsApp...",
+    "error_msg": "Une erreur est survenue lors de la validation de la commande.",
+    "empty_title": "Votre Écrin est Vide",
+    "empty_desc": "Découvrez notre collection pour trouver l'inspiration.",
+    "explore": "Explorer le Catalogue",
+    "selection_title": "Votre Sélection",
+    "selection_desc": "Vérifiez les pièces avant de finaliser votre commande.",
+    "checkout_title": "Finalisation",
+    "estimated_total": "Total Estimé",
+    "full_name": "Nom complet",
+    "address": "Adresse complète",
+    "preparing": "Préparation...",
+    "order_whatsapp": "Commander via WhatsApp",
+    "redirect_notice": "En validant, vous serez redirigé vers WhatsApp pour finaliser l'achat avec un conseiller."
+  },
+  "auth": {
+    "welcome": "Bienvenue",
+    "login_subtitle": "Connectez-vous à votre espace exclusif.",
+    "login_error": "Une erreur est survenue lors de la connexion.",
+    "phone": "Numéro de téléphone",
+    "password": "Mot de passe",
+    "login": "Se connecter",
+    "no_account": "Pas encore de compte ?",
+    "register": "S'inscrire",
+    "register_error": "Une erreur est survenue lors de l'inscription.",
+    "create_account": "Créer un compte",
+    "join": "Rejoignez l'univers Alixco Luxe.",
+    "full_name": "Nom Complet",
+    "already_have_account": "Déjà un compte ?"
+  },
+  "dashboard": {
+    "welcome": "Bienvenue,",
+    "subtitle": "Gérez vos commandes, votre profil et vos adresses.",
+    "account_info": "Informations du compte",
+    "phone": "Téléphone",
+    "role": "Rôle",
+    "member_since": "Membre depuis",
+    "not_provided": "Non renseigné",
+    "addresses": "Adresses d'expédition",
+    "no_address": "Aucune adresse enregistrée.",
+    "add_address": "+ Ajouter une adresse",
+    "orders": "Historique des commandes",
+    "no_orders": "Vous n'avez passé aucune commande pour le moment.",
+    "status": {
+      "pending": "En attente",
+      "processing": "En traitement",
+      "shipped": "Expédiée",
+      "delivered": "Livrée",
+      "cancelled": "Annulée"
+    }
+  },
+  "admin": {
+    "dashboard": "Tableau de bord Administrateur",
+    "subtitle": "Vue d'ensemble de la plateforme Alixco Luxe.",
+    "checking_rights": "Vérification des droits...",
+    "rbac_status": "Statut RBAC :",
+    "pending_orders": "Commandes à traiter",
+    "online_products": "Produits en ligne",
+    "registered_clients": "Clients inscrits",
+    "manage": "Gérer",
+    "catalog": "Catalogue Produits",
+    "categories": "Catégories Phares",
+    "featured": "Pièces Maîtresses",
+    "orders_mgmt": "Les Commandes"
+  }
+}

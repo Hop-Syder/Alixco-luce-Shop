@@ -15,8 +15,10 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/services/api';
 import Image from 'next/image';
+import { useTranslation } from '@/context/LanguageContext';
 
 import { useCartStore } from '@/store/cartStore';
+import { toast } from 'react-hot-toast';
 
 interface Product {
   _id: string;
@@ -34,6 +36,7 @@ export default function ProductDetail() {
   const [loading, setLoading] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
   const addItem = useCartStore((state) => state.addItem);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -63,7 +66,7 @@ export default function ProductDetail() {
     });
     
     // Minimalist toast fallback (can be improved later with a proper Toast system)
-    alert(`Ajouté au panier : ${quantity}x ${product.name}`);
+    toast.success(`${t('cart.added')} : ${quantity}x ${product.name}`);
   };
 
   if (loading) {
@@ -77,8 +80,8 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center bg-[hsl(var(--background))]">
-        <h2 className="text-3xl font-heading font-bold text-stone-900 mb-4">Création introuvable</h2>
-        <Link href="/products" className="btn-primary">Retour au catalogue</Link>
+        <h2 className="text-3xl font-heading font-bold text-stone-900 mb-4">{t('products.not_found')}</h2>
+        <Link href="/products" className="btn-primary">{t('products.back_to_catalog')}</Link>
       </div>
     );
   }
@@ -97,7 +100,7 @@ export default function ProductDetail() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            RETOUR AU CATALOGUE
+            {t('products.back_to_catalog')}
           </Link>
         </div>
 
@@ -127,11 +130,9 @@ export default function ProductDetail() {
               </div>
               
               <div className="border-t border-stone-200 py-8 mb-8">
-                <h3 className="text-sm font-bold tracking-widest uppercase text-stone-900 mb-4">Description</h3>
+                <h3 className="text-sm font-bold tracking-widest uppercase text-stone-900 mb-4">{t('products.description')}</h3>
                 <p className="text-stone-600 leading-relaxed font-light text-lg">
-                  Ce chef-d&apos;œuvre incarne l&apos;excellence artisanale d&apos;Alixco Luxe. 
-                  Conçu avec des matériaux nobles pour une expérience et une élégance intemporelles. 
-                  Chaque détail a été pensé pour sublimer votre quotidien.
+                  {t('products.placeholder_desc')}
                 </p>
               </div>
               
@@ -150,8 +151,8 @@ export default function ProductDetail() {
                   </div>
                   <div className="text-sm font-medium">
                     {product.stock > 0 
-                      ? <span className="text-emerald-600 flex items-center"><span className="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span> En stock ({product.stock})</span>
-                      : <span className="text-red-500 flex items-center"><span className="w-2 h-2 rounded-full bg-red-500 mr-2"></span> Rupture de stock</span>
+                      ? <span className="text-emerald-600 flex items-center"><span className="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span> {t('products.in_stock')} ({product.stock})</span>
+                      : <span className="text-red-500 flex items-center"><span className="w-2 h-2 rounded-full bg-red-500 mr-2"></span> {t('products.out_of_stock')}</span>
                     }
                   </div>
                 </div>
@@ -164,7 +165,7 @@ export default function ProductDetail() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                   </svg>
-                  Ajouter au panier
+                  {t('products.add_to_cart')}
                 </button>
               </div>
 

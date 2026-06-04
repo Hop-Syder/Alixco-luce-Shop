@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "workshop": "Workshop",
+    "login": "Login",
+    "account": "Account",
+    "register": "Sign Up",
+    "logout": "Logout"
+  },
+  "hero": {
+    "subtitle": "AlixcoLuxe",
+    "title1": "The Art of Customization",
+    "title2": "Laser Engraving & Cutting",
+    "description": "A workshop specializing in the creation of personalized art objects, we design unique, refined, and custom-made pieces. Combining elegance and precision, we customize wood, glass, metal, and leather to elevate your corporate gifts and fashion accessories.",
+    "cta_collection": "Discover the collection",
+    "cta_about": "Our Expertise",
+    "scroll": "Scroll down"
+  },
+  "trust": {
+    "delivery_title": "Secure Shipping",
+    "delivery_desc": "Careful and tracked delivery for all your creations.",
+    "quality_title": "Artisanal Craftsmanship",
+    "quality_desc": "Each piece is engraved and designed with utmost precision.",
+    "payment_title": "Protected Payment",
+    "payment_desc": "Fully encrypted transactions for your peace of mind."
+  },
+  "categories": {
+    "subtitle": "Exclusive Collections",
+    "title": "The Excellence of Custom-Made"
+  },
+  "featured": {
+    "subtitle": "Masterpieces",
+    "title": "Exceptional Creations",
+    "view_all": "View all catalog",
+    "discover": "Discover the piece"
+  },
+  "promo": {
+    "badge": "Exclusive Offer",
+    "title1": "Unique Creations",
+    "title2": "Limited Editions",
+    "description": "Discover our exclusive capsule collection engraved on precious wood. Each piece is numbered and delivered with its certificate of authenticity.",
+    "feature1": "Certified precious wood",
+    "feature2": "Unique numbering",
+    "feature3": "Certificate included",
+    "cta": "View collection",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes"
+  },
+  "testimonials": {
+    "subtitle": "Testimonials",
+    "title": "Their Alixco Luxe Experience",
+    "review1_role": "Art Collector",
+    "review1_text": "The engraving on glass is incredibly fine. An exceptional piece in my living room.",
+    "review2_role": "Marketing Director",
+    "review2_text": "Perfect corporate gifts. Our partners loved the elegance and quality of customization.",
+    "review3_role": "Interior Designer",
+    "review3_text": "Masterful work on wood. The details are remarkably precise."
+  },
+  "newsletter": {
+    "title": "Join the Private Circle",
+    "description": "Sign up to receive invitations to private sales and preview our new artisanal creations.",
+    "placeholder": "Your email address",
+    "button": "Subscribe"
+  },
+  "footer": {
+    "brand_desc": "The Art of the Unique and the Refinement of Custom-Made. Specialists in art, jewelry, and fashion customization to affirm your unique style.",
+    "explore": "Explore",
+    "collections": "Collections",
+    "our_workshop": "Our Workshop",
+    "custom_made": "Custom-Made",
+    "journal": "Journal",
+    "legal": "Legal",
+    "terms": "Terms of Service",
+    "privacy": "Legal Notice",
+    "shipping": "Shipping & Returns",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "products": {
+    "not_found": "Creation not found",
+    "back_to_catalog": "Back to catalog",
+    "description": "Description",
+    "placeholder_desc": "This masterpiece embodies the artisanal excellence of Alixco Luxe. Designed with noble materials for a timeless experience and elegance. Every detail has been thought out to sublimate your daily life.",
+    "in_stock": "In stock",
+    "out_of_stock": "Out of stock",
+    "add_to_cart": "Add to cart"
+  },
+  "cart": {
+    "added": "Added to cart",
+    "success_msg": "Order prepared. Redirecting to WhatsApp...",
+    "error_msg": "An error occurred while validating the order.",
+    "empty_title": "Your Cart is Empty",
+    "empty_desc": "Discover our collection to find inspiration.",
+    "explore": "Explore the Catalog",
+    "selection_title": "Your Selection",
+    "selection_desc": "Check the items before finalizing your order.",
+    "checkout_title": "Checkout",
+    "estimated_total": "Estimated Total",
+    "full_name": "Full name",
+    "address": "Full address",
+    "preparing": "Preparing...",
+    "order_whatsapp": "Order via WhatsApp",
+    "redirect_notice": "By confirming, you will be redirected to WhatsApp to finalize the purchase with an advisor."
+  },
+  "auth": {
+    "welcome": "Welcome",
+    "login_subtitle": "Log in to your exclusive space.",
+    "login_error": "An error occurred during login.",
+    "phone": "Phone number",
+    "password": "Password",
+    "login": "Log in",
+    "no_account": "Don't have an account yet?",
+    "register": "Sign up",
+    "register_error": "An error occurred during registration.",
+    "create_account": "Create an account",
+    "join": "Join the Alixco Luxe universe.",
+    "full_name": "Full Name",
+    "already_have_account": "Already have an account?"
+  },
+  "dashboard": {
+    "welcome": "Welcome,",
+    "subtitle": "Manage your orders, profile, and addresses.",
+    "account_info": "Account Information",
+    "phone": "Phone",
+    "role": "Role",
+    "member_since": "Member since",
+    "not_provided": "Not provided",
+    "addresses": "Shipping Addresses",
+    "no_address": "No saved address.",
+    "add_address": "+ Add an address",
+    "orders": "Order History",
+    "no_orders": "You haven't placed any orders yet.",
+    "status": {
+      "pending": "Pending",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    }
+  },
+  "admin": {
+    "dashboard": "Administrator Dashboard",
+    "subtitle": "Overview of the Alixco Luxe platform.",
+    "checking_rights": "Checking rights...",
+    "rbac_status": "RBAC Status:",
+    "pending_orders": "Pending orders",
+    "online_products": "Online products",
+    "registered_clients": "Registered clients",
+    "manage": "Manage",
+    "catalog": "Product Catalog",
+    "categories": "Featured Categories",
+    "featured": "Featured Pieces",
+    "orders_mgmt": "Orders"
+  }
+}

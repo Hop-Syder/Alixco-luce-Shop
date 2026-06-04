@@ -7,10 +7,14 @@
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
+"use client";
 import React from 'react';
 import { FadeUp } from '@/components/ui/FadeUp';
+import { useTranslation } from '@/context/LanguageContext';
 
 export function AtelierMachinesSection() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <style>{`
@@ -38,20 +42,20 @@ export function AtelierMachinesSection() {
         </FadeUp>
 
         <FadeUp delay={0.3} className="space-y-8">
-          <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Notre Équipement</span>
-          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight">Technologie <br/>de Pointe</h2>
+          <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">{t('about.machines_subtitle')}</span>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight">{t('about.machines_title1')} <br/>{t('about.machines_title2')}</h2>
           <p className="text-stone-300 font-light text-lg leading-relaxed">
-            Notre parc machine est composé de graveurs et découpeurs laser de dernière génération. Ils offrent une résolution exceptionnelle permettant de reproduire les détails les plus infimes, qu&apos;il s&apos;agisse de typographies élégantes ou de motifs complexes.
+            {t('about.machines_desc')}
           </p>
           <ul className="space-y-4 text-stone-400 text-sm font-light">
             <li className="flex items-center before:content-[''] before:w-1.5 before:h-1.5 before:bg-[hsl(var(--primary))] before:rounded-full before:mr-4">
-              Laser CO2 Haute Précision pour les matières organiques.
+              {t('about.machines_list1')}
             </li>
             <li className="flex items-center before:content-[''] before:w-1.5 before:h-1.5 before:bg-[hsl(var(--primary))] before:rounded-full before:mr-4">
-              Laser Fibre pour le marquage inaltérable des métaux.
+              {t('about.machines_list2')}
             </li>
             <li className="flex items-center before:content-[''] before:w-1.5 before:h-1.5 before:bg-[hsl(var(--primary))] before:rounded-full before:mr-4">
-              Calibration optique au 1/100ème de millimètre.
+              {t('about.machines_list3')}
             </li>
           </ul>
         </FadeUp>

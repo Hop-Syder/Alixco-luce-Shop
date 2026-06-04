@@ -7,9 +7,11 @@
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
+"use client";
 import React from 'react';
 import { ProductCard } from './ProductCard';
 import { Product } from '@/types/product';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface ProductGridProps {
   products: Product[];
@@ -17,6 +19,7 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products, loading }: ProductGridProps) {
+  const { t } = useTranslation();
   if (loading) {
     return (
       <div className="flex justify-center items-center py-32">
@@ -28,7 +31,7 @@ export function ProductGrid({ products, loading }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="col-span-full text-center py-20 glass-card rounded-[2rem]">
-        <p className="text-stone-500 text-lg">Notre collection est en cours de renouvellement.</p>
+        <p className="text-stone-500 text-lg">{t('products.empty_catalog')}</p>
       </div>
     );
   }

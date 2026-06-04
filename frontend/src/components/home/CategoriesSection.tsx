@@ -16,6 +16,7 @@ import { ArrowRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
 import { api } from '@/services/api';
 import Image from 'next/image';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface Category {
   _id?: string;
@@ -26,13 +27,14 @@ interface Category {
 }
 
 const defaultCategories: Category[] = [
-  { title: "Art & Décoration", desc: "Création d'objets d'art et de tableaux pour sublimer vos intérieurs", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" },
-  { title: "Joaillerie & Accessoires", desc: "Personnalisation de bijoux pour une allure qui ne ressemble qu'à vous", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" },
-  { title: "Mode Customisée", desc: "Transformation de vêtements pour affirmer votre style unique", img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" },
-  { title: "Coffrets & Gravure Laser", desc: "Boîtes personnalisées et gravure sur bois, chaînes et tissus", img: "https://images.unsplash.com/photo-1611077544831-29e20a0279c6?auto=format&fit=crop&q=80&w=800" }
+  { title: "Gravure & Découpe Laser", desc: "Personnalisation sur bois, verre, métal et cuir pour donner vie à vos idées", img: "https://images.unsplash.com/photo-1611077544831-29e20a0279c6?auto=format&fit=crop&q=80&w=800" },
+  { title: "Créations d'Art", desc: "Pièces uniques conçues sur-mesure pour sublimer votre décoration", img: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=800" },
+  { title: "Accessoires de Mode", desc: "Customisation sur tissus et accessoires pour affirmer votre style unique", img: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=800" },
+  { title: "Cadeaux d'Entreprise", desc: "Boîtes personnalisées et cadeaux d'affaires sur-mesure pour marquer les esprits", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" }
 ];
 
 export function CategoriesSection() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState<Category[]>(defaultCategories);
 
   useEffect(() => {
@@ -56,8 +58,8 @@ export function CategoriesSection() {
   return (
     <section className="py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
       <FadeUp className="text-center mb-20 flex flex-col items-center">
-        <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Notre Expertise</span>
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">L&apos;Univers Alixco</h2>
+        <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">{t('categories.subtitle')}</span>
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-white mb-6">{t('categories.title')}</h2>
         <div className="accent-line"></div>
       </FadeUp>
       
@@ -69,10 +71,13 @@ export function CategoriesSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500"></div>
               
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h3 className="text-3xl font-heading font-bold text-white mb-3">{cat.title}</h3>
-                <p className="text-stone-300 font-light text-sm uppercase tracking-wider flex items-center">
-                  {cat.desc} <ArrowRight className="ml-4 w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 text-[hsl(var(--primary))]" />
-                </p>
+                <h3 className="text-3xl font-heading font-bold text-white mb-3 truncate" title={cat.title}>{cat.title}</h3>
+                <div className="flex items-end justify-between gap-4">
+                  <p className="text-stone-300 font-light text-sm uppercase tracking-wider line-clamp-2 flex-1" title={cat.desc}>
+                    {cat.desc}
+                  </p>
+                  <ArrowRight className="w-5 h-5 flex-shrink-0 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300 text-[hsl(var(--primary))]" />
+                </div>
               </div>
             </Link>
           </FadeUp>

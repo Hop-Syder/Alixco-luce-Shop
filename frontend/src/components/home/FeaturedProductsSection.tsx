@@ -16,6 +16,7 @@ import { ArrowRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
 import { api } from '@/services/api';
 import Image from 'next/image';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface FeaturedProduct {
   _id?: string;
@@ -34,6 +35,7 @@ const defaultProducts: FeaturedProduct[] = [
 ];
 
 export function FeaturedProductsSection() {
+  const { t } = useTranslation();
   const [products, setProducts] = useState<FeaturedProduct[]>(defaultProducts);
 
   useEffect(() => {
@@ -60,11 +62,11 @@ export function FeaturedProductsSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeUp className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div>
-            <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">Sélection Exclusive</span>
-            <h2 className="text-4xl font-heading font-bold text-white">Pièces Maîtresses</h2>
+            <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">{t('featured.subtitle')}</span>
+            <h2 className="text-4xl font-heading font-bold text-white">{t('featured.title')}</h2>
           </div>
           <Link href="/products" className="flex items-center text-sm uppercase tracking-widest text-white hover:text-[hsl(var(--primary))] transition-colors group">
-            Voir la collection complète <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+            {t('featured.view_all')} <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
           </Link>
         </FadeUp>
 
@@ -83,7 +85,7 @@ export function FeaturedProductsSection() {
                   {/* Overlay interaction */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
                     <span className="text-white uppercase tracking-widest text-xs border border-white px-6 py-3 hover:bg-white hover:text-black transition-colors">
-                      Découvrir
+                      {t('featured.discover')}
                     </span>
                   </div>
                 </div>
