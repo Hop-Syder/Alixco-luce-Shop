@@ -3,7 +3,7 @@
  * @organization Nexus Partners
  * @description Admin Featured Products Management Page
  * @created 2026-05-22
- * @updated 2026-05-22
+ * @updated 2026-06-05
  * 🌐 ceo.nexuspartners.xyz
  * 📧 daoudaabassichristian@gmail.com
  */
@@ -46,7 +46,7 @@ export default function AdminFeaturedProducts() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchProducts();
   }, []);
 
