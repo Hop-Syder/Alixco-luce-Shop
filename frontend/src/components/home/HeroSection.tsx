@@ -53,7 +53,7 @@ export function HeroSection() {
     <section 
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-screen flex flex-col justify-center items-start px-4 sm:px-6 lg:px-12 xl:px-24 text-left pt-24 pb-16 overflow-hidden bg-[hsl(var(--background))]"
+      className="relative min-h-screen flex flex-col justify-center items-start px-4 sm:px-6 lg:px-12 xl:px-24 text-left pt-16 sm:pt-24 pb-16 overflow-hidden bg-[hsl(var(--background))]"
     >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -68,7 +68,7 @@ export function HeroSection() {
         <div className="absolute top-[25%] left-[25%] w-[65vw] h-[65vw] md:w-[45vw] md:h-[45vw] rounded-full bg-[hsl(var(--primary))]/10 blur-[160px] pointer-events-none mix-blend-screen animate-pulse"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center -mt-6 lg:-mt-12">
+      <div className="max-w-7xl mx-auto z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center -mt-12 sm:-mt-6 lg:-mt-12">
         
         {/* GAUCHE : TEXTES ET BOUTONS */}
         <div className="lg:col-span-7 xl:col-span-7 space-y-6 flex flex-col items-start">
@@ -145,7 +145,7 @@ export function HeroSection() {
               <div className="w-full h-full rounded-[1.8rem] overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="https://images.unsplash.com/photo-1618220179428-22790b46a015?auto=format&fit=crop&q=80&w=800" 
+                  src="/header-droit.jpeg" 
                   alt="Art et personnalisation AlixcoLuxe" 
                   className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 pointer-events-none"
                 />
