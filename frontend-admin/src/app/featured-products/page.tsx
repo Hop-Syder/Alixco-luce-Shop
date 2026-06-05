@@ -99,7 +99,7 @@ export default function AdminFeaturedProducts() {
     }
   };
 
-  if (loading) return <div>Chargement...</div>;
+  if (loading) return <div className="flex items-center justify-center min-h-[40vh] text-stone-500 text-sm">Chargement des pièces maîtresses...</div>;
 
   return (
     <div className="space-y-6 text-stone-200">
@@ -173,16 +173,16 @@ export default function AdminFeaturedProducts() {
               />
             </div>
           </div>
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-6 pt-6 border-t border-white/10">
             <button 
               onClick={handleSave}
-              className="bg-green-700 text-white px-4 py-2 rounded-xl flex items-center hover:bg-green-600 font-semibold"
+              className="bg-[hsl(var(--primary))] text-white px-6 py-3 rounded-xl flex items-center hover:opacity-90 font-semibold transition-opacity"
             >
               <Save className="w-4 h-4 mr-2" /> Enregistrer
             </button>
             <button 
               onClick={() => setIsEditing(null)}
-              className="bg-stone-800 text-stone-300 px-4 py-2 rounded-xl flex items-center hover:bg-stone-700 font-semibold"
+              className="bg-stone-800 text-stone-300 px-6 py-3 rounded-xl flex items-center hover:bg-stone-700 font-semibold transition-colors"
             >
               <X className="w-4 h-4 mr-2" /> Annuler
             </button>

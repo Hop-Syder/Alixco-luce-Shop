@@ -122,7 +122,7 @@ export default function HomeSettingsEditor() {
 
   if (!settings) {
     return (
-      <div className="text-red-500 bg-red-50 p-6 rounded-2xl border border-red-100 max-w-xl mx-auto text-center">
+      <div className="text-red-400 bg-red-950/30 p-6 rounded-2xl border border-red-900/50 max-w-xl mx-auto text-center">
         Impossible de charger les données de la page d&apos;accueil.
       </div>
     );

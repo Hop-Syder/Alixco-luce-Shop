@@ -80,7 +80,7 @@ export default function ProductDetail() {
   if (!product) {
     return (
       <div className="min-h-[calc(100vh-5rem)] flex flex-col items-center justify-center bg-[hsl(var(--background))]">
-        <h2 className="text-3xl font-heading font-bold text-stone-900 mb-4">{t('products.not_found')}</h2>
+        <h2 className="text-3xl font-heading font-bold text-white mb-4">{t('products.not_found')}</h2>
         <Link href="/products" className="btn-primary">{t('products.back_to_catalog')}</Link>
       </div>
     );
@@ -109,7 +109,7 @@ export default function ProductDetail() {
             
             {/* Image */}
             <div className="w-full md:w-1/2">
-              <div className="rounded-[2rem] overflow-hidden bg-stone-100 aspect-[4/5] relative shadow-inner">
+              <div className="rounded-[2rem] overflow-hidden bg-stone-900 aspect-[4/5] relative shadow-inner border border-white/5">
                 <Image 
                   src={product.image || 'https://via.placeholder.com/600x750?text=Alixco+Luxe'} 
                   alt={product.name} 
@@ -125,27 +125,27 @@ export default function ProductDetail() {
               
               <div className="mb-8">
                 <span className="text-xs text-[hsl(var(--primary))] font-bold uppercase tracking-[0.2em] mb-3 block">{product.category}</span>
-                <h1 className="text-4xl md:text-5xl font-heading font-bold text-[hsl(var(--text-main))] leading-tight mb-4">{product.name}</h1>
-                <p className="text-3xl text-stone-800 font-semibold">{product.price.toLocaleString()} FCFA</p>
+                <h1 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight mb-4">{product.name}</h1>
+                <p className="text-3xl text-[hsl(var(--primary))] font-semibold">{product.price.toLocaleString()} FCFA</p>
               </div>
               
-              <div className="border-t border-stone-200 py-8 mb-8">
-                <h3 className="text-sm font-bold tracking-widest uppercase text-stone-900 mb-4">{t('products.description')}</h3>
-                <p className="text-stone-600 leading-relaxed font-light text-lg">
+              <div className="border-t border-white/8 py-8 mb-8">
+                <h3 className="text-sm font-bold tracking-widest uppercase text-stone-300 mb-4">{t('products.description')}</h3>
+                <p className="text-stone-400 leading-relaxed font-light text-lg">
                   {t('products.placeholder_desc')}
                 </p>
               </div>
               
               <div className="space-y-6">
                 <div className="flex items-center gap-6">
-                  <div className="flex items-center bg-white border border-stone-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="flex items-center bg-stone-900 border border-white/10 rounded-xl overflow-hidden">
                     <button 
-                      className="px-5 py-3 text-stone-600 hover:bg-stone-50 hover:text-[hsl(var(--primary))] transition-colors"
+                      className="px-5 py-3 text-stone-400 hover:bg-white/5 hover:text-[hsl(var(--primary))] transition-colors"
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     >-</button>
-                    <span className="px-4 font-semibold text-stone-800 w-12 text-center">{quantity}</span>
+                    <span className="px-4 font-semibold text-white w-12 text-center">{quantity}</span>
                     <button 
-                      className="px-5 py-3 text-stone-600 hover:bg-stone-50 hover:text-[hsl(var(--primary))] transition-colors"
+                      className="px-5 py-3 text-stone-400 hover:bg-white/5 hover:text-[hsl(var(--primary))] transition-colors"
                       onClick={() => setQuantity(quantity + 1)}
                     >+</button>
                   </div>

@@ -83,11 +83,9 @@ export default function AdminDashboard() {
         )}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4">
-            📦
-          </div>
+          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4">📦</div>
           <div>
             <h3 className="text-2xl font-bold text-white">{stats.pendingOrders}</h3>
             <p className="text-stone-400 font-medium text-sm">Commandes en attente</p>
@@ -95,9 +93,7 @@ export default function AdminDashboard() {
         </div>
         
         <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-purple-950/40 text-purple-400 flex items-center justify-center text-xl mr-4">
-            🛍️
-          </div>
+          <div className="w-12 h-12 rounded-full bg-purple-950/40 text-purple-400 flex items-center justify-center text-xl mr-4">🛍️</div>
           <div>
             <h3 className="text-2xl font-bold text-white">{stats.productsCount}</h3>
             <p className="text-stone-400 font-medium text-sm">Produits en ligne</p>
@@ -105,19 +101,17 @@ export default function AdminDashboard() {
         </div>
         
         <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-[hsl(var(--primary))] flex items-center justify-center text-xl mr-4">
-            👥
-          </div>
+          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-[hsl(var(--primary))] flex items-center justify-center text-xl mr-4">👥</div>
           <div>
             <h3 className="text-2xl font-bold text-white">{stats.uniqueCustomers}</h3>
             <p className="text-stone-400 font-medium text-sm">Clients inscrits</p>
           </div>
         </div>
+      </div>
 
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Link href="/products" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-            📦
-          </div>
+          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">📦</div>
           <div>
             <h3 className="text-lg font-bold text-white">Gérer</h3>
             <p className="text-stone-400 font-medium text-sm">Catalogue</p>
@@ -125,9 +119,7 @@ export default function AdminDashboard() {
         </Link>
 
         <Link href="/categories" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-indigo-950/40 text-indigo-400 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-            🏷️
-          </div>
+          <div className="w-12 h-12 rounded-full bg-indigo-950/40 text-indigo-400 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">🏷️</div>
           <div>
             <h3 className="text-lg font-bold text-white">Gérer</h3>
             <p className="text-stone-400 font-medium text-sm">Catégories</p>
@@ -135,9 +127,7 @@ export default function AdminDashboard() {
         </Link>
 
         <Link href="/featured-products" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-amber-950/40 text-amber-400 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
-            ⭐
-          </div>
+          <div className="w-12 h-12 rounded-full bg-amber-950/40 text-amber-400 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">⭐</div>
           <div>
             <h3 className="text-lg font-bold text-white">Gérer</h3>
             <p className="text-stone-400 font-medium text-sm">Mis en avant</p>
@@ -145,12 +135,18 @@ export default function AdminDashboard() {
         </Link>
 
         <Link href="/orders" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-orange-400 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-            📋
-          </div>
+          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-orange-400 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">📋</div>
           <div>
             <h3 className="text-lg font-bold text-white">Gérer</h3>
             <p className="text-stone-400 font-medium text-sm">Commandes</p>
+          </div>
+        </Link>
+        
+        <Link href="/home-settings" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-teal-950/40 text-teal-400 flex items-center justify-center text-xl mr-4 group-hover:bg-teal-600 group-hover:text-white transition-colors">⚙️</div>
+          <div>
+            <h3 className="text-lg font-bold text-white">Gérer</h3>
+            <p className="text-stone-400 font-medium text-sm">Paramètres Accueil</p>
           </div>
         </Link>
       </div>

@@ -80,7 +80,7 @@ export default function AdminOrders() {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Chargement des commandes...</div>;
+    return <div className="flex items-center justify-center min-h-[40vh] text-stone-500 text-sm">Chargement des commandes...</div>;
   }
 
   return (

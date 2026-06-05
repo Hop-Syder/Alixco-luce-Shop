@@ -1,7 +1,7 @@
 /**
  * @author @hopsyder
  * @organization Nexus Partners
- * @description Layout page with global navigation for admin
+ * @description Layout principal admin — Sidebar Premium Dark avec Auth Guard
  * @created 2026-05-22
  * @updated 2026-06-05
  * 🌐 ceo.nexuspartners.xyz
@@ -12,11 +12,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "react-hot-toast";
-import Link from 'next/link';
+import { AdminSidebar } from "@/components/admin/AdminSidebar";
 
 export const metadata: Metadata = {
   title: "Alixco-luce Admin",
-  description: "Administration du site Alixco-luce",
+  description: "Console d'administration Alixco-luce | Nexus Partners",
 };
 
 export default function RootLayout({
@@ -26,39 +26,44 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="antialiased">
-      <body className="min-h-screen flex flex-col bg-[hsl(var(--background))] text-[hsl(var(--text-main))]">
+      <body className="min-h-screen bg-[hsl(var(--background))] text-[hsl(var(--text-main))]">
         <AuthProvider>
-          <Toaster 
-            position="top-center"
+          <Toaster
+            position="top-right"
             toastOptions={{
               style: {
-                background: '#1c1917',
-                color: '#d6d3d1',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                background: '#171717',
+                color: '#e5e5e5',
+                border: '1px solid rgba(255,255,255,0.08)',
+                borderRadius: '12px',
+                fontSize: '14px',
               },
               success: {
                 iconTheme: {
-                  primary: 'hsl(var(--primary))',
-                  secondary: '#000000',
+                  primary: '#F26E11',
+                  secondary: '#000',
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: '#EF4444',
+                  secondary: '#fff',
                 },
               },
             }}
           />
-          {/* Simple Admin Header */}
-          <header className="bg-black text-white p-4 flex justify-between items-center border-b border-white/10">
-            <Link href="/" className="text-2xl font-bold">Alixco<span className="text-[hsl(var(--primary))]">Admin</span></Link>
-            <nav className="flex space-x-4">
-              <Link href="/products" className="hover:text-[hsl(var(--primary))]">Produits</Link>
-              <Link href="/categories" className="hover:text-[hsl(var(--primary))]">Catégories</Link>
-              <Link href="/featured-products" className="hover:text-[hsl(var(--primary))]">Pièces Phares</Link>
-              <Link href="/orders" className="hover:text-[hsl(var(--primary))]">Commandes</Link>
-              <Link href="/home-settings" className="hover:text-[hsl(var(--primary))]">{"Page d'accueil"}</Link>
-            </nav>
-          </header>
-          
-          <main className="flex-grow p-6">
-            {children}
-          </main>
+
+          <div className="flex min-h-screen">
+            {/* Sidebar */}
+            <AdminSidebar />
+
+            {/* Main Content Area */}
+            <div className="flex-1 flex flex-col min-w-0">
+              <main className="flex-grow p-6 lg:p-8">
+                {children}
+              </main>
+            </div>
+          </div>
         </AuthProvider>
       </body>
     </html>

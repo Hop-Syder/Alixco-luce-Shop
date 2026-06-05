@@ -9,15 +9,41 @@
  * ──────────────────────────────────
  */
 "use client";
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Clock, CheckCircle2, ChevronRight } from 'lucide-react';
 import { FadeUp } from '@/components/ui/FadeUp';
 import Image from 'next/image';
 import { useTranslation } from '@/context/LanguageContext';
+import { api } from '@/services/api';
+
+interface PromoData {
+  title: string;
+  subtitle: string;
+  description: string;
+  discount_tag: string;
+  cta_text: string;
+  cta_link: string;
+  image: string;
+}
 
 export function PromoSection() {
   const { t } = useTranslation();
+  const [promoData, setPromoData] = useState<PromoData | null>(null);
+
+  useEffect(() => {
+    const fetchPromoData = async () => {
+      try {
+        const response = await api.get('/page-settings/home');
+        if (response.data && response.data.promo) {
+          setPromoData(response.data.promo);
+        }
+      } catch (error) {
+        console.warn("Impossible de charger le contenu dynamique de la promo, utilisation des données de secours locales.");
+      }
+    };
+    fetchPromoData();
+  }, []);
 
   return (
     <section className="py-12 w-full relative">
@@ -26,7 +52,7 @@ export function PromoSection() {
           <div className="relative border border-white/5 overflow-hidden rounded-sm shadow-2xl bg-[#0a0a0a]">
             {/* Background Image */}
             <Image 
-              src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600" 
+              src={promoData?.image || "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600"} 
               alt="Promo" 
               fill
               className="object-cover opacity-30 mix-blend-screen pointer-events-none" 
@@ -42,16 +68,16 @@ export function PromoSection() {
             <div className="space-y-6">
               <div className="space-y-3">
                 <div className="inline-flex items-center text-[hsl(var(--primary))] text-xs font-bold uppercase tracking-[0.3em]">
-                  <Clock className="w-4 h-4 mr-3" /> {t('promo.badge')}
+                  <Clock className="w-4 h-4 mr-3" /> {promoData?.discount_tag || t('promo.badge')}
                 </div>
                 
                 <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-none tracking-tight">
-                  {t('promo.title1')} <br/>
-                  <span className="text-gradient-gold mt-1 block">{t('promo.title2')}</span>
+                  {promoData?.title || t('promo.title1')} <br/>
+                  <span className="text-gradient-gold mt-1 block">{promoData?.subtitle || t('promo.title2')}</span>
                 </h2>
                 
                 <p className="text-stone-400 text-base md:text-lg font-light leading-snug max-w-lg">
-                  {t('promo.description')}
+                  {promoData?.description || t('promo.description')}
                 </p>
               </div>
               
@@ -77,8 +103,8 @@ export function PromoSection() {
               </ul>
               
               <div className="pt-6">
-                <Link href="/products?collection=limited" className="btn-primary inline-flex items-center group px-10 py-4 text-sm uppercase tracking-widest">
-                  {t('promo.cta')}
+                <Link href={promoData?.cta_link || "/products?collection=limited"} className="btn-primary inline-flex items-center group px-10 py-4 text-sm uppercase tracking-widest">
+                  {promoData?.cta_text || t('promo.cta')}
                   <ChevronRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
