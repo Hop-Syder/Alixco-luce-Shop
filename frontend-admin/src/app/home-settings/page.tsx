@@ -129,20 +129,20 @@ export default function HomeSettingsEditor() {
   }
 
   return (
-    <form onSubmit={handleSave} className="space-y-8 max-w-6xl mx-auto pb-12">
+    <form onSubmit={handleSave} className="space-y-8 max-w-6xl mx-auto pb-12 text-stone-200">
       
       {/* En-tête de la Page */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white shadow rounded-2xl p-6 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6 gap-4">
         <div className="flex items-center gap-4">
-          <Link href="/" className="p-2 hover:bg-stone-100 rounded-xl transition-colors">
-            <ArrowLeft className="w-5 h-5 text-stone-500" />
+          <Link href="/" className="p-2 hover:bg-stone-800 rounded-xl transition-colors">
+            <ArrowLeft className="w-5 h-5 text-stone-400" />
           </Link>
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <h2 className="text-2xl font-heading font-bold text-white flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[hsl(var(--primary))]" />
               Édition Page d&apos;accueil
             </h2>
-            <p className="text-gray-500">Personnalisez les textes, images et actions du site vitrine.</p>
+            <p className="text-stone-400">Personnalisez les textes, images et actions du site vitrine.</p>
           </div>
         </div>
         <button
@@ -160,81 +160,81 @@ export default function HomeSettingsEditor() {
         <div className="lg:col-span-8 space-y-8">
           
           {/* Bloc Hero */}
-          <div className="bg-white rounded-2xl shadow p-6 sm:p-8 space-y-6">
-            <h3 className="text-lg font-bold text-stone-800 border-b pb-3 border-stone-100">
+          <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
+            <h3 className="text-lg font-heading font-bold text-white border-b pb-3 border-white/10">
               1. Section principale (Hero Banner)
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Titre surligné (Or)</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Titre surligné (Or)</label>
                 <input
                   type="text"
                   value={settings.hero.title_highlight}
                   onChange={(e) => handleHeroChange('title_highlight', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   placeholder="Ex: Personnalisation"
                   required
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Titre principal</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Titre principal</label>
                 <input
                   type="text"
                   value={settings.hero.title_main}
                   onChange={(e) => handleHeroChange('title_main', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   placeholder="Ex: L'Art de la"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Sous-titre (Laser)</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Sous-titre (Laser)</label>
                 <input
                   type="text"
                   value={settings.hero.subtitle}
                   onChange={(e) => handleHeroChange('subtitle', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   placeholder="Ex: Gravure & Découpe au Laser"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Texte de description</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Texte de description</label>
                 <textarea
                   value={settings.hero.description}
                   onChange={(e) => handleHeroChange('description', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50 h-28 resize-none"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white h-28 resize-none"
                   placeholder="Description détaillée de l'entreprise..."
                   required
                 />
               </div>
             </div>
 
-            <div className="border-t pt-6 border-stone-100 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border-t pt-6 border-white/10 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <h4 className="text-sm font-bold text-stone-800 mb-4">Bouton Principal (CTA Or)</h4>
+                <h4 className="text-sm font-bold text-white mb-4">Bouton Principal (CTA Or)</h4>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1">Libellé du bouton</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton</label>
                     <input
                       type="text"
                       value={settings.hero.cta_primary_text}
                       onChange={(e) => handleHeroChange('cta_primary_text', e.target.value)}
-                      className="w-full border border-stone-100 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1">Lien de redirection</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection</label>
                     <input
                       type="text"
                       value={settings.hero.cta_primary_link}
                       onChange={(e) => handleHeroChange('cta_primary_link', e.target.value)}
-                      className="w-full border border-stone-100 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                       required
                     />
                   </div>
@@ -242,25 +242,25 @@ export default function HomeSettingsEditor() {
               </div>
 
               <div>
-                <h4 className="text-sm font-bold text-stone-800 mb-4">Bouton Secondaire (CTA Sombre)</h4>
+                <h4 className="text-sm font-bold text-white mb-4">Bouton Secondaire (CTA Sombre)</h4>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1">Libellé du bouton</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton</label>
                     <input
                       type="text"
                       value={settings.hero.cta_secondary_text}
                       onChange={(e) => handleHeroChange('cta_secondary_text', e.target.value)}
-                      className="w-full border border-stone-100 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-stone-600 mb-1">Lien de redirection</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection</label>
                     <input
                       type="text"
                       value={settings.hero.cta_secondary_link}
                       onChange={(e) => handleHeroChange('cta_secondary_link', e.target.value)}
-                      className="w-full border border-stone-100 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                       required
                     />
                   </div>
@@ -270,73 +270,73 @@ export default function HomeSettingsEditor() {
           </div>
 
           {/* Bloc Promotion */}
-          <div className="bg-white rounded-2xl shadow p-6 sm:p-8 space-y-6">
-            <h3 className="text-lg font-bold text-stone-800 border-b pb-3 border-stone-100">
+          <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6">
+            <h3 className="text-lg font-heading font-bold text-white border-b pb-3 border-white/10">
               2. Section promotionnelle (Offre Spéciale)
             </h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Titre de l&apos;offre</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Titre de l&apos;offre</label>
                 <input
                   type="text"
                   value={settings.promo.title}
                   onChange={(e) => handlePromoChange('title', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Sous-titre (Réduction / Offre)</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Sous-titre (Réduction / Offre)</label>
                 <input
                   type="text"
                   value={settings.promo.subtitle}
                   onChange={(e) => handlePromoChange('subtitle', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Badge promotionnel</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Badge promotionnel</label>
                 <input
                   type="text"
                   value={settings.promo.discount_tag}
                   onChange={(e) => handlePromoChange('discount_tag', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   placeholder="Ex: Offre Limitée"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Action (Lien CTA)</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Action (Lien CTA)</label>
                 <input
                   type="text"
                   value={settings.promo.cta_link}
                   onChange={(e) => handlePromoChange('cta_link', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Texte d&apos;action (CTA)</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Texte d&apos;action (CTA)</label>
                 <input
                   type="text"
                   value={settings.promo.cta_text}
                   onChange={(e) => handlePromoChange('cta_text', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   required
                 />
               </div>
 
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-stone-700 mb-2">Description promotionnelle</label>
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Description promotionnelle</label>
                 <textarea
                   value={settings.promo.description}
                   onChange={(e) => handlePromoChange('description', e.target.value)}
-                  className="w-full border border-stone-200 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-stone-50 h-24 resize-none"
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white h-24 resize-none"
                   required
                 />
               </div>
@@ -348,70 +348,70 @@ export default function HomeSettingsEditor() {
         <div className="lg:col-span-4 space-y-8">
           
           {/* Images Hero */}
-          <div className="bg-white rounded-2xl shadow p-6 space-y-6">
-            <h3 className="text-md font-bold text-stone-800 border-b pb-3 border-stone-100">
+          <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6 space-y-6">
+            <h3 className="text-md font-heading font-bold text-white border-b pb-3 border-white/10">
               Médias du Hero
             </h3>
             
             {/* Image de la carte 3D */}
             <div className="space-y-3">
-              <label className="block text-xs font-semibold text-stone-700">Image interactive 3D (URL ou Local)</label>
+              <label className="block text-xs font-semibold text-stone-300">Image interactive 3D (URL ou Local)</label>
               <input
                 type="text"
                 value={settings.hero.image_3d}
                 onChange={(e) => handleHeroChange('image_3d', e.target.value)}
-                className="w-full border border-stone-200 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                className="w-full border border-white/10 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                 required
               />
-              <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-stone-100 bg-stone-100 flex items-center justify-center">
+              <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-white/10 bg-stone-900 flex items-center justify-center">
                 {settings.hero.image_3d ? (
                   <img src={settings.hero.image_3d} alt="Aperçu 3D" className="w-full h-full object-cover" />
                 ) : (
-                  <ImageIcon className="w-8 h-8 text-stone-400" />
+                  <ImageIcon className="w-8 h-8 text-stone-500" />
                 )}
               </div>
             </div>
 
             {/* Image de fond */}
-            <div className="space-y-3 border-t pt-6 border-stone-100">
-              <label className="block text-xs font-semibold text-stone-700">Image de fond (URL ou Local)</label>
+            <div className="space-y-3 border-t pt-6 border-white/10">
+              <label className="block text-xs font-semibold text-stone-300">Image de fond (URL ou Local)</label>
               <input
                 type="text"
                 value={settings.hero.image_bg}
                 onChange={(e) => handleHeroChange('image_bg', e.target.value)}
-                className="w-full border border-stone-200 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                className="w-full border border-white/10 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                 required
               />
-              <div className="relative h-24 rounded-lg overflow-hidden border border-stone-100 bg-stone-100 flex items-center justify-center">
+              <div className="relative h-24 rounded-lg overflow-hidden border border-white/10 bg-stone-900 flex items-center justify-center">
                 {settings.hero.image_bg ? (
                   <img src={settings.hero.image_bg} alt="Aperçu fond" className="w-full h-full object-cover" />
                 ) : (
-                  <ImageIcon className="w-8 h-8 text-stone-400" />
+                  <ImageIcon className="w-8 h-8 text-stone-500" />
                 )}
               </div>
             </div>
           </div>
 
           {/* Image Promo */}
-          <div className="bg-white rounded-2xl shadow p-6 space-y-6">
-            <h3 className="text-md font-bold text-stone-800 border-b pb-3 border-stone-100">
+          <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6 space-y-6">
+            <h3 className="text-md font-heading font-bold text-white border-b pb-3 border-white/10">
               Média de la Promo
             </h3>
             
             <div className="space-y-3">
-              <label className="block text-xs font-semibold text-stone-700">Image de fond promo (URL)</label>
+              <label className="block text-xs font-semibold text-stone-300">Image de fond promo (URL)</label>
               <input
                 type="text"
                 value={settings.promo.image}
                 onChange={(e) => handlePromoChange('image', e.target.value)}
-                className="w-full border border-stone-200 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-stone-50"
+                className="w-full border border-white/10 rounded-lg p-2.5 text-xs outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
                 required
               />
-              <div className="relative h-36 rounded-xl overflow-hidden border border-stone-100 bg-stone-100 flex items-center justify-center">
+              <div className="relative h-36 rounded-xl overflow-hidden border border-white/10 bg-stone-900 flex items-center justify-center">
                 {settings.promo.image ? (
                   <img src={settings.promo.image} alt="Aperçu Promo" className="w-full h-full object-cover" />
                 ) : (
-                  <ImageIcon className="w-8 h-8 text-stone-400" />
+                  <ImageIcon className="w-8 h-8 text-stone-500" />
                 )}
               </div>
             </div>

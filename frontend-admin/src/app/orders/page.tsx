@@ -84,10 +84,10 @@ export default function AdminOrders() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-        <h2 className="text-xl font-bold text-gray-800 flex items-center">
-          <span className="w-8 h-8 rounded-lg bg-orange-100 text-orange-600 flex items-center justify-center mr-3">📦</span>
+    <div className="bg-[hsl(var(--surface-light))] rounded-2xl border border-white/10 overflow-hidden text-stone-200">
+      <div className="p-6 border-b border-white/10 flex justify-between items-center bg-stone-950/40">
+        <h2 className="text-xl font-heading font-bold text-white flex items-center">
+          <span className="w-8 h-8 rounded-lg bg-orange-950/50 text-[hsl(var(--primary))] flex items-center justify-center mr-3">📦</span>
           Gestion des Commandes
         </h2>
       </div>
@@ -95,7 +95,7 @@ export default function AdminOrders() {
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="bg-gray-50 border-b border-gray-100 text-gray-500 text-sm uppercase tracking-wider">
+            <tr className="bg-stone-950/40 border-b border-white/10 text-stone-400 text-sm uppercase tracking-wider">
               <th className="p-4 font-semibold">N° Commande</th>
               <th className="p-4 font-semibold">Date</th>
               <th className="p-4 font-semibold">Client</th>
@@ -105,10 +105,10 @@ export default function AdminOrders() {
               <th className="p-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-white/5">
             {orders.length === 0 ? (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-gray-500">
+                <td colSpan={7} className="p-8 text-center text-stone-500">
                   Aucune commande pour le moment.
                 </td>
               </tr>
@@ -116,31 +116,31 @@ export default function AdminOrders() {
               orders.map((order) => {
                 const oId = order._id || order.id;
                 return (
-                  <tr key={oId} className="hover:bg-gray-50/50 transition-colors">
-                    <td className="p-4 font-medium text-gray-900">{order.orderNumber}</td>
-                    <td className="p-4 text-sm text-gray-600">
+                  <tr key={oId} className="hover:bg-white/5 transition-colors">
+                    <td className="p-4 font-medium text-white">{order.orderNumber}</td>
+                    <td className="p-4 text-sm text-stone-300">
                       {new Date(order.createdAt).toLocaleDateString('fr-FR', {
                         day: '2-digit', month: 'short', year: 'numeric',
                         hour: '2-digit', minute: '2-digit'
                       })}
                     </td>
                     <td className="p-4">
-                      <div className="text-sm font-medium text-gray-900">{order.customer?.name}</div>
-                      <div className="text-xs text-gray-500">{order.customer?.phone}</div>
+                      <div className="text-sm font-medium text-white">{order.customer?.name}</div>
+                      <div className="text-xs text-stone-400">{order.customer?.phone}</div>
                     </td>
-                    <td className="p-4 text-sm text-gray-600">
+                    <td className="p-4 text-sm text-stone-300">
                       {order.items?.length || 0} article(s)
                     </td>
-                    <td className="p-4 font-bold text-gray-900 whitespace-nowrap">
+                    <td className="p-4 font-bold text-white whitespace-nowrap">
                       {order.total?.toLocaleString()} FCFA
                     </td>
                     <td className="p-4 text-center">
-                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold
-                        ${order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : ''}
-                        ${order.status === 'processing' ? 'bg-blue-100 text-blue-700' : ''}
-                        ${order.status === 'shipped' ? 'bg-indigo-100 text-indigo-700' : ''}
-                        ${order.status === 'delivered' ? 'bg-emerald-100 text-emerald-700' : ''}
-                        ${order.status === 'cancelled' ? 'bg-red-100 text-red-700' : ''}
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold border
+                        ${order.status === 'pending' ? 'bg-yellow-950/30 text-yellow-400 border-yellow-900/30' : ''}
+                        ${order.status === 'processing' ? 'bg-blue-950/30 text-blue-400 border-blue-900/30' : ''}
+                        ${order.status === 'shipped' ? 'bg-indigo-950/30 text-indigo-400 border-indigo-900/30' : ''}
+                        ${order.status === 'delivered' ? 'bg-emerald-950/30 text-emerald-400 border-emerald-900/30' : ''}
+                        ${order.status === 'cancelled' ? 'bg-red-950/30 text-red-400 border-red-900/30' : ''}
                       `}>
                         {VALID_STATUSES.find(s => s.value === order.status)?.label || order.status}
                       </span>
@@ -150,10 +150,10 @@ export default function AdminOrders() {
                         value={order.status}
                         onChange={(e) => handleStatusChange(oId as string, e.target.value)}
                         disabled={updating === oId}
-                        className="text-sm border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:opacity-50"
+                        className="text-sm border border-white/10 rounded-md bg-[hsl(var(--surface-neutral))] text-white focus:border-[hsl(var(--primary))] focus:ring-[hsl(var(--primary))] disabled:opacity-50"
                       >
                         {VALID_STATUSES.map(s => (
-                          <option key={s.value} value={s.value}>{s.label}</option>
+                          <option key={s.value} value={s.value} className="bg-stone-900 text-white">{s.label}</option>
                         ))}
                       </select>
                     </td>

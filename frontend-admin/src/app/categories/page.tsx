@@ -98,77 +98,77 @@ export default function AdminCategories() {
   if (loading) return <div>Chargement...</div>;
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center bg-white shadow rounded-2xl p-6">
+    <div className="space-y-6 text-stone-200">
+      <div className="flex justify-between items-center bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6">
         <div>
-          <h2 className="text-2xl font-bold text-gray-800">Catégories Phares</h2>
-          <p className="text-gray-500">Gérez les sections affichées sur la page d&apos;accueil.</p>
+          <h2 className="text-2xl font-heading font-bold text-white">Catégories Phares</h2>
+          <p className="text-stone-400">Gérez les sections affichées sur la page d&apos;accueil.</p>
         </div>
         <button 
           onClick={handleCreate}
-          className="bg-[hsl(var(--primary))] text-white px-4 py-2 rounded-lg flex items-center hover:opacity-90 transition-opacity"
+          className="bg-[hsl(var(--primary))] text-white px-4 py-2 rounded-xl flex items-center hover:opacity-90 transition-opacity font-medium"
         >
           <Plus className="w-5 h-5 mr-2" />
           Ajouter
         </button>
       </div>
 
-      {error && <div className="text-red-500 bg-red-50 p-4 rounded-lg">{error}</div>}
+      {error && <div className="text-red-400 bg-red-950/30 p-4 rounded-xl border border-red-900/50">{error}</div>}
 
       {isEditing && (
-        <div className="bg-white shadow rounded-2xl p-6 border border-gray-100">
-          <h3 className="text-lg font-bold mb-4">{isEditing === 'new' ? 'Nouvelle catégorie' : 'Modifier la catégorie'}</h3>
+        <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6">
+          <h3 className="text-lg font-heading font-bold mb-4 text-white">{isEditing === 'new' ? 'Nouvelle catégorie' : 'Modifier la catégorie'}</h3>
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Titre</label>
+              <label className="block text-sm font-semibold text-stone-300 mb-1">Titre *</label>
               <input 
                 type="text" 
                 value={formData.title} 
                 onChange={(e) => setFormData({...formData, title: e.target.value})}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none"
+                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                 placeholder="Ex: Gravure Laser"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <label className="block text-sm font-semibold text-stone-300 mb-1">Description *</label>
               <input 
                 type="text" 
                 value={formData.desc} 
                 onChange={(e) => setFormData({...formData, desc: e.target.value})}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none"
+                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                 placeholder="Courte phrase d'accroche"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">URL de l&apos;image</label>
+              <label className="block text-sm font-semibold text-stone-300 mb-1">URL de l&apos;image *</label>
               <input 
                 type="text" 
                 value={formData.img} 
                 onChange={(e) => setFormData({...formData, img: e.target.value})}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none"
+                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                 placeholder="https://..."
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ordre d&apos;affichage</label>
+              <label className="block text-sm font-semibold text-stone-300 mb-1">Ordre d&apos;affichage</label>
               <input 
                 type="number" 
                 value={formData.order} 
                 onChange={(e) => setFormData({...formData, order: parseInt(e.target.value) || 0})}
-                className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none"
+                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
               />
             </div>
           </div>
           <div className="flex gap-4 mt-6">
             <button 
               onClick={handleSave}
-              className="bg-green-600 text-white px-4 py-2 rounded-lg flex items-center hover:bg-green-700"
+              className="bg-green-700 text-white px-4 py-2 rounded-xl flex items-center hover:bg-green-600 font-semibold"
             >
               <Save className="w-4 h-4 mr-2" /> Enregistrer
             </button>
             <button 
               onClick={() => setIsEditing(null)}
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg flex items-center hover:bg-gray-300"
+              className="bg-stone-800 text-stone-300 px-4 py-2 rounded-xl flex items-center hover:bg-stone-700 font-semibold"
             >
               <X className="w-4 h-4 mr-2" /> Annuler
             </button>
@@ -178,20 +178,20 @@ export default function AdminCategories() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {categories.map((cat) => (
-          <div key={cat._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group">
-            <div className="relative h-48">
+          <div key={cat._id} className="bg-[hsl(var(--surface-light))] rounded-2xl border border-white/10 overflow-hidden group">
+            <div className="relative h-48 border-b border-white/5">
               <img src={cat.img} alt={cat.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                 <button 
                   onClick={() => handleEdit(cat)}
-                  className="bg-white text-gray-900 p-2 rounded-full hover:bg-blue-50"
+                  className="bg-stone-900 text-stone-200 p-2 rounded-full hover:bg-stone-800 border border-white/10"
                   title="Modifier"
                 >
                   <Edit2 className="w-5 h-5" />
                 </button>
                 <button 
                   onClick={() => handleDelete(cat._id!)}
-                  className="bg-white text-red-600 p-2 rounded-full hover:bg-red-50"
+                  className="bg-stone-900 text-red-400 p-2 rounded-full hover:bg-stone-850 border border-white/10"
                   title="Supprimer"
                 >
                   <Trash2 className="w-5 h-5" />
@@ -200,15 +200,15 @@ export default function AdminCategories() {
             </div>
             <div className="p-4">
               <div className="flex justify-between items-center mb-2">
-                <h3 className="font-bold text-lg">{cat.title}</h3>
-                <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">Ordre: {cat.order}</span>
+                <h3 className="font-heading font-bold text-lg text-white">{cat.title}</h3>
+                <span className="text-xs bg-stone-800 text-stone-300 px-2 py-1 rounded-full border border-white/5">Ordre: {cat.order}</span>
               </div>
-              <p className="text-gray-500 text-sm">{cat.desc}</p>
+              <p className="text-stone-400 text-sm">{cat.desc}</p>
             </div>
           </div>
         ))}
         {categories.length === 0 && (
-          <div className="col-span-full text-center py-12 text-gray-500 bg-white rounded-2xl border border-dashed border-gray-300">
+          <div className="col-span-full text-center py-12 text-stone-500 bg-stone-900/40 rounded-2xl border border-dashed border-white/10">
             Aucune catégorie configurée. Les catégories par défaut seront affichées sur le site.
           </div>
         )}

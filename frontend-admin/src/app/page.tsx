@@ -65,18 +65,18 @@ export default function AdminDashboard() {
   }, [token]);
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white shadow rounded-2xl p-8">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Tableau de bord Admin</h2>
-        <p className="text-gray-500 mb-6">{"Vue d'ensemble de l'activité"}</p>
+    <div className="space-y-6 text-stone-200">
+      <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-8">
+        <h2 className="text-3xl font-heading font-bold text-white mb-2">Tableau de bord Admin</h2>
+        <p className="text-stone-400 mb-6">{"Vue d'ensemble de l'activité"}</p>
         
         {loading ? (
-          <div className="text-gray-500">Vérification des droits en cours...</div>
+          <div className="text-stone-400">Vérification des droits en cours...</div>
         ) : (
-          <div className={`p-4 rounded-lg border font-medium ${
+          <div className={`p-4 rounded-xl border font-medium ${
             adminStatus.includes('Erreur') 
-              ? 'bg-red-50 text-red-800 border-red-200' 
-              : 'bg-green-50 text-green-800 border-green-200'
+              ? 'bg-red-950/30 text-red-400 border-red-900/50' 
+              : 'bg-green-950/30 text-green-400 border-green-900/50'
           } inline-block`}>
             Statut des droits : {adminStatus}
           </div>
@@ -84,69 +84,73 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4">
+        <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
+          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4">
             📦
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">{stats.pendingOrders}</h3>
-            <p className="text-gray-500 font-medium">Commandes en attente</p>
+            <h3 className="text-2xl font-bold text-white">{stats.pendingOrders}</h3>
+            <p className="text-stone-400 font-medium text-sm">Commandes en attente</p>
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl mr-4">
+        <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
+          <div className="w-12 h-12 rounded-full bg-purple-950/40 text-purple-400 flex items-center justify-center text-xl mr-4">
             🛍️
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">{stats.productsCount}</h3>
-            <p className="text-gray-500 font-medium">Produits en ligne</p>
+            <h3 className="text-2xl font-bold text-white">{stats.productsCount}</h3>
+            <p className="text-stone-400 font-medium text-sm">Produits en ligne</p>
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center">
-          <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl mr-4">
+        <div className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center">
+          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-[hsl(var(--primary))] flex items-center justify-center text-xl mr-4">
             👥
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">{stats.uniqueCustomers}</h3>
-            <p className="text-gray-500 font-medium">Clients inscrits</p>
+            <h3 className="text-2xl font-bold text-white">{stats.uniqueCustomers}</h3>
+            <p className="text-stone-400 font-medium text-sm">Clients inscrits</p>
           </div>
         </div>
-        <Link href="/products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+
+        <Link href="/products" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-blue-950/40 text-blue-400 flex items-center justify-center text-xl mr-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
             📦
           </div>
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Catalogue</p>
+            <h3 className="text-lg font-bold text-white">Gérer</h3>
+            <p className="text-stone-400 font-medium text-sm">Catalogue</p>
           </div>
         </Link>
-        <Link href="/categories" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+
+        <Link href="/categories" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-indigo-950/40 text-indigo-400 flex items-center justify-center text-xl mr-4 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
             🏷️
           </div>
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Catégories</p>
+            <h3 className="text-lg font-bold text-white">Gérer</h3>
+            <p className="text-stone-400 font-medium text-sm">Catégories</p>
           </div>
         </Link>
-        <Link href="/featured-products" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
+
+        <Link href="/featured-products" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-amber-950/40 text-amber-400 flex items-center justify-center text-xl mr-4 group-hover:bg-amber-600 group-hover:text-white transition-colors">
             ⭐
           </div>
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Mis en avant</p>
+            <h3 className="text-lg font-bold text-white">Gérer</h3>
+            <p className="text-stone-400 font-medium text-sm">Mis en avant</p>
           </div>
         </Link>
-        <Link href="/orders" className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center hover:border-blue-300 transition-colors cursor-pointer group">
-          <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+
+        <Link href="/orders" className="bg-[hsl(var(--surface-light))] p-6 rounded-2xl border border-white/10 flex items-center hover:border-[hsl(var(--primary))]/50 transition-colors cursor-pointer group">
+          <div className="w-12 h-12 rounded-full bg-orange-950/40 text-orange-400 flex items-center justify-center text-xl mr-4 group-hover:bg-orange-600 group-hover:text-white transition-colors">
             📋
           </div>
           <div>
-            <h3 className="text-lg font-bold text-gray-800">Gérer</h3>
-            <p className="text-gray-500 font-medium">Commandes</p>
+            <h3 className="text-lg font-bold text-white">Gérer</h3>
+            <p className="text-stone-400 font-medium text-sm">Commandes</p>
           </div>
         </Link>
       </div>
