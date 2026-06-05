@@ -52,7 +52,7 @@ export default function RootLayout({
               <Link href="/categories" className="hover:text-[hsl(var(--primary))]">Catégories</Link>
               <Link href="/featured-products" className="hover:text-[hsl(var(--primary))]">Pièces Phares</Link>
               <Link href="/orders" className="hover:text-[hsl(var(--primary))]">Commandes</Link>
-              <Link href="/home-settings" className="hover:text-[hsl(var(--primary))]">Page d'accueil</Link>
+              <Link href="/home-settings" className="hover:text-[hsl(var(--primary))]">{"Page d'accueil"}</Link>
             </nav>
           </header>
           

@@ -41,10 +41,10 @@ export default function AdminDashboard() {
         const orders = ordersRes.data || [];
         
         // Calculate pending orders (status is 'pending' or 'processing')
-        const pending = orders.filter((o: any) => o.status === 'pending' || o.status === 'processing').length;
+        const pending = orders.filter((o: { status: string }) => o.status === 'pending' || o.status === 'processing').length;
         
         // Calculate unique customers by phone number
-        const phones = orders.map((o: any) => o.customer?.phone).filter(Boolean);
+        const phones = orders.map((o: { customer?: { phone?: string } }) => o.customer?.phone).filter(Boolean);
         const uniqueClients = new Set(phones).size;
 
         setStats({
