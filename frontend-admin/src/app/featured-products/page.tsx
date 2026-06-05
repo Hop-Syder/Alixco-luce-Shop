@@ -13,7 +13,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save } from 'lucide-react';
-import Image from 'next/image';
 
 interface FeaturedProduct {
   _id?: string;
@@ -200,7 +199,7 @@ export default function AdminFeaturedProducts() {
                   {product.badge}
                 </div>
               )}
-              <Image src={product.img} alt={product.name} fill className="object-cover" unoptimized />
+              <img src={product.img} alt={product.name} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                 <button 
                   onClick={() => handleEdit(product)}

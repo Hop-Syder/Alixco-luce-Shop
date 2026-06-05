@@ -18,23 +18,49 @@ export default function AdminDashboard() {
   const { token } = useAuth();
   const [adminStatus, setAdminStatus] = useState<string>('');
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({
+    pendingOrders: 0,
+    productsCount: 0,
+    uniqueCustomers: 0
+  });
 
   useEffect(() => {
-    const checkAdmin = async () => {
+    const checkAdminAndFetchStats = async () => {
       try {
-        const response = await api.get('/users/admin-test', {
-          headers: { Authorization: `Bearer ${token}` }
+        const [adminRes, productsRes, ordersRes] = await Promise.all([
+          api.get('/users/admin-test', {
+            headers: { Authorization: `Bearer ${token}` }
+          }),
+          api.get('/products'),
+          api.get('/orders')
+        ]);
+        
+        setAdminStatus(adminRes.data.message);
+        
+        const products = productsRes.data || [];
+        const orders = ordersRes.data || [];
+        
+        // Calculate pending orders (status is 'pending' or 'processing')
+        const pending = orders.filter((o: any) => o.status === 'pending' || o.status === 'processing').length;
+        
+        // Calculate unique customers by phone number
+        const phones = orders.map((o: any) => o.customer?.phone).filter(Boolean);
+        const uniqueClients = new Set(phones).size;
+
+        setStats({
+          pendingOrders: pending,
+          productsCount: products.length,
+          uniqueCustomers: uniqueClients
         });
-        setAdminStatus(response.data.message);
       } catch (error) {
-        console.error('Error checking admin status', error);
+        console.error('Error during data initialization:', error);
         setAdminStatus('Erreur de validation des droits (Accès Refusé).');
       } finally {
         setLoading(false);
       }
     };
     if (token) {
-      checkAdmin();
+      checkAdminAndFetchStats();
     }
   }, [token]);
 
@@ -63,7 +89,7 @@ export default function AdminDashboard() {
             📦
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">0</h3>
+            <h3 className="text-2xl font-bold text-gray-800">{stats.pendingOrders}</h3>
             <p className="text-gray-500 font-medium">Commandes en attente</p>
           </div>
         </div>
@@ -73,7 +99,7 @@ export default function AdminDashboard() {
             🛍️
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">0</h3>
+            <h3 className="text-2xl font-bold text-gray-800">{stats.productsCount}</h3>
             <p className="text-gray-500 font-medium">Produits en ligne</p>
           </div>
         </div>
@@ -83,7 +109,7 @@ export default function AdminDashboard() {
             👥
           </div>
           <div>
-            <h3 className="text-2xl font-bold text-gray-800">0</h3>
+            <h3 className="text-2xl font-bold text-gray-800">{stats.uniqueCustomers}</h3>
             <p className="text-gray-500 font-medium">Clients inscrits</p>
           </div>
         </div>

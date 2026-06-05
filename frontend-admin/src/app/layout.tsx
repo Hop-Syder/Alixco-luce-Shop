@@ -1,3 +1,13 @@
+/**
+ * @author @hopsyder
+ * @organization Nexus Partners
+ * @description Layout page with global navigation for admin
+ * @created 2026-05-22
+ * @updated 2026-06-05
+ * 🌐 ceo.nexuspartners.xyz
+ * 📧 daoudaabassichristian@gmail.com
+ */
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
@@ -40,7 +50,9 @@ export default function RootLayout({
             <nav className="flex space-x-4">
               <Link href="/products" className="hover:text-[hsl(var(--primary))]">Produits</Link>
               <Link href="/categories" className="hover:text-[hsl(var(--primary))]">Catégories</Link>
+              <Link href="/featured-products" className="hover:text-[hsl(var(--primary))]">Pièces Phares</Link>
               <Link href="/orders" className="hover:text-[hsl(var(--primary))]">Commandes</Link>
+              <Link href="/home-settings" className="hover:text-[hsl(var(--primary))]">Page d'accueil</Link>
             </nav>
           </header>
           

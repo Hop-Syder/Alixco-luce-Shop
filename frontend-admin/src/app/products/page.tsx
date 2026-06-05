@@ -13,7 +13,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save, Search } from 'lucide-react';
-import Image from 'next/image';
 
 interface Product {
   _id?: string;
@@ -214,7 +213,7 @@ export default function AdminProducts() {
                 />
                 {formData.image && (
                   <div className="relative w-12 h-12">
-                    <Image src={formData.image} alt="Preview" fill className="rounded-lg object-cover border" unoptimized />
+                    <img src={formData.image} alt="Preview" className="w-full h-full object-cover rounded-lg border" />
                   </div>
                 )}
               </div>
@@ -258,7 +257,7 @@ export default function AdminProducts() {
                     <td className="p-4">
                       <div className="flex items-center gap-4">
                         <div className="relative w-12 h-12">
-                          <Image src={product.image} alt={product.name} fill className="rounded-lg object-cover bg-stone-100" unoptimized />
+                          <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-lg bg-stone-100" />
                         </div>
                         <span className="font-bold text-stone-800">{product.name}</span>
                       </div>

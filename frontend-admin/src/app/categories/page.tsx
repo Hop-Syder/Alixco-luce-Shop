@@ -13,7 +13,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save } from 'lucide-react';
-import Image from 'next/image';
 
 interface Category {
   _id?: string;
@@ -181,7 +180,7 @@ export default function AdminCategories() {
         {categories.map((cat) => (
           <div key={cat._id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden group">
             <div className="relative h-48">
-              <Image src={cat.img} alt={cat.title} fill className="object-cover" />
+              <img src={cat.img} alt={cat.title} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                 <button 
                   onClick={() => handleEdit(cat)}

@@ -69,3 +69,29 @@ class Order(BaseModel):
 
 class OrderStatusUpdate(BaseModel):
     status: str
+
+class HeroSettings(BaseModel):
+    title_highlight: str
+    title_main: str
+    subtitle: str
+    description: str
+    cta_primary_text: str
+    cta_primary_link: str
+    cta_secondary_text: str
+    cta_secondary_link: str
+    image_3d: str
+    image_bg: str
+
+class PromoSettings(BaseModel):
+    title: str
+    subtitle: str
+    description: str
+    discount_tag: Optional[str] = None
+    cta_text: str
+    cta_link: str
+    image: str
+
+class HomePageSettings(BaseModel):
+    hero: HeroSettings
+    promo: PromoSettings
+

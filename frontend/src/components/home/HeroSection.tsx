@@ -9,15 +9,44 @@
  * ──────────────────────────────────
  */
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Crown, Sparkles, Cpu, Award } from 'lucide-react';
 import { useTranslation } from '@/context/LanguageContext';
 import { FadeUp } from '@/components/ui/FadeUp';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { api } from '@/services/api';
+
+interface HeroData {
+  title_highlight: string;
+  title_main: string;
+  subtitle: string;
+  description: string;
+  cta_primary_text: string;
+  cta_primary_link: string;
+  cta_secondary_text: string;
+  cta_secondary_link: string;
+  image_3d: string;
+  image_bg: string;
+}
 
 export function HeroSection() {
   const { t } = useTranslation();
+  const [heroData, setHeroData] = useState<HeroData | null>(null);
+
+  useEffect(() => {
+    const fetchHeroData = async () => {
+      try {
+        const response = await api.get('/page-settings/home');
+        if (response.data && response.data.hero) {
+          setHeroData(response.data.hero);
+        }
+      } catch (error) {
+        console.warn("Impossible de charger le contenu dynamique du Hero, utilisation des données de secours locales.");
+      }
+    };
+    fetchHeroData();
+  }, []);
 
   // Mouse Parallax values using Framer Motion
   const x = useMotionValue(0);
@@ -59,7 +88,7 @@ export function HeroSection() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img 
-          src="/hearder.jpg" 
+          src={heroData?.image_bg || "/hearder.jpg"} 
           alt="AlixcoLuxe Header Background" 
           className="w-full h-full object-cover opacity-20 filter grayscale contrast-125"
         />
@@ -93,29 +122,32 @@ export function HeroSection() {
           <div className="space-y-3">
             <FadeUp delay={0.25}>
               <h1 className="text-4xl sm:text-6xl xl:text-7xl font-heading font-extrabold tracking-tight text-white leading-[1.05]">
-                L'Art de la <span className="bg-gradient-to-r from-amber-500 via-amber-200 to-orange-500 bg-clip-text text-transparent filter drop-shadow-[0_2px_10px_rgba(245,158,11,0.2)]">Personnalisation</span>
+                {heroData?.title_main || "L'Art de la"}{" "}
+                <span className="bg-gradient-to-r from-amber-500 via-amber-200 to-orange-500 bg-clip-text text-transparent filter drop-shadow-[0_2px_10px_rgba(245,158,11,0.2)]">
+                  {heroData?.title_highlight || "Personnalisation"}
+                </span>
               </h1>
             </FadeUp>
             <FadeUp delay={0.35}>
               <h2 className="text-2xl sm:text-4xl xl:text-5xl font-heading font-medium tracking-tight text-stone-300">
-                Gravure & Découpe au <span className="text-[hsl(var(--primary))] font-bold">Laser</span>
+                {heroData?.subtitle || t('hero.subtitle')}
               </h2>
             </FadeUp>
           </div>
           
           <FadeUp delay={0.45}>
             <p className="text-lg text-stone-300 max-w-xl font-light leading-relaxed">
-              {t('hero.description')}
+              {heroData?.description || t('hero.description')}
             </p>
           </FadeUp>
 
           <FadeUp delay={0.65} className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-5 pt-4 w-full sm:w-auto">
-            <Link href="/products" className="btn-primary flex items-center justify-center group text-center py-4 px-8 rounded-full font-semibold">
-              {t('hero.cta_collection')}
+            <Link href={heroData?.cta_primary_link || "/products"} className="btn-primary flex items-center justify-center group text-center py-4 px-8 rounded-full font-semibold">
+              {heroData?.cta_primary_text || t('hero.cta_collection')}
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
-            <Link href="/about" className="btn-secondary flex items-center justify-center text-center py-4 px-8 rounded-full font-semibold">
-              {t('hero.cta_about')}
+            <Link href={heroData?.cta_secondary_link || "/about"} className="btn-secondary flex items-center justify-center text-center py-4 px-8 rounded-full font-semibold">
+              {heroData?.cta_secondary_text || t('hero.cta_about')}
             </Link>
           </FadeUp>
         </div>
@@ -145,7 +177,7 @@ export function HeroSection() {
               <div className="w-full h-full rounded-[1.8rem] overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
-                  src="/header-droit.jpeg" 
+                  src={heroData?.image_3d || "/header-droit.jpeg"} 
                   alt="Art et personnalisation AlixcoLuxe" 
                   className="w-full h-full object-cover filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 pointer-events-none"
                 />
