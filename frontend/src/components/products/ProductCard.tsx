@@ -13,7 +13,9 @@ import { Product } from '@/types/product';
 import { useTranslation } from '@/context/LanguageContext';
 
 export function ProductCard({ product }: { product: Product }) {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
+  const name = language === 'en' ? (product.name_en || product.name_fr) : (product.name_fr || product.name_en);
+
   return (
     <Link href={`/products/${product._id}`} className="group">
       <div className="glass-card rounded-[2rem] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-900/10 h-full flex flex-col">
@@ -22,7 +24,7 @@ export function ProductCard({ product }: { product: Product }) {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src={product.image || 'https://via.placeholder.com/600x750?text=Alixco+Luxe'} 
-            alt={product.name} 
+            alt={name} 
             className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
           />
           {product.stock <= 0 && (
@@ -35,7 +37,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="p-8 flex-grow flex flex-col justify-between">
           <div>
             <p className="text-xs text-[hsl(var(--primary))] uppercase tracking-[0.15em] font-bold mb-2">{product.category}</p>
-            <h3 className="text-xl font-heading font-bold text-stone-900 mb-2 line-clamp-2">{product.name}</h3>
+            <h3 className="text-xl font-heading font-bold text-stone-900 mb-2 line-clamp-2">{name}</h3>
           </div>
           <p className="text-lg font-semibold text-stone-700 mt-4">{product.price.toLocaleString()} FCFA</p>
         </div>

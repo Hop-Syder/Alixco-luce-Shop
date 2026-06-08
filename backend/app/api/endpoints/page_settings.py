@@ -10,11 +10,18 @@
 
 from fastapi import APIRouter, Depends, HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
+from bson import ObjectId
 
 from app.api import deps
 from app.models.schemas import HomePageSettings, HeroSettings, PromoSettings
 
 router = APIRouter()
+
+def serialize_settings(doc: dict) -> dict:
+    """Helper: convertit _id MongoDB en str et retire les champs internes."""
+    if doc and "_id" in doc:
+        doc["_id"] = str(doc["_id"])
+    return doc
 
 # Valeurs de secours (fallback) par défaut pour la page d'accueil
 DEFAULT_HOME_SETTINGS = {
@@ -53,7 +60,7 @@ async def get_home_settings(
     settings = await db.page_settings.find_one({"page": "home"})
     if not settings:
         return DEFAULT_HOME_SETTINGS
-    return settings
+    return serialize_settings(settings)
 
 @router.put("/home", response_model=HomePageSettings)
 async def update_home_settings(
@@ -64,7 +71,8 @@ async def update_home_settings(
     """
     Met à jour la configuration éditoriale de la page d'accueil (Admin uniquement).
     """
-    updated_data = settings_in.model_dump()
+    # On exclut le champ 'page' qui vient du schema (optionnel) pour éviter la duplication
+    updated_data = settings_in.model_dump(exclude={"page"})
     updated_data["page"] = "home"
     
     await db.page_settings.replace_one(
@@ -74,4 +82,4 @@ async def update_home_settings(
     )
     
     saved_settings = await db.page_settings.find_one({"page": "home"})
-    return saved_settings
+    return serialize_settings(saved_settings)

@@ -20,22 +20,25 @@ import { useTranslation } from '@/context/LanguageContext';
 
 interface FeaturedProduct {
   _id?: string;
-  name: string;
-  price: string;
-  badge?: string;
+  name_fr: string;
+  name_en: string;
+  price_fr: string;
+  price_en: string;
+  badge_fr?: string;
+  badge_en?: string;
   img: string;
   order?: number;
 }
 
 const defaultProducts: FeaturedProduct[] = [
-  { name: "Trophée Verre Gravé", price: "À partir de 120 €", badge: "Best-Seller", img: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&q=80&w=600" },
-  { name: "Enseigne Bois Découpé", price: "Sur Devis", img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=600" },
-  { name: "Porte-clés Cuir Personnalisé", price: "25 €", img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600" },
-  { name: "Plaque Métal Entreprise", price: "180 €", badge: "Nouveau", img: "https://images.unsplash.com/photo-1618220179428-22790b46a0eb?auto=format&fit=crop&q=80&w=600" }
+  { name_fr: "Trophée Verre Gravé", name_en: "Engraved Glass Trophy", price_fr: "À partir de 120 €", price_en: "From 120 €", badge_fr: "Best-Seller", badge_en: "Best-Seller", img: "https://images.unsplash.com/photo-1578500494198-246f612d3b3d?auto=format&fit=crop&q=80&w=600" },
+  { name_fr: "Enseigne Bois Découpé", name_en: "Cut Wood Sign", price_fr: "Sur Devis", price_en: "On Quote", img: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&q=80&w=600" },
+  { name_fr: "Porte-clés Cuir Personnalisé", name_en: "Custom Leather Keychain", price_fr: "25 €", price_en: "25 €", img: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&q=80&w=600" },
+  { name_fr: "Plaque Métal Entreprise", name_en: "Corporate Metal Plaque", price_fr: "180 €", price_en: "180 €", badge_fr: "Nouveau", badge_en: "New", img: "https://images.unsplash.com/photo-1618220179428-22790b46a0eb?auto=format&fit=crop&q=80&w=600" }
 ];
 
 export function FeaturedProductsSection() {
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [products, setProducts] = useState<FeaturedProduct[]>(defaultProducts);
 
   useEffect(() => {
@@ -71,16 +74,21 @@ export function FeaturedProductsSection() {
         </FadeUp>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {products.map((product, i) => (
+          {products.map((product, i) => {
+            const name = language === 'en' ? (product.name_en || product.name_fr) : (product.name_fr || product.name_en);
+            const price = language === 'en' ? (product.price_en || product.price_fr) : (product.price_fr || product.price_en);
+            const badge = language === 'en' ? (product.badge_en || product.badge_fr) : (product.badge_fr || product.badge_en);
+
+            return (
             <FadeUp key={product._id || i} delay={i * 0.1}>
               <div className="group cursor-pointer h-full flex flex-col">
                 <div className="relative h-80 overflow-hidden mb-6 border border-white/5">
-                  {product.badge && (
+                  {badge && (
                     <div className="absolute top-4 left-4 z-10 bg-[hsl(var(--background))] border border-[hsl(var(--primary))]/30 text-[hsl(var(--primary))] text-[10px] uppercase tracking-widest font-bold px-3 py-1">
-                      {product.badge}
+                      {badge}
                     </div>
                   )}
-                  <Image src={product.img} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000 opacity-80 group-hover:opacity-100" unoptimized />
+                  <Image src={product.img} alt={name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000 opacity-80 group-hover:opacity-100" unoptimized />
                   
                   {/* Overlay interaction */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
@@ -90,12 +98,12 @@ export function FeaturedProductsSection() {
                   </div>
                 </div>
                 <div className="space-y-2 flex-grow text-center">
-                  <h3 className="text-lg font-heading text-white">{product.name}</h3>
-                  <p className="text-[hsl(var(--primary))] text-sm tracking-wider">{product.price}</p>
+                  <h3 className="text-lg font-heading text-white">{name}</h3>
+                  <p className="text-[hsl(var(--primary))] text-sm tracking-wider">{price}</p>
                 </div>
               </div>
             </FadeUp>
-          ))}
+          )})}
         </div>
       </div>
     </section>

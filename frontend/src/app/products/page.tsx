@@ -22,8 +22,10 @@ export default function ProductList() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await api.get('/products');
-        setProducts(response.data);
+        // By default we get page 1, limit 20. For full shop, we might want limit 100 or infinite scroll.
+        // Keeping it simple: limit 100 to show most products
+        const response = await api.get('/products', { params: { limit: 100 } });
+        setProducts(response.data.items || []);
       } catch (error: unknown) {
         const err = error as { isAxiosError?: boolean, message?: string };
         if (err.isAxiosError && err.message === 'Network Error') {

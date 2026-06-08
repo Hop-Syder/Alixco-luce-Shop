@@ -92,21 +92,23 @@ export default function HomeSettingsEditor() {
     if (!settings) return;
 
     setSaving(true);
-    const savePromise = api.put('/page-settings/home', settings, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    toast.promise(savePromise, {
-      loading: 'Enregistrement des modifications...',
-      success: 'Configuration de la page d\'accueil mise à jour !',
-      error: 'Erreur lors de la sauvegarde.'
-    });
+    const loadingToast = toast.loading('Enregistrement des modifications...');
 
     try {
-      const response = await savePromise;
+      const response = await api.put('/page-settings/home', {
+        hero: settings.hero,
+        promo: settings.promo,
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
       setSettings(response.data);
-    } catch (error) {
+      toast.success("Configuration de la page d'accueil mise à jour !", { id: loadingToast });
+    } catch (error: unknown) {
       console.error('Erreur de sauvegarde:', error);
+      const e = error as { response?: { data?: { detail?: string } } };
+      const msg = e?.response?.data?.detail || 'Erreur lors de la sauvegarde.';
+      toast.error(msg, { id: loadingToast });
     } finally {
       setSaving(false);
     }

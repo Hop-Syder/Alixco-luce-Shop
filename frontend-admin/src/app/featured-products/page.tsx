@@ -13,12 +13,16 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api } from '@/services/api';
 import { Plus, Edit2, Trash2, X, Save } from 'lucide-react';
+import { DragDropImageUploader } from '@/components/ui/DragDropImageUploader';
 
 interface FeaturedProduct {
   _id?: string;
-  name: string;
-  price: string;
-  badge?: string;
+  name_fr: string;
+  name_en: string;
+  price_fr: string;
+  price_en: string;
+  badge_fr?: string;
+  badge_en?: string;
   img: string;
   order: number;
 }
@@ -28,7 +32,7 @@ export default function AdminFeaturedProducts() {
   const [products, setProducts] = useState<FeaturedProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [isEditing, setIsEditing] = useState<string | null>(null);
-  const [formData, setFormData] = useState<FeaturedProduct>({ name: '', price: '', badge: '', img: '', order: 0 });
+  const [formData, setFormData] = useState<FeaturedProduct>({ name_fr: '', name_en: '', price_fr: '', price_en: '', badge_fr: '', badge_en: '', img: '', order: 0 });
   const [error, setError] = useState('');
 
   const fetchProducts = async () => {
@@ -51,12 +55,12 @@ export default function AdminFeaturedProducts() {
 
   const handleEdit = (product: FeaturedProduct) => {
     setIsEditing(product._id!);
-    setFormData({ ...product, badge: product.badge || '' });
+    setFormData({ ...product, badge_fr: product.badge_fr || '', badge_en: product.badge_en || '' });
   };
 
   const handleCreate = () => {
     setIsEditing('new');
-    setFormData({ name: '', price: '', badge: '', img: '', order: products.length });
+    setFormData({ name_fr: '', name_en: '', price_fr: '', price_en: '', badge_fr: '', badge_en: '', img: '', order: products.length });
   };
 
   const handleDelete = async (id: string) => {
@@ -73,13 +77,13 @@ export default function AdminFeaturedProducts() {
   };
 
   const handleSave = async () => {
-    if (!formData.name || !formData.price || !formData.img) {
-      alert('Veuillez remplir au moins le nom, le prix et l\'image.');
+    if (!formData.name_fr || !formData.name_en || !formData.price_fr || !formData.price_en || !formData.img) {
+      alert('Veuillez remplir au moins les noms, les prix et l\'image.');
       return;
     }
     
     // Convert empty badge to null if needed, or just leave as string
-    const dataToSend = { ...formData, badge: formData.badge || null };
+    const dataToSend = { ...formData, badge_fr: formData.badge_fr || null, badge_en: formData.badge_en || null };
     
     try {
       if (isEditing === 'new') {
@@ -123,35 +127,71 @@ export default function AdminFeaturedProducts() {
         <div className="bg-[hsl(var(--surface-light))] border border-white/10 rounded-2xl p-6">
           <h3 className="text-lg font-heading font-bold mb-4 text-white">{isEditing === 'new' ? 'Nouveau produit phare' : 'Modifier le produit phare'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-stone-300 mb-1">Nom du Produit *</label>
-              <input 
-                type="text" 
-                value={formData.name} 
-                onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
-                placeholder="Ex: Trophée Verre Gravé"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Nom du Produit (FR) *</label>
+                <input 
+                  type="text" 
+                  value={formData.name_fr} 
+                  onChange={(e) => setFormData({...formData, name_fr: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: Trophée Verre Gravé"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Nom du Produit (EN) *</label>
+                <input 
+                  type="text" 
+                  value={formData.name_en} 
+                  onChange={(e) => setFormData({...formData, name_en: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: Engraved Glass Trophy"
+                />
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-stone-300 mb-1">Texte du Prix *</label>
-              <input 
-                type="text" 
-                value={formData.price} 
-                onChange={(e) => setFormData({...formData, price: e.target.value})}
-                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
-                placeholder="Ex: À partir de 120 €"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Texte du Prix (FR) *</label>
+                <input 
+                  type="text" 
+                  value={formData.price_fr} 
+                  onChange={(e) => setFormData({...formData, price_fr: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: À partir de 120 €"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Texte du Prix (EN) *</label>
+                <input 
+                  type="text" 
+                  value={formData.price_en} 
+                  onChange={(e) => setFormData({...formData, price_en: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: From 120 €"
+                />
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-semibold text-stone-300 mb-1">Badge (Optionnel)</label>
-              <input 
-                type="text" 
-                value={formData.badge || ''} 
-                onChange={(e) => setFormData({...formData, badge: e.target.value})}
-                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
-                placeholder="Ex: Best-Seller, Nouveau..."
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Badge (FR)</label>
+                <input 
+                  type="text" 
+                  value={formData.badge_fr || ''} 
+                  onChange={(e) => setFormData({...formData, badge_fr: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: Nouveau"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-stone-300 mb-1">Badge (EN)</label>
+                <input 
+                  type="text" 
+                  value={formData.badge_en || ''} 
+                  onChange={(e) => setFormData({...formData, badge_en: e.target.value})}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  placeholder="Ex: New"
+                />
+              </div>
             </div>
             <div>
               <label className="block text-sm font-semibold text-stone-300 mb-1">Ordre d&apos;affichage</label>
@@ -163,13 +203,10 @@ export default function AdminFeaturedProducts() {
               />
             </div>
             <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-stone-300 mb-1">URL de l&apos;image *</label>
-              <input 
-                type="text" 
+              <label className="block text-sm font-semibold text-stone-300 mb-1">Image du produit phare *</label>
+              <DragDropImageUploader 
                 value={formData.img} 
-                onChange={(e) => setFormData({...formData, img: e.target.value})}
-                className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
-                placeholder="https://..."
+                onChange={(url) => setFormData({...formData, img: url})} 
               />
             </div>
           </div>
@@ -194,12 +231,12 @@ export default function AdminFeaturedProducts() {
         {products.map((product) => (
           <div key={product._id} className="bg-[hsl(var(--surface-light))] rounded-2xl border border-white/10 overflow-hidden group flex flex-col">
             <div className="relative h-48 border-b border-white/5">
-              {product.badge && (
+              {product.badge_fr && (
                 <div className="absolute top-2 left-2 z-10 bg-black text-[hsl(var(--primary))] text-[10px] uppercase tracking-widest font-bold px-2 py-1 border border-white/10">
-                  {product.badge}
+                  {product.badge_fr}
                 </div>
               )}
-              <img src={product.img} alt={product.name} className="w-full h-full object-cover" />
+              <img src={product.img} alt={product.name_fr} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                 <button 
                   onClick={() => handleEdit(product)}
@@ -219,9 +256,9 @@ export default function AdminFeaturedProducts() {
             </div>
             <div className="p-4 flex-grow flex flex-col">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="font-heading font-bold text-md leading-tight text-white">{product.name}</h3>
+                <h3 className="font-heading font-bold text-md leading-tight text-white">{product.name_fr}</h3>
               </div>
-              <p className="text-[hsl(var(--primary))] font-semibold text-sm mt-auto">{product.price}</p>
+              <p className="text-[hsl(var(--primary))] font-semibold text-sm mt-auto">{product.price_fr}</p>
               <p className="text-xs text-stone-500 mt-2">Ordre: {product.order}</p>
             </div>
           </div>

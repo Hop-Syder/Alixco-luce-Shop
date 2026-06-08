@@ -18,8 +18,10 @@ import {
   Tag,
   Star,
   ShoppingBag,
+  Users,
   Settings2,
   LogOut,
+  MessageSquare
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -29,6 +31,8 @@ const NAV_ITEMS = [
   { href: '/categories', label: 'Catégories', icon: Tag },
   { href: '/featured-products', label: 'Pièces Phares', icon: Star },
   { href: '/orders', label: 'Commandes', icon: ShoppingBag },
+  { href: '/customers', label: 'Clients (CRM)', icon: Users },
+  { href: '/testimonials', label: 'Témoignages', icon: MessageSquare },
   { href: '/home-settings', label: "Page d'accueil", icon: Settings2 },
 ];
 

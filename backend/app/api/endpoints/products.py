@@ -16,7 +16,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from bson import ObjectId
 
 from app.api import deps
-from app.models.schemas import Product, ProductBase, ProductUpdate
+from app.models.schemas import Product, ProductBase, ProductUpdate, PaginatedResponse
 
 router = APIRouter()
 
@@ -25,18 +25,30 @@ def serialize_product(db_product: dict) -> dict:
     db_product["_id"] = str(db_product["_id"])
     return db_product
 
-@router.get("/", response_model=List[Product])
+@router.get("/", response_model=PaginatedResponse[Product])
 async def list_products(
-    skip: int = 0,
-    limit: int = 100,
+    page: int = 1,
+    limit: int = 20,
     db: AsyncIOMotorDatabase = Depends(deps.get_db)
 ):
     """
-    Retrieve products list.
+    Retrieve products list (paginated).
     """
+    skip = (page - 1) * limit
+    total = await db.products.count_documents({})
+    
     cursor = db.products.find({}).skip(skip).limit(limit)
     products = await cursor.to_list(length=limit)
-    return [serialize_product(p) for p in products]
+    
+    total_pages = (total + limit - 1) // limit
+    
+    return {
+        "items": [serialize_product(p) for p in products],
+        "total": total,
+        "page": page,
+        "limit": limit,
+        "total_pages": total_pages
+    }
 
 @router.get("/{product_id}", response_model=Product)
 async def get_product(
@@ -87,6 +99,7 @@ async def update_product(
     except Exception:
         raise HTTPException(status_code=400, detail="Invalid product ID format")
 
+    # Correction: filtrer uniquement les valeurs None, pas les 0 ou chaînes vides
     update_data = {k: v for k, v in product_in.model_dump().items() if v is not None}
     
     if update_data:
