@@ -44,7 +44,7 @@ const validatePhone = (phone: string): boolean => {
   return /^[\d+\-\s()]+$/.test(phone) && phone.length >= 8;
 };
 
-export default function CartPage(): JSX.Element {
+export default function CartPage() {
   const { t } = useTranslation();
   const { items, removeItem, updateQuantity, clearCart } = useCartStore();
   const { user } = useAuth();
@@ -303,8 +303,8 @@ export default function CartPage(): JSX.Element {
                 type="submit"
                 disabled={isSubmitting || items.length === 0}
                 className={`w-full text-lg py-4 mt-6 flex justify-center items-center gap-2 rounded-xl font-semibold transition-all ${isSubmitting || items.length === 0
-                    ? 'btn-primary opacity-50 cursor-not-allowed'
-                    : 'btn-primary hover:shadow-xl'
+                  ? 'btn-primary opacity-50 cursor-not-allowed'
+                  : 'btn-primary hover:shadow-xl'
                   }`}
               >
                 {isSubmitting ? (

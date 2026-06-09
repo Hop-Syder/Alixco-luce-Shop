@@ -42,6 +42,6 @@ export async function generateMetadata(
   }
 }
 
-export default function ProductPage({ params }: Props) {
+export default function ProductPage() {
   return <ProductDetailClient />;
 }
