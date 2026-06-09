@@ -107,9 +107,9 @@ export default function Footer() {
             <ul className="space-y-5">
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-[hsl(var(--primary))] mr-3 mt-0.5 shrink-0" />
-                <a href="https://maps.app.goo.gl/q3BtrditE6muAohE6" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-[hsl(var(--primary))] text-sm font-light leading-relaxed transition-colors">
+                <a href="https://maps.app.goo.gl/k7uKZ3bfaonbioQNA" target="_blank" rel="noopener noreferrer" className="text-stone-400 hover:text-[hsl(var(--primary))] text-sm font-light leading-relaxed transition-colors" aria-label="Voir l'atelier AlixcoLuxe sur Google Maps">
                   Atelier AlixcoLuxe<br />
-                  Bénin
+                  Cotonou, Bénin
                 </a>
               </li>
               <li className="flex items-center">
