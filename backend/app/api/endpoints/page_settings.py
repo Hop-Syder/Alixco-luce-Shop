@@ -45,7 +45,7 @@ DEFAULT_HOME_SETTINGS = {
         "discount_tag": "Offre Limitée",
         "cta_text": "Profiter de l'offre",
         "cta_link": "/products?collection=limited",
-        "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=1600"
+        "image": "/background.jpg"
     }
 }
 
