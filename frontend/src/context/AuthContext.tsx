@@ -23,18 +23,25 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    // Load from localStorage on mount
+    // Only access localStorage on client-side after hydration
     const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
-    
-    if (storedToken && storedUser) {
-      Promise.resolve().then(() => {
+
+    try {
+      if (storedToken && storedUser) {
         setToken(storedToken);
         setUser(JSON.parse(storedUser));
-      });
+      }
+    } catch (error) {
+      // If localStorage data is corrupted, clear it
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
+
+    setIsHydrated(true);
   }, []);
 
   const login = (newToken: string, userData: User) => {
