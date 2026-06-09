@@ -33,8 +33,9 @@ class Logger {
 
         // In development, also log to console
         if (this.isDevelopment) {
-            const consoleMethod = level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
-            console[consoleMethod as keyof typeof console](`[${level.toUpperCase()}] ${message}`, data);
+            const consoleMethod: 'error' | 'warn' | 'log' =
+                level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
+            console[consoleMethod](`[${level.toUpperCase()}] ${message}`, data);
         }
 
         // TODO: Send to error tracking service (Sentry, DataDog, etc.)
