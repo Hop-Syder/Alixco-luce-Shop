@@ -43,5 +43,5 @@ export async function generateMetadata(
 }
 
 export default function ProductPage({ params }: Props) {
-  return <ProductDetailClient id={params.id} />;
+  return <ProductDetailClient />;
 }
