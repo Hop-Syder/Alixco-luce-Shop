@@ -11,13 +11,18 @@
 import { createClient } from '@supabase/supabase-js';
 import ws from 'ws';
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+export const getSupabaseAdmin = () => {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
+  const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-// Node 20 n'a pas de WebSocket natif stable — requis par le client Realtime initialisé en interne par supabase-js, même si on ne l'utilise que pour Storage.
-export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceRoleKey, {
-  auth: { persistSession: false },
-  realtime: { transport: ws as unknown as typeof WebSocket },
-});
+  if (!supabaseUrl || !supabaseServiceRoleKey) {
+    throw new Error('Supabase environment variables are missing');
+  }
+
+  return createClient(supabaseUrl, supabaseServiceRoleKey, {
+    auth: { persistSession: false },
+    realtime: { transport: ws as unknown as typeof WebSocket },
+  });
+};
 
 export const SUPABASE_STORAGE_BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'alixco-luxe-uploads';

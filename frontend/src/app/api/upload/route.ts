@@ -10,7 +10,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
-import { supabaseAdmin, SUPABASE_STORAGE_BUCKET } from '@/lib/supabase';
+import { getSupabaseAdmin, SUPABASE_STORAGE_BUCKET } from '@/lib/supabase';
 import { withCors, corsPreflight } from '@/lib/cors';
 
 const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
@@ -47,6 +47,7 @@ export async function POST(req: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const objectPath = `alixco_luxe/${randomUUID()}.${extension}`;
 
+    const supabaseAdmin = getSupabaseAdmin();
     const { error } = await supabaseAdmin.storage
       .from(SUPABASE_STORAGE_BUCKET)
       .upload(objectPath, buffer, { contentType: CONTENT_TYPES[extension], upsert: false });
