@@ -11,7 +11,10 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // Try to fetch the product from our backend
   try {
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    // Determine the base URL for server-side fetching
+    const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+    const host = process.env.VERCEL_URL || 'localhost:3000';
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || `${protocol}://${host}/api`;
     const res = await fetch(`${API_URL}/products/${params.id}`, { cache: 'no-store' });
     if (!res.ok) {
       return { title: 'Produit Introuvable - AlixcoLuxe' };
