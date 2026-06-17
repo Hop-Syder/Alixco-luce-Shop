@@ -21,7 +21,8 @@ import {
   Users,
   Settings2,
   LogOut,
-  MessageSquare
+  MessageSquare,
+  MessageCircle
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -34,6 +35,7 @@ const NAV_ITEMS = [
   { href: '/customers', label: 'Clients (CRM)', icon: Users },
   { href: '/testimonials', label: 'Témoignages', icon: MessageSquare },
   { href: '/home-settings', label: "Page d'accueil", icon: Settings2 },
+  { href: '/settings', label: 'Paramètres', icon: MessageCircle },
 ];
 
 export function AdminSidebar() {

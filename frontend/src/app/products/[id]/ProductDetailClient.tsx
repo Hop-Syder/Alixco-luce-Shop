@@ -16,24 +16,18 @@ import Link from 'next/link';
 import { api } from '@/services/api';
 import Image from 'next/image';
 import { useTranslation } from '@/context/LanguageContext';
+import { FadeUp } from '@/components/ui/FadeUp';
+import { ProductCard } from '@/components/products/ProductCard';
+import type { Product } from '@/types/product';
 
 import { useCartStore } from '@/store/cartStore';
 import { toast } from 'react-hot-toast';
-
-interface Product {
-  _id: string;
-  name_fr: string;
-  name_en: string;
-  price: number;
-  image: string;
-  category: string;
-  stock: number;
-}
 
 export default function ProductDetail() {
   const params = useParams();
   const id = params?.id as string;
   const [product, setProduct] = useState<Product | null>(null);
+  const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [quantity, setQuantity] = useState<number>(1);
   const addItem = useCartStore((state) => state.addItem);
@@ -54,6 +48,23 @@ export default function ProductDetail() {
       fetchProduct();
     }
   }, [id]);
+
+  useEffect(() => {
+    if (!product) return;
+
+    const fetchSimilarProducts = async () => {
+      try {
+        const response = await api.get('/products', {
+          params: { category: product.category, limit: 8 },
+        });
+        const items: Product[] = response.data.items || [];
+        setSimilarProducts(items.filter((p) => p._id !== product._id).slice(0, 4));
+      } catch (error) {
+        console.error('Error fetching similar products', error);
+      }
+    };
+    fetchSimilarProducts();
+  }, [product]);
 
   const name = product ? (language === 'en' ? (product.name_en || product.name_fr) : (product.name_fr || product.name_en)) : '';
 
@@ -114,7 +125,7 @@ export default function ProductDetail() {
             <div className="w-full md:w-1/2">
               <div className="rounded-[2rem] overflow-hidden bg-stone-900 aspect-[4/5] relative shadow-inner border border-white/5">
                 <Image 
-                  src={product.image || 'https://via.placeholder.com/600x750?text=Alixco+Luxe'} 
+                  src={product.image || '/logo.png'}
                   alt={name} 
                   fill
                   className="object-cover object-center"
@@ -175,6 +186,27 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
+
+        {/* Vous aimerez aussi : autres créations de la même catégorie */}
+        {similarProducts.length > 0 && (
+          <section className="mt-20">
+            <FadeUp className="text-center mb-12 flex flex-col items-center">
+              <span className="text-[hsl(var(--primary))] uppercase tracking-[0.2em] text-xs font-bold mb-4 block">
+                {t('products.similar_subtitle')}
+              </span>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
+                {t('products.similar_title')}
+              </h2>
+              <div className="accent-line"></div>
+            </FadeUp>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {similarProducts.map((similar) => (
+                <ProductCard key={similar._id} product={similar} />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

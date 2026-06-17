@@ -104,7 +104,9 @@
     "in_stock": "In stock",
     "out_of_stock": "Out of stock",
     "add_to_cart": "Add to cart",
-    "empty_catalog": "Our catalog will soon be enriched with new creations. Check back soon."
+    "empty_catalog": "Our catalog will soon be enriched with new creations. Check back soon.",
+    "similar_subtitle": "Continue Exploring",
+    "similar_title": "You May Also Like"
   },
   "about": {
     "hero_subtitle": "Our Workshop",

@@ -104,7 +104,9 @@
     "in_stock": "En stock",
     "out_of_stock": "Rupture de stock",
     "add_to_cart": "Ajouter au panier",
-    "empty_catalog": "Notre catalogue s'enrichit prochainement de nouvelles créations. Revenez bientôt."
+    "empty_catalog": "Notre catalogue s'enrichit prochainement de nouvelles créations. Revenez bientôt.",
+    "similar_subtitle": "Continuez votre découverte",
+    "similar_title": "Vous Aimerez Aussi"
   },
   "about": {
     "hero_subtitle": "Notre Atelier",

@@ -24,11 +24,14 @@ export const GET = withErrorHandling(async (req: NextRequest) => {
   const { searchParams } = req.nextUrl;
   const page = Number(searchParams.get('page') || '1');
   const limit = Number(searchParams.get('limit') || '20');
+  const category = searchParams.get('category');
   const skip = (page - 1) * limit;
 
+  const where = category ? { category } : {};
+
   const [items, total] = await Promise.all([
-    prisma.product.findMany({ skip, take: limit }),
-    prisma.product.count(),
+    prisma.product.findMany({ where, skip, take: limit }),
+    prisma.product.count({ where }),
   ]);
 
   return withCors(
