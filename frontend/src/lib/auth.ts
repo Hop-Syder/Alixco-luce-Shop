@@ -77,9 +77,9 @@ export class AuthError extends Error {
 
 export async function requireUser(req: NextRequest): Promise<AuthUser> {
   const token = extractBearerToken(req);
-  if (!token) throw new AuthError('Could not validate credentials', 403);
+  if (!token) throw new AuthError('Could not validate credentials', 401);
   const decoded = await decodeToken(token);
-  if (!decoded) throw new AuthError('Could not validate credentials', 403);
+  if (!decoded) throw new AuthError('Could not validate credentials', 401);
   const user = await prisma.user.findUnique({ where: { id: decoded.sub } });
   if (!user) throw new AuthError('User not found', 404);
   return { id: user.id, email: user.email, phone: user.phone, full_name: user.full_name, role: user.role };
