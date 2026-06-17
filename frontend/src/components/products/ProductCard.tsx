@@ -11,10 +11,33 @@ import React from 'react';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import { useTranslation } from '@/context/LanguageContext';
+import { useCartStore } from '@/store/cartStore';
+import { toast } from 'react-hot-toast';
 
 export function ProductCard({ product }: { product: Product }) {
   const { t, language } = useTranslation();
+  const addItem = useCartStore((state) => state.addItem);
   const name = language === 'en' ? (product.name_en || product.name_fr) : (product.name_fr || product.name_en);
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault(); // Empêche la navigation du Link
+    e.stopPropagation();
+
+    if (product.stock <= 0) {
+      toast.error(t('products.out_of_stock') || 'Rupture de stock');
+      return;
+    }
+
+    addItem({
+      productId: product._id,
+      name,
+      price: product.price,
+      quantity: 1,
+      image: product.image
+    });
+
+    toast.success(t('cart.added') || 'Ajouté au panier');
+  };
 
   return (
     <Link href={`/products/${product._id}`} className="group block h-full">
@@ -42,9 +65,15 @@ export function ProductCard({ product }: { product: Product }) {
           
           {/* Sliding Quick Action */}
           <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 z-10">
-            <div className="bg-black/60 backdrop-blur-md border border-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 text-center hover:bg-[hsl(var(--primary))] hover:border-[hsl(var(--primary))] transition-colors">
-              {t('featured.discover') || 'Découvrir'}
-            </div>
+            <button 
+              onClick={handleAddToCart}
+              disabled={product.stock <= 0}
+              className={`w-full bg-black/60 backdrop-blur-md border border-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 text-center transition-colors
+                ${product.stock > 0 ? 'hover:bg-[hsl(var(--primary))] hover:border-[hsl(var(--primary))] cursor-pointer' : 'opacity-50 cursor-not-allowed'}
+              `}
+            >
+              {product.stock > 0 ? (t('products.add_to_cart') || 'Ajouter au panier') : (t('products.out_of_stock') || 'Rupture')}
+            </button>
           </div>
           
           {/* Gradient Overlay for bottom text readability */}
