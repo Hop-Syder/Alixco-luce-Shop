@@ -32,6 +32,7 @@ export function PromoSection() {
   const { t } = useTranslation();
   const [promoData, setPromoData] = useState<PromoData | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isExpired, setIsExpired] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPromoData = async () => {
@@ -55,25 +56,42 @@ export function PromoSection() {
     const endDateString = promoData?.countdown_end || defaultEndDate.toISOString();
     const endDate = new Date(endDateString).getTime();
 
-    const timer = setInterval(() => {
+    const checkTime = () => {
       const now = new Date().getTime();
       const distance = endDate - now;
 
-      if (distance < 0) {
-        clearInterval(timer);
+      if (distance <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        setIsExpired(true);
+        return true; // Indicates timer should stop
       } else {
+        setIsExpired(false);
         setTimeLeft({
           days: Math.floor(distance / (1000 * 60 * 60 * 24)),
           hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
           minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
           seconds: Math.floor((distance % (1000 * 60)) / 1000),
         });
+        return false;
       }
+    };
+
+    // Run once immediately
+    const shouldStop = checkTime();
+
+    if (shouldStop) return;
+
+    const timer = setInterval(() => {
+      const stop = checkTime();
+      if (stop) clearInterval(timer);
     }, 1000);
 
     return () => clearInterval(timer);
   }, [promoData?.countdown_end]);
+
+  if (isExpired) {
+    return null;
+  }
 
   return (
     <section className="py-12 w-full relative">
