@@ -10,8 +10,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireAdmin, AuthError } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 
 const HOME_SETTINGS_KEY = 'home_page';
 
@@ -46,20 +47,15 @@ export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
   const setting = await prisma.setting.findUnique({ where: { key: HOME_SETTINGS_KEY } });
   return withCors(NextResponse.json(setting ? setting.value : DEFAULT_HOME_SETTINGS), origin);
-}
+});
 
-export async function PUT(req: NextRequest) {
+export const PUT = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const body = await req.json();
   const value = { hero: body.hero, promo: body.promo };
@@ -71,4 +67,4 @@ export async function PUT(req: NextRequest) {
   });
 
   return withCors(NextResponse.json(setting.value), origin);
-}
+});

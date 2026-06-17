@@ -89,7 +89,6 @@ export function DragDropImageUploader({ value, onChange, className = '' }: Props
         </div>
       ) : (
         <div className="relative w-full max-h-64 rounded-xl border border-white/20 overflow-hidden bg-stone-900 group">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={value} alt="Aperçu" className="w-full h-full object-contain" />
           
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">

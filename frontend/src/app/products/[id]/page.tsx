@@ -1,21 +1,19 @@
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import ProductDetailClient from './ProductDetailClient';
 
 type Props = {
-  params: { id: string }
+  params: Promise<{ id: string }>
 };
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Try to fetch the product from our backend
   try {
+    const { id } = await params;
     // Determine the base URL for server-side fetching
     const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
     const host = process.env.VERCEL_URL || 'localhost:3000';
     const API_URL = process.env.NEXT_PUBLIC_API_URL || `${protocol}://${host}/api`;
-    const res = await fetch(`${API_URL}/products/${params.id}`, { cache: 'no-store' });
+    const res = await fetch(`${API_URL}/products/${id}`, { cache: 'no-store' });
     if (!res.ok) {
       return { title: 'Produit Introuvable - AlixcoLuxe' };
     }
@@ -29,7 +27,8 @@ export async function generateMetadata(
     const keywords = product.seo_keywords_fr ? product.seo_keywords_fr.split(',') : ['luxe', 'art', 'décoration'];
 
     return {
-      title: `${title} | AlixcoLuxe`,
+      // Le layout racine applique déjà le template "%s | AlixcoLuxe" — ne pas le dupliquer ici.
+      title,
       description,
       keywords,
       openGraph: {
@@ -38,7 +37,7 @@ export async function generateMetadata(
         images: [product.image],
       },
     };
-  } catch (err) {
+  } catch {
     return {
       title: 'AlixcoLuxe Boutique',
     };

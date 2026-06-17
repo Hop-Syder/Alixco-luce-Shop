@@ -94,7 +94,7 @@ export default function AdminProducts() {
     seo_keywords_en: ''
   };
 
-  const { register, handleSubmit, control, reset, setValue, watch, formState: { errors } } = useForm<ProductFormValues>({
+  const { register, handleSubmit, control, reset, formState: { errors } } = useForm<ProductFormValues>({
     resolver: zodResolver(productSchema),
     defaultValues
   });

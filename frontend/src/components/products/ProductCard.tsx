@@ -24,7 +24,7 @@ export function ProductCard({ product }: { product: Product }) {
     e.stopPropagation();
 
     if (product.stock <= 0) {
-      toast.error(t('products.out_of_stock') || 'Rupture de stock');
+      toast.error(t('products.out_of_stock'));
       return;
     }
 
@@ -36,7 +36,7 @@ export function ProductCard({ product }: { product: Product }) {
       image: product.image
     });
 
-    toast.success(t('cart.added') || 'Ajouté au panier');
+    toast.success(t('cart.added'));
   };
 
   return (
@@ -49,7 +49,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="relative aspect-[4/5] overflow-hidden bg-stone-900">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
-            src={product.image || 'https://via.placeholder.com/600x750?text=Alixco+Luxe'} 
+            src={product.image || '/logo.png'}
             alt={name} 
             className="w-full h-full object-cover object-center group-hover:scale-110 group-hover:opacity-80 transition-all duration-700 ease-out"
           />
@@ -72,7 +72,7 @@ export function ProductCard({ product }: { product: Product }) {
                 ${product.stock > 0 ? 'hover:bg-[hsl(var(--primary))] hover:border-[hsl(var(--primary))] cursor-pointer' : 'opacity-50 cursor-not-allowed'}
               `}
             >
-              {product.stock > 0 ? (t('products.add_to_cart') || 'Ajouter au panier') : (t('products.out_of_stock') || 'Rupture')}
+              {product.stock > 0 ? t('products.add_to_cart') : t('products.out_of_stock')}
             </button>
           </div>
           

@@ -41,7 +41,7 @@ export function PromoSection() {
         if (response.data && response.data.promo) {
           setPromoData(response.data.promo);
         }
-      } catch (error) {
+      } catch {
         console.warn("Impossible de charger le contenu dynamique de la promo, utilisation des données de secours locales.");
       }
     };

@@ -18,6 +18,7 @@ import { FeaturedProductsSection } from '@/components/home/FeaturedProductsSecti
 import { PromoSection } from '@/components/home/PromoSection';
 import { TestimonialsSection } from '@/components/home/TestimonialsSection';
 import { NewsletterSection } from '@/components/home/NewsletterSection';
+import { AtelierLocationSection } from '@/components/about/AtelierLocationSection';
 
 export const metadata: Metadata = {
   title: "Gravure Laser, Art & Cadeaux Personnalisés au Bénin",
@@ -51,6 +52,7 @@ export default function Home() {
       <FeaturedProductsSection />
       <PromoSection />
       <TestimonialsSection />
+      <AtelierLocationSection />
       <NewsletterSection />
     </div>
   );

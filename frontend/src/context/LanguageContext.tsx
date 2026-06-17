@@ -6,10 +6,17 @@ import en from '../i18n/en.json';
 type Language = 'fr' | 'en';
 type Dictionary = typeof fr;
 
+type TranslationParams = Record<string, string | number>;
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, params?: TranslationParams) => string;
+}
+
+function interpolate(template: string, params?: TranslationParams): string {
+  if (!params) return template;
+  return template.replace(/\{\{(\w+)\}\}/g, (_, k: string) => String(params[k] ?? ''));
 }
 
 const dictionaries: Record<Language, Dictionary> = {
@@ -42,7 +49,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('language', lang);
   };
 
-  const t = (key: string): string => {
+  const t = (key: string, params?: TranslationParams): string => {
     const keys = key.split('.');
     let value: unknown = dictionaries[language];
 
@@ -59,11 +66,11 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
              return key; // return key name if not found at all
            }
         }
-        return typeof fallbackValue === 'string' ? fallbackValue : key;
+        return typeof fallbackValue === 'string' ? interpolate(fallbackValue, params) : key;
       }
     }
 
-    return typeof value === 'string' ? value : key;
+    return typeof value === 'string' ? interpolate(value, params) : key;
   };
 
   return (

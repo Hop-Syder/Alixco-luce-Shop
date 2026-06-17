@@ -66,19 +66,19 @@ export default function CartPage() {
     const newErrors: FormErrors = {};
 
     if (!customerInfo.name.trim()) {
-      newErrors.name = 'Le nom est requis';
+      newErrors.name = t('cart.validation_name_required');
     }
 
     if (!validateEmail(customerInfo.email)) {
-      newErrors.email = 'Email invalide';
+      newErrors.email = t('cart.validation_email_invalid');
     }
 
     if (!validatePhone(customerInfo.phone)) {
-      newErrors.phone = 'Numéro de téléphone invalide';
+      newErrors.phone = t('cart.validation_phone_invalid');
     }
 
     if (!customerInfo.address.trim()) {
-      newErrors.address = 'L\'adresse est requise';
+      newErrors.address = t('cart.validation_address_required');
     }
 
     setErrors(newErrors);
@@ -89,12 +89,12 @@ export default function CartPage() {
     e.preventDefault();
 
     if (items.length === 0) {
-      toast.error('Le panier est vide');
+      toast.error(t('cart.empty_error'));
       return;
     }
 
     if (!validateForm()) {
-      toast.error('Veuillez corriger les erreurs du formulaire');
+      toast.error(t('cart.form_errors'));
       return;
     }
 
@@ -106,7 +106,7 @@ export default function CartPage() {
         userId: user?.id || null
       };
 
-      const response = await api.post('/orders/', orderData);
+      const response = await api.post('/orders', orderData);
 
       clearCart();
 
@@ -125,12 +125,9 @@ export default function CartPage() {
     } catch (error) {
       logger.error('Checkout error', error);
 
-      // Provide user-friendly error message
-      const errorMessage = error instanceof Error
-        ? error.message
-        : 'Une erreur est survenue lors de la commande';
-
-      toast.error(errorMessage || t('cart.error_msg'));
+      // Le message métier précis (stock insuffisant, etc.) vient de error.response.data.detail (API)
+      const apiDetail = (error as { response?: { data?: { detail?: string } } })?.response?.data?.detail;
+      toast.error(apiDetail || t('cart.error_msg'));
     } finally {
       setIsSubmitting(false);
     }
@@ -177,7 +174,7 @@ export default function CartPage() {
             {items.map((item) => (
               <div key={item.productId} className="glass-card flex flex-col sm:flex-row items-center gap-6 p-6 rounded-[2rem]">
                 <div className="relative w-32 h-32">
-                  <Image src={item.image || 'https://via.placeholder.com/300'} alt={item.name} fill className="object-cover rounded-2xl shadow-sm" unoptimized />
+                  <Image src={item.image || '/logo.png'} alt={item.name} fill className="object-cover rounded-2xl shadow-sm" unoptimized />
                 </div>
 
                 <div className="flex-1 text-center sm:text-left">
@@ -189,14 +186,14 @@ export default function CartPage() {
                   <div className="flex items-center bg-[hsl(var(--surface-neutral))] border border-white/10 rounded-xl overflow-hidden shadow-sm">
                     <button
                       type="button"
-                      aria-label="Diminuer la quantité"
+                      aria-label={t('cart.decrease_qty_aria')}
                       className="px-4 py-2 text-stone-400 hover:bg-white/5 hover:text-[hsl(var(--primary))] transition-colors"
                       onClick={() => updateQuantity(item.productId, Math.max(1, item.quantity - 1))}
                     >-</button>
                     <span className="px-3 font-semibold text-[hsl(var(--text-main))] w-8 text-center">{item.quantity}</span>
                     <button
                       type="button"
-                      aria-label="Augmenter la quantité"
+                      aria-label={t('cart.increase_qty_aria')}
                       className="px-4 py-2 text-stone-400 hover:bg-white/5 hover:text-[hsl(var(--primary))] transition-colors"
                       onClick={() => updateQuantity(item.productId, item.quantity + 1)}
                     >+</button>
@@ -204,10 +201,10 @@ export default function CartPage() {
 
                   <button
                     type="button"
-                    aria-label="Retirer du panier"
+                    aria-label={t('cart.remove_aria')}
                     onClick={() => removeItem(item.productId)}
                     className="w-10 h-10 rounded-full flex items-center justify-center bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
-                    title="Retirer"
+                    title={t('cart.remove_title')}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -242,7 +239,7 @@ export default function CartPage() {
                   }}
                   className={`w-full bg-[hsl(var(--surface-neutral))] border rounded-xl p-3 focus:ring-2 focus:border-transparent outline-none transition-all text-[hsl(var(--text-main))] placeholder:text-stone-600 ${errors.name ? 'border-red-500 focus:ring-red-400' : 'border-white/10 focus:ring-[hsl(var(--primary))]'
                     }`}
-                  placeholder="Jean Dupont"
+                  placeholder={t('cart.name_placeholder')}
                 />
                 {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
               </div>
@@ -250,7 +247,7 @@ export default function CartPage() {
               {/* Email and Phone */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold tracking-wide text-stone-300 mb-2 uppercase">Email</label>
+                  <label className="block text-sm font-semibold tracking-wide text-stone-300 mb-2 uppercase">{t('cart.email_label')}</label>
                   <input
                     type="email"
                     value={customerInfo.email}
@@ -260,12 +257,12 @@ export default function CartPage() {
                     }}
                     className={`w-full bg-[hsl(var(--surface-neutral))] border rounded-xl p-3 focus:ring-2 focus:border-transparent outline-none transition-all text-[hsl(var(--text-main))] placeholder:text-stone-600 ${errors.email ? 'border-red-500 focus:ring-red-400' : 'border-white/10 focus:ring-[hsl(var(--primary))]'
                       }`}
-                    placeholder="jean@mail.com"
+                    placeholder={t('cart.email_placeholder')}
                   />
                   {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold tracking-wide text-stone-300 mb-2 uppercase">WhatsApp</label>
+                  <label className="block text-sm font-semibold tracking-wide text-stone-300 mb-2 uppercase">{t('cart.whatsapp_label')}</label>
                   <input
                     type="tel"
                     value={customerInfo.phone}
@@ -293,7 +290,7 @@ export default function CartPage() {
                   className={`w-full bg-[hsl(var(--surface-neutral))] border rounded-xl p-3 focus:ring-2 focus:border-transparent outline-none transition-all resize-none text-[hsl(var(--text-main))] placeholder:text-stone-600 ${errors.address ? 'border-red-500 focus:ring-red-400' : 'border-white/10 focus:ring-[hsl(var(--primary))]'
                     }`}
                   rows={3}
-                  placeholder="Quartier, Rue, Ville..."
+                  placeholder={t('cart.address_placeholder')}
                 ></textarea>
                 {errors.address && <p className="text-red-400 text-xs mt-1">{errors.address}</p>}
               </div>

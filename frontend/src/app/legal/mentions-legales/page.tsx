@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata = {
-  title: 'Mentions Légales | AlixcoLuxe',
+  title: 'Mentions Légales',
   description: 'Mentions Légales de la plateforme AlixcoLuxe.',
 };
 
@@ -16,7 +16,7 @@ export default function MentionsLegalesPage() {
       <div className="max-w-4xl mx-auto">
         <Link href="/" className="inline-flex items-center text-sm font-medium text-stone-400 hover:text-[hsl(var(--primary))] transition-colors mb-12 group">
           <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-          Retour à l'accueil
+          Retour à l&apos;accueil
         </Link>
         
         <div className="glass-card rounded-[2rem] p-8 md:p-12">
@@ -32,7 +32,7 @@ export default function MentionsLegalesPage() {
                 1. Éditeur du site
               </h2>
               <p>
-                Le présent site, accessible à l'URL (le "Site"), est édité par :
+                Le présent site, accessible à l&apos;URL (le &quot;Site&quot;), est édité par :
                 <br /><br />
                 <strong>AlixcoLuxe</strong><br />
                 Atelier situé au Bénin.<br />
@@ -47,7 +47,7 @@ export default function MentionsLegalesPage() {
                 2. Hébergement
               </h2>
               <p>
-                Le site est hébergé par la plateforme de déploiement cloud Vercel Inc. (ou LWS, selon l'infrastructure finale).
+                Le site est hébergé par la plateforme de déploiement cloud Vercel Inc. (ou LWS, selon l&apos;infrastructure finale).
               </p>
             </section>
 
@@ -57,7 +57,7 @@ export default function MentionsLegalesPage() {
                 3. Propriété intellectuelle
               </h2>
               <p>
-                La structure générale du site, ainsi que les textes, graphiques, images, sons et vidéos la composant, sont la propriété de l'éditeur ou de ses partenaires. Toute représentation et/ou reproduction et/ou exploitation partielle ou totale des contenus et services proposés par le site, par quelque procédé que ce soit, sans l'autorisation préalable et par écrit d'AlixcoLuxe, est strictement interdite.
+                La structure générale du site, ainsi que les textes, graphiques, images, sons et vidéos la composant, sont la propriété de l&apos;éditeur ou de ses partenaires. Toute représentation et/ou reproduction et/ou exploitation partielle ou totale des contenus et services proposés par le site, par quelque procédé que ce soit, sans l&apos;autorisation préalable et par écrit d&apos;AlixcoLuxe, est strictement interdite.
               </p>
             </section>
 
@@ -67,7 +67,7 @@ export default function MentionsLegalesPage() {
                 4. Données personnelles
               </h2>
               <p>
-                Conformément à la réglementation applicable en matière de protection des données, vous disposez d'un droit d'accès, de rectification et d'effacement de vos données personnelles. Vous pouvez exercer ce droit en nous contactant à l'adresse email : contact@alixcoluxe.com.
+                Conformément à la réglementation applicable en matière de protection des données, vous disposez d&apos;un droit d&apos;accès, de rectification et d&apos;effacement de vos données personnelles. Vous pouvez exercer ce droit en nous contactant à l&apos;adresse email : contact@alixcoluxe.com.
               </p>
               <p className="mt-4">
                 Les informations recueillies via nos formulaires (contact, commande, inscription) sont enregistrées dans un fichier informatisé par AlixcoLuxe pour faciliter le traitement de vos requêtes et le suivi de vos créations sur-mesure. Elles sont conservées le temps nécessaire à ces finalités.

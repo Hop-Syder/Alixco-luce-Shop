@@ -6,7 +6,9 @@
     "login": "Connexion",
     "account": "Compte",
     "register": "Créer un compte",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "notifications_aria": "Notifications",
+    "cart_aria": "Panier avec {{count}} articles"
   },
   "hero": {
     "subtitle": "AlixcoLuxe",
@@ -15,7 +17,14 @@
     "description": "Atelier spécialisé dans la création d'objets d'art personnalisés, nous concevons des pièces uniques, raffinées et sur-mesure. Alliant élégance et précision, nous personnalisons le bois, le verre, le métal et le cuir pour sublimer vos cadeaux d'entreprise et accessoires de mode.",
     "cta_collection": "Découvrir la collection",
     "cta_about": "Notre Savoir-Faire",
-    "scroll": "Défiler"
+    "scroll": "Défiler",
+    "badge_precision": "Précision Ultime",
+    "badge_custom_design": "Conception sur-mesure",
+    "badge_laser": "Gravure Laser",
+    "badge_precision_mm": "Précision 0.01mm",
+    "badge_unique": "100% Unique",
+    "badge_certified": "Signé & Certifié",
+    "badge_craftsmanship": "Artisanat d'Art"
   },
   "trust": {
     "delivery_title": "Expédition Sécurisée",
@@ -81,7 +90,8 @@
     "rights": "Tous droits réservés."
   },
   "common": {
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "switch_language_aria": "Changer de langue"
   },
   "products": {
     "subtitle": "Notre Collection",
@@ -93,7 +103,65 @@
     "placeholder_desc": "Ce chef-d'œuvre incarne l'excellence artisanale d'Alixco Luxe. Conçu avec des matériaux nobles pour une expérience et une élégance intemporelles. Chaque détail a été pensé pour sublimer votre quotidien.",
     "in_stock": "En stock",
     "out_of_stock": "Rupture de stock",
-    "add_to_cart": "Ajouter au panier"
+    "add_to_cart": "Ajouter au panier",
+    "empty_catalog": "Notre catalogue s'enrichit prochainement de nouvelles créations. Revenez bientôt."
+  },
+  "about": {
+    "hero_subtitle": "Notre Atelier",
+    "hero_title1": "L'Excellence",
+    "hero_title2": "Façonnée à la Main",
+    "hero_description": "Au cœur de Cotonou, notre atelier perpétue un savoir-faire artisanal où précision laser et sensibilité humaine se rencontrent pour donner naissance à des pièces uniques, pensées pour durer.",
+    "philosophy_title": "Notre Philosophie",
+    "philosophy_quote": "La perfection ne réside pas dans la machine, mais dans la main qui la guide.",
+    "philosophy_desc": "Chez Alixco Luxe, la technologie laser est un instrument au service de l'artisanat — jamais l'inverse. Chaque création naît d'une exigence : sublimer la matière sans jamais trahir son âme.",
+    "process_subtitle": "Notre Méthode",
+    "process_title": "De l'Idée à la Pièce Unique",
+    "process_step1_title": "Conception",
+    "process_step1_desc": "Nous échangeons avec vous pour traduire votre idée en un dessin technique fidèle à votre vision.",
+    "process_step2_title": "Précision Laser",
+    "process_step2_desc": "Gravure et découpe au laser avec une tolérance de 0,01 mm, pour un rendu d'une netteté irréprochable.",
+    "process_step3_title": "Finition & Contrôle",
+    "process_step3_desc": "Chaque pièce est inspectée à la main avant de recevoir sa finition finale et de vous être livrée.",
+    "machines_subtitle": "Notre Équipement",
+    "machines_title1": "Une Technologie",
+    "machines_title2": "au Service du Détail",
+    "machines_desc": "Nos machines de gravure et découpe laser de dernière génération nous permettent d'atteindre un niveau de précision inégalé, sur des matériaux aussi variés que le bois, le verre, le métal ou le cuir.",
+    "machines_list1": "Précision de coupe au 0,01 mm",
+    "machines_list2": "Compatible bois, verre, métal et cuir",
+    "machines_list3": "Contrôle qualité à chaque étape",
+    "materials_subtitle": "Nos Matières",
+    "materials_title": "Une Matière, Une Histoire",
+    "materials_wood_title": "Bois",
+    "materials_wood_desc": "Chêne, noyer et bois précieux, gravés pour révéler le grain et le caractère de chaque essence.",
+    "materials_metal_title": "Métal",
+    "materials_metal_desc": "Laiton, acier et aluminium, découpés avec une finesse qui transforme la matière brute en pièce d'orfèvre.",
+    "materials_textile_title": "Tissu",
+    "materials_textile_desc": "Découpe et marquage sur textile pour des accessoires de mode uniques, à la finition impeccable.",
+    "materials_leather_title": "Cuir",
+    "materials_leather_desc": "Cuir pleine fleur gravé à la main pour des pièces intemporelles, riches en caractère.",
+    "location_title1": "Visitez",
+    "location_title2": "Notre Atelier",
+    "location_desc": "Venez découvrir notre atelier à Cotonou et échanger avec notre équipe sur votre prochaine création sur-mesure.",
+    "location_contact": "Nous Contacter",
+    "location_address_label": "Adresse",
+    "location_address_value1": "Atelier Alixco Luxe",
+    "location_address_value2": "Cotonou, Bénin",
+    "location_phone_label": "Téléphone",
+    "location_email_label": "Email",
+    "location_hours": "Horaires d'Ouverture",
+    "location_mon_fri": "Lundi — Vendredi",
+    "location_mon_fri_val": "09:00 - 18:00",
+    "location_sat": "Samedi",
+    "location_sat_val": "09:00 - 14:00",
+    "location_sun": "Dimanche",
+    "location_sun_val": "Fermé",
+    "location_map_title": "AlixcoLuxe — Localisation Atelier Cotonou Bénin",
+    "open_google_maps": "Voir l'atelier sur Google Maps",
+    "open_google_maps_aria": "Voir l'atelier AlixcoLuxe sur Google Maps",
+    "cta_title": "Prêt à Créer Votre Pièce Unique ?",
+    "cta_desc": "Découvrez notre collection ou contactez notre atelier pour donner vie à votre projet sur-mesure.",
+    "cta_btn1": "Découvrir la Collection",
+    "cta_btn2": "Nous Contacter"
   },
   "cart": {
     "added": "Ajouté au panier",
@@ -110,7 +178,22 @@
     "address": "Adresse complète",
     "preparing": "Préparation...",
     "order_whatsapp": "Commander via WhatsApp",
-    "redirect_notice": "En validant, vous serez redirigé vers WhatsApp pour finaliser l'achat avec un conseiller."
+    "redirect_notice": "En validant, vous serez redirigé vers WhatsApp pour finaliser l'achat avec un conseiller.",
+    "empty_error": "Le panier est vide",
+    "form_errors": "Veuillez corriger les erreurs du formulaire",
+    "validation_name_required": "Le nom est requis",
+    "validation_email_invalid": "Email invalide",
+    "validation_phone_invalid": "Numéro de téléphone invalide",
+    "validation_address_required": "L'adresse est requise",
+    "email_label": "Email",
+    "whatsapp_label": "WhatsApp",
+    "decrease_qty_aria": "Diminuer la quantité",
+    "increase_qty_aria": "Augmenter la quantité",
+    "remove_aria": "Retirer du panier",
+    "remove_title": "Retirer",
+    "name_placeholder": "Jean Dupont",
+    "email_placeholder": "jean@mail.com",
+    "address_placeholder": "Quartier, Rue, Ville..."
   },
   "auth": {
     "welcome": "Bienvenue",
@@ -125,7 +208,9 @@
     "create_account": "Créer un compte",
     "join": "Rejoignez l'univers Alixco Luxe.",
     "full_name": "Nom Complet",
-    "already_have_account": "Déjà un compte ?"
+    "already_have_account": "Déjà un compte ?",
+    "welcome_toast": "Bienvenue, {{name}} !",
+    "logout_toast": "Déconnexion réussie"
   },
   "dashboard": {
     "welcome": "Bienvenue,",

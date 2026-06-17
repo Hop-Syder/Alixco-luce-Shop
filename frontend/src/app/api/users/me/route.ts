@@ -9,23 +9,18 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { requireUser, AuthError } from '@/lib/auth';
+import { requireUser } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import prisma from '@/lib/db';
 
 export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  let user;
-  try {
-    user = await requireUser(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  const user = await requireUser(req);
 
   const fullUser = await prisma.user.findUnique({ where: { id: user.id }, include: { addresses: true } });
   return withCors(
@@ -40,4 +35,4 @@ export async function GET(req: NextRequest) {
     }),
     origin
   );
-}
+});

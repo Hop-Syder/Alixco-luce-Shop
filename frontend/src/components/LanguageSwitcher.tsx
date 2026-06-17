@@ -4,7 +4,7 @@ import { useTranslation } from '@/context/LanguageContext';
 import { Globe } from 'lucide-react';
 
 const LanguageSwitcher = () => {
-  const { language, setLanguage } = useTranslation();
+  const { language, setLanguage, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +27,7 @@ const LanguageSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         type="button"
-        aria-label="Changer de langue"
+        aria-label={t('common.switch_language_aria')}
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-1 text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 rounded-lg"
       >

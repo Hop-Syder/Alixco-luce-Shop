@@ -10,8 +10,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireAdmin, AuthError } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import { toMongoLike } from '@/lib/serialize';
 
 type Params = { params: Promise<{ id: string }> };
@@ -20,14 +21,9 @@ export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function PUT(req: NextRequest, { params }: Params) {
+export const PUT = withErrorHandling<Params>(async (req, { params }) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const { id } = await params;
   const body = await req.json();
@@ -54,16 +50,11 @@ export async function PUT(req: NextRequest, { params }: Params) {
   } catch {
     return withCors(NextResponse.json({ detail: 'Category not found' }, { status: 404 }), origin);
   }
-}
+});
 
-export async function DELETE(req: NextRequest, { params }: Params) {
+export const DELETE = withErrorHandling<Params>(async (req, { params }) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const { id } = await params;
   try {
@@ -72,4 +63,4 @@ export async function DELETE(req: NextRequest, { params }: Params) {
   } catch {
     return withCors(NextResponse.json({ detail: 'Category not found' }, { status: 404 }), origin);
   }
-}
+});

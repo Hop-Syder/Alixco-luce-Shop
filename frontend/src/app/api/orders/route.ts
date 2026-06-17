@@ -10,8 +10,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireAdmin, getOptionalCurrentUser, AuthError } from '@/lib/auth';
+import { requireAdmin, getOptionalCurrentUser } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import { toMongoLike } from '@/lib/serialize';
 import { buildWhatsappMessage, generateOrderNumber, getWhatsappNumber } from '@/lib/whatsapp';
 
@@ -19,14 +20,9 @@ export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const { searchParams } = req.nextUrl;
   const skip = Number(searchParams.get('skip') || '0');
@@ -40,7 +36,7 @@ export async function GET(req: NextRequest) {
   });
 
   return withCors(NextResponse.json(orders.map(toMongoLike)), origin);
-}
+});
 
 interface OrderItemInput {
   productId: string;
@@ -48,11 +44,18 @@ interface OrderItemInput {
   notes?: string;
 }
 
-export async function POST(req: NextRequest) {
+export const POST = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
   const body = await req.json();
   const items: OrderItemInput[] = body.items;
   const customer = body.customer;
+
+  if (!Array.isArray(items) || items.length === 0) {
+    return withCors(NextResponse.json({ detail: 'La commande doit contenir au moins un article.' }, { status: 400 }), origin);
+  }
+  if (!customer?.name || !customer?.phone || !customer?.address) {
+    return withCors(NextResponse.json({ detail: 'Nom, téléphone et adresse du client sont requis.' }, { status: 400 }), origin);
+  }
 
   const currentUser = await getOptionalCurrentUser(req);
   const userId = currentUser?.id ?? body.userId ?? null;
@@ -122,4 +125,4 @@ export async function POST(req: NextRequest) {
     NextResponse.json({ orderId: order.id, orderNumber: order.orderNumber, whatsappUrl: waUrl }),
     origin
   );
-}
+});

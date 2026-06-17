@@ -6,7 +6,9 @@
     "login": "Login",
     "account": "Account",
     "register": "Sign Up",
-    "logout": "Logout"
+    "logout": "Logout",
+    "notifications_aria": "Notifications",
+    "cart_aria": "Cart with {{count}} items"
   },
   "hero": {
     "subtitle": "AlixcoLuxe",
@@ -15,7 +17,14 @@
     "description": "A workshop specializing in the creation of personalized art objects, we design unique, refined, and custom-made pieces. Combining elegance and precision, we customize wood, glass, metal, and leather to elevate your corporate gifts and fashion accessories.",
     "cta_collection": "Discover the collection",
     "cta_about": "Our Expertise",
-    "scroll": "Scroll down"
+    "scroll": "Scroll down",
+    "badge_precision": "Ultimate Precision",
+    "badge_custom_design": "Custom Design",
+    "badge_laser": "Laser Engraving",
+    "badge_precision_mm": "0.01mm Precision",
+    "badge_unique": "100% Unique",
+    "badge_certified": "Signed & Certified",
+    "badge_craftsmanship": "Art Craftsmanship"
   },
   "trust": {
     "delivery_title": "Secure Shipping",
@@ -81,7 +90,8 @@
     "rights": "All rights reserved."
   },
   "common": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "switch_language_aria": "Switch language"
   },
   "products": {
     "subtitle": "Our Collection",
@@ -93,7 +103,65 @@
     "placeholder_desc": "This masterpiece embodies the artisanal excellence of Alixco Luxe. Designed with noble materials for a timeless experience and elegance. Every detail has been thought out to sublimate your daily life.",
     "in_stock": "In stock",
     "out_of_stock": "Out of stock",
-    "add_to_cart": "Add to cart"
+    "add_to_cart": "Add to cart",
+    "empty_catalog": "Our catalog will soon be enriched with new creations. Check back soon."
+  },
+  "about": {
+    "hero_subtitle": "Our Workshop",
+    "hero_title1": "Excellence",
+    "hero_title2": "Crafted by Hand",
+    "hero_description": "At the heart of Cotonou, our workshop carries on an artisanal craft where laser precision meets human sensitivity, giving life to unique pieces made to last.",
+    "philosophy_title": "Our Philosophy",
+    "philosophy_quote": "Perfection lies not in the machine, but in the hand that guides it.",
+    "philosophy_desc": "At Alixco Luxe, laser technology is a tool in service of craftsmanship — never the other way around. Every creation is born from one demand: to elevate the material without ever betraying its soul.",
+    "process_subtitle": "Our Method",
+    "process_title": "From Idea to Unique Piece",
+    "process_step1_title": "Design",
+    "process_step1_desc": "We work with you to translate your idea into a technical drawing true to your vision.",
+    "process_step2_title": "Laser Precision",
+    "process_step2_desc": "Laser engraving and cutting with a 0.01mm tolerance, for a flawlessly sharp finish.",
+    "process_step3_title": "Finishing & Control",
+    "process_step3_desc": "Every piece is hand-inspected before receiving its final finish and being delivered to you.",
+    "machines_subtitle": "Our Equipment",
+    "machines_title1": "Technology",
+    "machines_title2": "in Service of Detail",
+    "machines_desc": "Our latest-generation laser engraving and cutting machines allow us to achieve unmatched precision on materials as varied as wood, glass, metal, or leather.",
+    "machines_list1": "0.01mm cutting precision",
+    "machines_list2": "Compatible with wood, glass, metal, and leather",
+    "machines_list3": "Quality control at every step",
+    "materials_subtitle": "Our Materials",
+    "materials_title": "One Material, One Story",
+    "materials_wood_title": "Wood",
+    "materials_wood_desc": "Oak, walnut, and precious woods engraved to reveal the grain and character of each species.",
+    "materials_metal_title": "Metal",
+    "materials_metal_desc": "Brass, steel, and aluminum cut with a finesse that turns raw material into a jeweler's piece.",
+    "materials_textile_title": "Fabric",
+    "materials_textile_desc": "Textile cutting and marking for unique fashion accessories with an impeccable finish.",
+    "materials_leather_title": "Leather",
+    "materials_leather_desc": "Full-grain leather hand-engraved for timeless pieces, rich in character.",
+    "location_title1": "Visit",
+    "location_title2": "Our Workshop",
+    "location_desc": "Come discover our workshop in Cotonou and discuss your next custom creation with our team.",
+    "location_contact": "Contact Us",
+    "location_address_label": "Address",
+    "location_address_value1": "Alixco Luxe Workshop",
+    "location_address_value2": "Cotonou, Benin",
+    "location_phone_label": "Phone",
+    "location_email_label": "Email",
+    "location_hours": "Opening Hours",
+    "location_mon_fri": "Monday — Friday",
+    "location_mon_fri_val": "09:00 AM - 06:00 PM",
+    "location_sat": "Saturday",
+    "location_sat_val": "09:00 AM - 02:00 PM",
+    "location_sun": "Sunday",
+    "location_sun_val": "Closed",
+    "location_map_title": "AlixcoLuxe — Workshop Location Cotonou Benin",
+    "open_google_maps": "View workshop on Google Maps",
+    "open_google_maps_aria": "View AlixcoLuxe workshop on Google Maps",
+    "cta_title": "Ready to Create Your Unique Piece?",
+    "cta_desc": "Explore our collection or contact our workshop to bring your custom project to life.",
+    "cta_btn1": "Discover the Collection",
+    "cta_btn2": "Contact Us"
   },
   "cart": {
     "added": "Added to cart",
@@ -110,7 +178,22 @@
     "address": "Full address",
     "preparing": "Preparing...",
     "order_whatsapp": "Order via WhatsApp",
-    "redirect_notice": "By confirming, you will be redirected to WhatsApp to finalize the purchase with an advisor."
+    "redirect_notice": "By confirming, you will be redirected to WhatsApp to finalize the purchase with an advisor.",
+    "empty_error": "Your cart is empty",
+    "form_errors": "Please correct the errors in the form",
+    "validation_name_required": "Name is required",
+    "validation_email_invalid": "Invalid email",
+    "validation_phone_invalid": "Invalid phone number",
+    "validation_address_required": "Address is required",
+    "email_label": "Email",
+    "whatsapp_label": "WhatsApp",
+    "decrease_qty_aria": "Decrease quantity",
+    "increase_qty_aria": "Increase quantity",
+    "remove_aria": "Remove from cart",
+    "remove_title": "Remove",
+    "name_placeholder": "John Smith",
+    "email_placeholder": "john@mail.com",
+    "address_placeholder": "Neighborhood, Street, City..."
   },
   "auth": {
     "welcome": "Welcome",
@@ -125,7 +208,9 @@
     "create_account": "Create an account",
     "join": "Join the Alixco Luxe universe.",
     "full_name": "Full Name",
-    "already_have_account": "Already have an account?"
+    "already_have_account": "Already have an account?",
+    "welcome_toast": "Welcome, {{name}}!",
+    "logout_toast": "Successfully logged out"
   },
   "dashboard": {
     "welcome": "Welcome,",

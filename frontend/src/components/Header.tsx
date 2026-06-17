@@ -15,14 +15,12 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { useAuth } from '@/context/AuthContext';
 import { useTranslation } from '@/context/LanguageContext';
 import { useCartStore } from '@/store/cartStore';
-import { ShoppingBag, User, LogOut, Home, Grid, PenTool, Bell } from 'lucide-react';
+import { ShoppingBag, Home, Grid, PenTool, Bell } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header: React.FC = () => {
-  const { isAuthenticated, logout, user } = useAuth();
   const { t } = useTranslation();
   const cartItems = useCartStore(state => state.items);
   const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -86,7 +84,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-4 md:space-x-6 z-50">
               
               {/* Notification - Uniquement Mobile (Fixé en haut à droite) */}
-              <button type="button" aria-label="Notifications" className="md:hidden relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
+              <button type="button" aria-label={t('nav.notifications_aria')} className="md:hidden relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2">
                 <Bell className="w-5 h-5" strokeWidth={1.5} />
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[hsl(var(--primary))] rounded-full border border-black"></span>
               </button>
@@ -97,7 +95,7 @@ const Header: React.FC = () => {
 
 
               {/* Panier (Visible Desktop & Mobile) */}
-              <Link href="/cart" aria-label={`Panier avec ${cartItemCount} articles`} className="relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
+              <Link href="/cart" aria-label={t('nav.cart_aria', { count: cartItemCount })} className="relative text-stone-400 hover:text-[hsl(var(--primary))] transition-colors p-2 flex items-center">
                 <ShoppingBag className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
                 {cartItemCount > 0 && (
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-[9px] font-bold text-white transform translate-x-1/4 -translate-y-1/4 bg-[hsl(var(--primary))] rounded-full border border-black md:w-5 md:h-5 md:text-[10px] md:border-2">

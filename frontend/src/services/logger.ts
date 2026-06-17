@@ -37,11 +37,6 @@ class Logger {
                 level === 'error' ? 'error' : level === 'warn' ? 'warn' : 'log';
             console[consoleMethod](`[${level.toUpperCase()}] ${message}`, data);
         }
-
-        // TODO: Send to error tracking service (Sentry, DataDog, etc.)
-        // if (level === 'error' && !isDevelopment) {
-        //   sendToErrorTracking(entry);
-        // }
     }
 
     info(message: string, data?: unknown): void {

@@ -10,15 +10,16 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireAdmin, AuthError } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import { toMongoLike, paginate } from '@/lib/serialize';
 
 export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
   const { searchParams } = req.nextUrl;
   const isFeatured = searchParams.get('is_featured');
@@ -37,16 +38,11 @@ export async function GET(req: NextRequest) {
   ]);
 
   return withCors(NextResponse.json(paginate(items.map(toMongoLike), total, page, limit)), origin);
-}
+});
 
-export async function POST(req: NextRequest) {
+export const POST = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const body = await req.json();
   const testimonial = await prisma.testimonial.create({
@@ -63,4 +59,4 @@ export async function POST(req: NextRequest) {
   });
 
   return withCors(NextResponse.json(toMongoLike(testimonial)), origin);
-}
+});

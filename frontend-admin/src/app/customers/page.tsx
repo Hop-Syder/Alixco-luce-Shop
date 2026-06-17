@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api, fetcher } from '@/services/api';
 import useSWR from 'swr';
-import { Download, Search, Users, ExternalLink, CalendarDays, ShoppingCart, DollarSign } from 'lucide-react';
+import { Download, Search, Users, ExternalLink } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Pagination } from '@/components/ui/Pagination';
 

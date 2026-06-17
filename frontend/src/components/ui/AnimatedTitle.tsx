@@ -1,5 +1,6 @@
 "use client";
 
+import type { ElementType } from "react";
 import { motion, Variants } from "framer-motion";
 
 interface AnimatedTitleProps {
@@ -46,9 +47,9 @@ export const AnimatedTitle = ({
   const letters1 = text1.split(" ");
   const letters2 = text2.split(" ");
 
-  const MotionWrapper = motion[as] as any;
-  const Tag1 = tag1 as any;
-  const Tag2 = tag2 as any;
+  const MotionWrapper = motion[as] as ElementType;
+  const Tag1 = tag1 as ElementType;
+  const Tag2 = tag2 as ElementType;
 
   return (
     <MotionWrapper 

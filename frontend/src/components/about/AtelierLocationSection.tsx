@@ -43,7 +43,7 @@ export function AtelierLocationSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-start group"
-                    aria-label="Voir l'atelier AlixcoLuxe sur Google Maps"
+                    aria-label={t('about.open_google_maps_aria')}
                   >
                     <MapPin className="w-6 h-6 text-[hsl(var(--primary))] mr-4 flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" strokeWidth={1.5} />
                     <div>
@@ -64,7 +64,7 @@ export function AtelierLocationSection() {
                 <li className="flex items-start">
                   <Mail className="w-6 h-6 text-[hsl(var(--primary))] mr-4 flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <span className="block text-sm text-stone-400 uppercase tracking-widest mb-1">Email</span>
+                    <span className="block text-sm text-stone-400 uppercase tracking-widest mb-1">{t('about.location_email_label')}</span>
                     <a href="mailto:contact@alixcoluxe.com" className="text-stone-200 hover:text-[hsl(var(--primary))] transition-colors">
                       contact@alixcoluxe.com
                     </a>
@@ -81,7 +81,7 @@ export function AtelierLocationSection() {
                     <Clock className="w-5 h-5 mr-3" strokeWidth={1.5} />
                     <span>{t('about.location_mon_fri')}</span>
                   </div>
-                  <span className="text-stone-200 font-medium">09:00 - 18:00</span>
+                  <span className="text-stone-200 font-medium">{t('about.location_mon_fri_val')}</span>
                 </li>
                 <li className="flex justify-between items-center">
                   <div className="flex items-center text-stone-400">
@@ -114,7 +114,7 @@ export function AtelierLocationSection() {
                 referrerPolicy="no-referrer-when-downgrade"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%) hue-rotate(180deg)' }}
-                title="AlixcoLuxe — Localisation Atelier Cotonou Bénin"
+                title={t('about.location_map_title')}
               ></iframe>
               <div className="absolute inset-0 pointer-events-none ring-1 ring-inset ring-white/10 rounded-2xl"></div>
             </div>
@@ -124,7 +124,7 @@ export function AtelierLocationSection() {
               href="https://maps.app.goo.gl/k7uKZ3bfaonbioQNA"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Voir l'atelier AlixcoLuxe sur Google Maps"
+              aria-label={t('about.open_google_maps_aria')}
               className="flex items-center justify-center gap-3 w-full py-4 px-6 rounded-xl border border-[hsl(var(--primary))]/50 text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))] hover:text-black transition-all duration-300 font-semibold tracking-wider uppercase text-sm cursor-pointer"
             >
               <svg
@@ -136,7 +136,7 @@ export function AtelierLocationSection() {
               >
                 <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
               </svg>
-              {t('about.open_google_maps') ?? "Voir l'atelier sur Google Maps"}
+              {t('about.open_google_maps')}
             </a>
           </FadeUp>
 

@@ -12,18 +12,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 import { createAccessToken, verifyPassword } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 
 export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function POST(req: NextRequest) {
+export const POST = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
 
   // Le formulaire est envoyé en FormData ou en x-www-form-urlencoded par les deux frontends
   const formData = await req.formData();
   const phone = String(formData.get('username') || '');
   const password = String(formData.get('password') || '');
+
+  if (!phone || !password) {
+    return withCors(NextResponse.json({ detail: 'Incorrect phone or password' }, { status: 400 }), origin);
+  }
 
   const user = await prisma.user.findUnique({ where: { phone } });
   if (!user || !user.hashed_password) {
@@ -37,4 +42,4 @@ export async function POST(req: NextRequest) {
 
   const accessToken = await createAccessToken(user.id, user.role);
   return withCors(NextResponse.json({ access_token: accessToken, token_type: 'bearer' }), origin);
-}
+});

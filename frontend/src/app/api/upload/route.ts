@@ -12,6 +12,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { getSupabaseAdmin, SUPABASE_STORAGE_BUCKET } from '@/lib/supabase';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 
 const ALLOWED_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 const CONTENT_TYPES: Record<string, string> = {
@@ -26,7 +27,7 @@ export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function POST(req: NextRequest) {
+export const POST = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
   const formData = await req.formData();
   const file = formData.get('file');
@@ -58,9 +59,11 @@ export async function POST(req: NextRequest) {
 
     return withCors(NextResponse.json({ url: data.publicUrl }), origin);
   } catch (error) {
+    // Le détail technique reste côté serveur (logs) — le client ne reçoit qu'un message générique.
+    console.error('Upload Supabase Storage échoué:', error);
     return withCors(
-      NextResponse.json({ detail: `Erreur lors de l'upload: ${(error as Error).message}` }, { status: 500 }),
+      NextResponse.json({ detail: "Erreur lors de l'upload de l'image. Veuillez réessayer." }, { status: 500 }),
       origin
     );
   }
-}
+});

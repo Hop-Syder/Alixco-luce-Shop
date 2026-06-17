@@ -13,7 +13,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { api, fetcher } from '@/services/api';
 import useSWR from 'swr';
-import { Plus, Edit2, Trash2, X, Save, MessageSquare, CheckCircle, Star } from 'lucide-react';
+import { Plus, Edit2, Trash2, X, Save, MessageSquare, Star } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { Pagination } from '@/components/ui/Pagination';
 
@@ -105,7 +105,7 @@ export default function AdminTestimonials() {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTestimonials();
-    } catch (err) {
+    } catch {
       toast.error('Erreur lors de la modification.');
     }
   };
@@ -116,7 +116,7 @@ export default function AdminTestimonials() {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTestimonials();
-    } catch (err) {
+    } catch {
       toast.error('Erreur lors de la modification.');
     }
   };

@@ -55,7 +55,6 @@ export default function AdminOrders() {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchOrders();
   }, []);
 

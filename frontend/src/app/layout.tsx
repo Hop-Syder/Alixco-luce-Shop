@@ -112,7 +112,7 @@ export default function RootLayout({
       latitude: 6.3702927,
       longitude: 2.3485747,
     },
-    hasMap: "https://maps.app.goo.gl/k7uKZ3bfaonbioQNA",
+    hasMap: GOOGLE_MAPS_URL,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",

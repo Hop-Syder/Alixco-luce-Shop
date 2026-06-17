@@ -10,23 +10,18 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireUser, AuthError } from '@/lib/auth';
+import { requireUser } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import { toMongoLike } from '@/lib/serialize';
 
 export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  let user;
-  try {
-    user = await requireUser(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  const user = await requireUser(req);
 
   const orders = await prisma.order.findMany({
     where: { userId: user.id },
@@ -36,4 +31,4 @@ export async function GET(req: NextRequest) {
   });
 
   return withCors(NextResponse.json(orders.map(toMongoLike)), origin);
-}
+});

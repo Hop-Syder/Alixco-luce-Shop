@@ -25,7 +25,7 @@ export default function Error({ error, reset }: ErrorProps) {
                 </div>
 
                 <h1 className="text-3xl font-heading font-bold text-[hsl(var(--text-main))] mb-4">
-                    Oups! Une erreur s'est produite
+                    Oups ! Une erreur s&apos;est produite
                 </h1>
 
                 <p className="text-stone-500 mb-2 text-lg font-light">
@@ -52,7 +52,7 @@ export default function Error({ error, reset }: ErrorProps) {
                         href="/"
                         className="btn-secondary w-full"
                     >
-                        Retour à l'accueil
+                        Retour à l&apos;accueil
                     </Link>
                 </div>
             </div>

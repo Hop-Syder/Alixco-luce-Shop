@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+import { useTranslation } from '@/context/LanguageContext';
 
 interface User {
   id: string;
@@ -21,9 +22,9 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { t } = useTranslation();
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
     // Only access localStorage on client-side after hydration
@@ -32,16 +33,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     try {
       if (storedToken && storedUser) {
-        setToken(storedToken);
-        setUser(JSON.parse(storedUser));
+        const parsedUser: User = JSON.parse(storedUser);
+        // Une seule mise à jour d'état groupée pour éviter les rendus en cascade depuis un effet
+        React.startTransition(() => {
+          setToken(storedToken);
+          setUser(parsedUser);
+        });
       }
-    } catch (error) {
+    } catch {
       // If localStorage data is corrupted, clear it
       localStorage.removeItem('token');
       localStorage.removeItem('user');
     }
-
-    setIsHydrated(true);
   }, []);
 
   const login = (newToken: string, userData: User) => {
@@ -49,7 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(userData);
     localStorage.setItem('token', newToken);
     localStorage.setItem('user', JSON.stringify(userData));
-    toast.success(`Bienvenue, ${userData.full_name.split(' ')[0]} !`);
+    toast.success(t('auth.welcome_toast', { name: userData.full_name.split(' ')[0] }));
   };
 
   const logout = () => {
@@ -57,7 +60,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    toast.success('Déconnexion réussie');
+    toast.success(t('auth.logout_toast'));
   };
 
   return (

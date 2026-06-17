@@ -41,7 +41,7 @@ export function HeroSection() {
         if (response.data && response.data.hero) {
           setHeroData(response.data.hero);
         }
-      } catch (error) {
+      } catch {
         console.warn("Impossible de charger le contenu dynamique du Hero, utilisation des données de secours locales.");
       }
     };
@@ -113,7 +113,7 @@ export function HeroSection() {
                 {t('hero.subtitle')}
                 <Crown className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
                 <span className="text-stone-500 font-light px-1">|</span>
-                <span className="text-[hsl(var(--primary))] font-bold text-[10px] tracking-wider">Artisanat d'Art</span>
+                <span className="text-[hsl(var(--primary))] font-bold text-[10px] tracking-wider">{t('hero.badge_craftsmanship')}</span>
               </span>
             </div>
           </FadeUp>
@@ -189,9 +189,9 @@ export function HeroSection() {
               {/* Texte overlay sur l'image en bas */}
               <div className="absolute bottom-6 left-6 right-6 z-20" style={{ transform: 'translateZ(30px)' }}>
                 <span className="text-[10px] uppercase tracking-widest text-[hsl(var(--primary))] font-bold flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-amber-500" /> Précision Ultime
+                  <Sparkles className="w-3 h-3 text-amber-500" /> {t('hero.badge_precision')}
                 </span>
-                <h3 className="text-lg font-heading font-bold text-white mt-1">Conception sur-mesure</h3>
+                <h3 className="text-lg font-heading font-bold text-white mt-1">{t('hero.badge_custom_design')}</h3>
               </div>
             </div>
           </motion.div>
@@ -205,8 +205,8 @@ export function HeroSection() {
               <Cpu className="w-4 h-4" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">Gravure Laser</div>
-              <div className="text-[10px] text-stone-400">Précision 0.01mm</div>
+              <div className="text-xs font-bold text-white">{t('hero.badge_laser')}</div>
+              <div className="text-[10px] text-stone-400">{t('hero.badge_precision_mm')}</div>
             </div>
           </motion.div>
 
@@ -219,8 +219,8 @@ export function HeroSection() {
               <Award className="w-4 h-4" />
             </div>
             <div>
-              <div className="text-xs font-bold text-white">100% Unique</div>
-              <div className="text-[10px] text-stone-400">Signé & Certifié</div>
+              <div className="text-xs font-bold text-white">{t('hero.badge_unique')}</div>
+              <div className="text-[10px] text-stone-400">{t('hero.badge_certified')}</div>
             </div>
           </motion.div>
         </div>

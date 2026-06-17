@@ -57,19 +57,22 @@ export default function AdminDashboard() {
         
         setAdminStatus(adminRes.data.message);
         setAnalytics(analyticsRes.data);
-        
-        const products = productsRes.data || [];
-        const orders = ordersRes.data || [];
-        
+
+        // /products renvoie une enveloppe paginée { items, total, ... }, pas un tableau brut
+        const productsTotal: number = productsRes.data?.total ?? 0;
+        const orders: Array<{ status: string; customer?: { phone?: string } }> = ordersRes.data || [];
+
         // Calculate pending orders
-        const pending = orders.filter((o: { status: string }) => o.status === 'pending' || o.status === 'processing').length;
-        // Calculate unique customers
-        const phones = orders.map((o: { customer?: { phone?: string } }) => o.customer?.phone).filter(Boolean);
+        const pending = orders.filter((o) => o.status === 'pending' || o.status === 'processing').length;
+        // Calculate unique customers (numéros de téléphone valides uniquement)
+        const phones = orders
+          .map((o) => o.customer?.phone)
+          .filter((phone): phone is string => Boolean(phone));
         const uniqueClients = new Set(phones).size;
 
         setStats({
           pendingOrders: pending,
-          productsCount: products.length,
+          productsCount: productsTotal,
           uniqueCustomers: uniqueClients
         });
       } catch (error) {

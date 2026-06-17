@@ -10,8 +10,9 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/db';
-import { requireAdmin, AuthError } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 import { withCors, corsPreflight } from '@/lib/cors';
+import { withErrorHandling } from '@/lib/api-handler';
 import { paginate } from '@/lib/serialize';
 
 interface CustomerAggregate {
@@ -28,14 +29,9 @@ export async function OPTIONS(req: NextRequest) {
   return corsPreflight(req.headers.get('origin'));
 }
 
-export async function GET(req: NextRequest) {
+export const GET = withErrorHandling(async (req: NextRequest) => {
   const origin = req.headers.get('origin');
-  try {
-    await requireAdmin(req);
-  } catch (err) {
-    if (err instanceof AuthError) return withCors(NextResponse.json({ detail: err.message }, { status: err.status }), origin);
-    throw err;
-  }
+  await requireAdmin(req);
 
   const { searchParams } = req.nextUrl;
   const isExport = searchParams.get('export') === 'true';
@@ -80,4 +76,4 @@ export async function GET(req: NextRequest) {
   const items = customers.slice(skip, skip + limit);
 
   return withCors(NextResponse.json(paginate(items, total, page, limit)), origin);
-}
+});
