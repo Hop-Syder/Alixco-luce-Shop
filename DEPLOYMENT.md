@@ -83,12 +83,7 @@ L'application requiert un bucket public nommé `alixco-luxe-uploads`.
 
 ## 4️⃣ Étape 4 : Post-Déploiement
 
-1. **Création du compte Admin de production**
-   Depuis le répertoire `frontend` en local (en pointant vos variables d'environnement vers la DB de production) ou via une requête API sécurisée, exécutez le script d'initialisation du compte administrateur :
-   ```bash
-   DATABASE_URL="votre_url_de_production" npm run create:admin
-   ```
-2. **Tester les flux fonctionnels**
+1. **Tester les flux fonctionnels**
    - Testez l'upload d'image depuis l'admin pour vérifier que le bucket Supabase `alixco-luxe-uploads` accepte bien les requêtes.
    - Vérifiez que les catégories s'affichent correctement côté client.
    - Simulez une commande pour valider la génération des numéros de commande au format `ALX-XXXX` et la sauvegarde en base.

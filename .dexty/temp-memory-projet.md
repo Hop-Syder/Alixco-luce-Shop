@@ -26,7 +26,7 @@ Le backend FastAPI + MongoDB a été entièrement remplacé et décommissionné 
 - **Langage** : TypeScript strict.
 
 ## 🔑 Accès admin de dev
-Compte créé via `npm run create:admin` (script `frontend/scripts/create-admin.ts`) : téléphone `+22900000000` / mot de passe `Admin@2026!Dev` — à changer en production.
+Compte admin de test existant : téléphone `+22900000000` / mot de passe `Admin@2026!Dev` — à changer en production.
 
 ## 📁 Modèle de données réel
 `User`/`Address`, `Category` (catégories d'affichage homepage, pas de FK avec `Product.category` qui reste une string libre), `Product` (bilingue FR/EN, champs SEO), `FeaturedProduct`, `Order`/`OrderItem` (`whatsappMessage`, `orderNumber` au format `ALX-XXXX`), `Testimonial`, `Setting` (clé/valeur JSON générique : `home_page`, `whatsapp_number`).

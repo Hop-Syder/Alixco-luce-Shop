@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "migrate:mongo": "tsx scripts/migrate-mongo-to-postgres.ts",
-    "create:admin": "tsx scripts/create-admin.ts",
+    "seed:mock-products": "tsx scripts/seed-mock-products.ts",
     "postinstall": "prisma generate"
   },
   "dependencies": {

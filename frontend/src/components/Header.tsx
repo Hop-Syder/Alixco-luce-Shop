@@ -91,29 +91,7 @@ const Header: React.FC = () => {
                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[hsl(var(--primary))] rounded-full border border-black"></span>
               </button>
 
-              {/* Actions de compte (Desktop) */}
-              <div className="hidden md:flex items-center space-x-4">
-                {isAuthenticated ? (
-                  <>
-                    <Link href={user?.role === 'admin' ? '/admin' : '/dashboard'} className="text-sm uppercase tracking-widest font-semibold text-stone-300 hover:text-[hsl(var(--primary))] transition-colors flex items-center">
-                      <User className="w-4 h-4 mr-2" />
-                      {t('nav.account')}
-                    </Link>
-                    <button type="button" aria-label={t('nav.logout')} onClick={logout} className="text-stone-400 hover:text-red-500 transition-colors p-2" title={t('nav.logout')}>
-                      <LogOut className="w-5 h-5" strokeWidth={1.5} />
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link href="/login" className="text-sm uppercase tracking-widest font-medium text-stone-400 hover:text-[hsl(var(--text-main))] transition-colors">
-                      {t('nav.login')}
-                    </Link>
-                    <Link href="/register" className="btn-primary text-xs uppercase tracking-widest px-5 py-2.5">
-                      {t('nav.register')}
-                    </Link>
-                  </>
-                )}
-              </div>
+
 
               {/* Action de compte supprimée du Header Top (Mobile) et déplacée en bas */}
 
@@ -141,12 +119,7 @@ const Header: React.FC = () => {
       <nav className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] max-w-[380px] bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full z-50 shadow-2xl px-2">
         <div className="flex justify-between items-center h-[60px] px-2">
           {[
-            ...navLinks,
-            { 
-              name: isAuthenticated ? t('nav.account') : t('nav.login'), 
-              path: isAuthenticated ? (user?.role === 'admin' ? '/admin' : '/dashboard') : '/login', 
-              icon: User 
-            }
+            ...navLinks
           ].map((link) => {
             const isActive = pathname === link.path;
             const Icon = link.icon;
