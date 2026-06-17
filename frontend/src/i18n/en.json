@@ -46,7 +46,8 @@
     "cta": "Take advantage of the offer",
     "days": "Days",
     "hours": "Hours",
-    "minutes": "Minutes"
+    "minutes": "Minutes",
+    "seconds": "Seconds"
   },
   "testimonials": {
     "subtitle": "Testimonials",

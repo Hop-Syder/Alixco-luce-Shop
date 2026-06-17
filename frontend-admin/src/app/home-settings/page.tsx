@@ -37,6 +37,7 @@ interface PromoSettings {
   cta_text: string;
   cta_link: string;
   image: string;
+  countdown_end?: string;
 }
 
 interface HomePageSettings {
@@ -333,6 +334,17 @@ export default function HomeSettingsEditor() {
                   type="text"
                   value={settings.promo.cta_text}
                   onChange={(e) => handlePromoChange('cta_text', e.target.value)}
+                  className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
+                  required
+                />
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold text-stone-300 mb-2">Fin de la promotion (Date et heure)</label>
+                <input
+                  type="datetime-local"
+                  value={settings.promo.countdown_end ? new Date(settings.promo.countdown_end).toISOString().slice(0, 16) : ''}
+                  onChange={(e) => handlePromoChange('countdown_end', new Date(e.target.value).toISOString())}
                   className="w-full border border-white/10 rounded-xl p-3 focus:ring-2 focus:ring-[hsl(var(--primary))] outline-none bg-[hsl(var(--surface-neutral))] text-white"
                   required
                 />

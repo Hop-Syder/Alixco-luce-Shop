@@ -38,6 +38,7 @@ const DEFAULT_HOME_SETTINGS = {
     cta_text: "Profiter de l'offre",
     cta_link: '/products?collection=limited',
     image: '/background.jpg',
+    countdown_end: '2026-12-31T23:59:00',
   },
 };
 

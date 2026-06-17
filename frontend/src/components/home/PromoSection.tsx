@@ -25,11 +25,13 @@ interface PromoData {
   cta_text: string;
   cta_link: string;
   image: string;
+  countdown_end?: string;
 }
 
 export function PromoSection() {
   const { t } = useTranslation();
   const [promoData, setPromoData] = useState<PromoData | null>(null);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const fetchPromoData = async () => {
@@ -44,6 +46,34 @@ export function PromoSection() {
     };
     fetchPromoData();
   }, []);
+
+  useEffect(() => {
+    // Default end date if none is provided: 3 days from now
+    const defaultEndDate = new Date();
+    defaultEndDate.setDate(defaultEndDate.getDate() + 3);
+    
+    const endDateString = promoData?.countdown_end || defaultEndDate.toISOString();
+    const endDate = new Date(endDateString).getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = endDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      } else {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000),
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [promoData?.countdown_end]);
 
   return (
     <section className="py-12 w-full relative">
@@ -112,26 +142,33 @@ export function PromoSection() {
             
             {/* Countdown / Visual Element */}
             <div className="flex justify-center lg:justify-end w-full">
-              <div className="glass-card p-6 sm:p-10 md:p-12 flex items-center justify-center gap-3 sm:gap-6 md:gap-8 text-center border border-white/10 backdrop-blur-md relative overflow-hidden group w-full max-w-lg">
+              <div className="glass-card p-4 sm:p-6 md:p-8 flex items-center justify-center gap-2 sm:gap-4 md:gap-6 text-center border border-white/10 backdrop-blur-md relative overflow-hidden group w-full max-w-xl">
                 <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
-                <div className="flex flex-col relative z-10">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">02</span>
-                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">{t('promo.days')}</span>
+                <div className="flex flex-col relative z-10 w-12 sm:w-16 md:w-20">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-heading text-white tabular-nums tracking-tighter">{String(timeLeft.days).padStart(2, '0')}</span>
+                  <span className="text-[9px] sm:text-[10px] text-[hsl(var(--primary))] uppercase tracking-[0.2em] mt-2 font-bold">{t('promo.days')}</span>
                 </div>
                 
-                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white/20 relative z-10 -mt-6 sm:-mt-8">:</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-light text-white/20 relative z-10 -mt-4 sm:-mt-6">:</span>
                 
-                <div className="flex flex-col relative z-10">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">14</span>
-                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">{t('promo.hours')}</span>
+                <div className="flex flex-col relative z-10 w-12 sm:w-16 md:w-20">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-heading text-white tabular-nums tracking-tighter">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-[9px] sm:text-[10px] text-[hsl(var(--primary))] uppercase tracking-[0.2em] mt-2 font-bold">{t('promo.hours')}</span>
                 </div>
                 
-                <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white/20 relative z-10 -mt-6 sm:-mt-8">:</span>
+                <span className="text-2xl sm:text-3xl md:text-4xl font-light text-white/20 relative z-10 -mt-4 sm:-mt-6">:</span>
                 
-                <div className="flex flex-col relative z-10">
-                  <span className="text-4xl sm:text-5xl md:text-6xl font-heading text-white tabular-nums tracking-tighter">45</span>
-                  <span className="text-[10px] sm:text-xs text-[hsl(var(--primary))] uppercase tracking-[0.2em] sm:tracking-[0.3em] mt-2 sm:mt-4 font-bold">{t('promo.minutes')}</span>
+                <div className="flex flex-col relative z-10 w-12 sm:w-16 md:w-20">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-heading text-white tabular-nums tracking-tighter">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-[9px] sm:text-[10px] text-[hsl(var(--primary))] uppercase tracking-[0.2em] mt-2 font-bold">{t('promo.minutes')}</span>
+                </div>
+
+                <span className="text-2xl sm:text-3xl md:text-4xl font-light text-white/20 relative z-10 -mt-4 sm:-mt-6">:</span>
+                
+                <div className="flex flex-col relative z-10 w-12 sm:w-16 md:w-20">
+                  <span className="text-3xl sm:text-4xl md:text-5xl font-heading text-white tabular-nums tracking-tighter">{String(timeLeft.seconds).padStart(2, '0')}</span>
+                  <span className="text-[9px] sm:text-[10px] text-[hsl(var(--primary))] uppercase tracking-[0.2em] mt-2 font-bold">{t('promo.seconds') || 'SECS'}</span>
                 </div>
               </div>
             </div>

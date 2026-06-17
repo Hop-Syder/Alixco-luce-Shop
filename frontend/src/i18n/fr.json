@@ -46,7 +46,8 @@
     "cta": "Profiter de l'offre",
     "days": "Jours",
     "hours": "Heures",
-    "minutes": "Minutes"
+    "minutes": "Minutes",
+    "seconds": "Secondes"
   },
   "testimonials": {
     "subtitle": "Avis Clients",
