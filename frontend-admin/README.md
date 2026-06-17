@@ -30,6 +30,7 @@ Interface d'administration pour la gestion complète de la boutique **Alixco Lux
 - ✅ **Analytics** : Tableaux de bord et statistiques
 
 **Stack Technique** :
+
 - **Framework** : Next.js 15 avec App Router
 - **UI Framework** : React 19 + Tailwind CSS v4
 - **State Management** : Zustand + React Context
@@ -49,14 +50,25 @@ Avant de commencer, assurez-vous d'avoir installé :
 | **Git** | Dernière | [git-scm.com](https://git-scm.com) |
 
 **Vérifier les versions** :
+
 ```bash
 node --version   # v18.17.0 ou supérieur
 npm --version    # 9.6.0 ou supérieur
 ```
 
 **Accès Backend** :
+
 - L'API backend doit être accessible (par défaut `http://localhost:8000`)
 - Assurez-vous que le backend est en cours d'exécution avant de commencer le dev
+
+## 🔑 Accès par défaut (Test / Développement)
+
+Pour accéder au tableau de bord, utilisez les identifiants administrateur suivants :
+
+- **Numéro de téléphone** : `+22900000000`
+- **Mot de passe** : `Admin@2026!Dev`
+
+> **⚠️ Attention :** Pensez à modifier ces identifiants ou à supprimer ce compte temporaire une fois en production.
 
 ## 🚀 Installation
 
@@ -74,6 +86,7 @@ npm install
 ```
 
 Cela installe toutes les dépendances listées dans `package.json` :
+
 - Next.js et React
 - Dépendances UI (Tailwind CSS, Lucide)
 - Dépendances formulaires et validation (React Hook Form, Zod)
@@ -132,6 +145,7 @@ SESSION_TIMEOUT=3600000
 ### Variables Sensibles
 
 ⚠️ **IMPORTANT** :
+
 - Ne committez JAMAIS de fichiers `.env.local` ou `.env.production.local`
 - Ils sont déjà dans `.gitignore`
 - En production, définissez les variables via votre plateforme de déploiement
@@ -196,6 +210,7 @@ npm run dev
 Accédez à [http://localhost:3000](http://localhost:3000)
 
 **Caractéristiques** :
+
 - **Hot Module Replacement (HMR)** : Changements en temps réel
 - **Fast Refresh** : État préservé lors des changements
 - **Turbopack** : Bundler ultra-rapide (4x plus rapide que Webpack)
@@ -203,6 +218,7 @@ Accédez à [http://localhost:3000](http://localhost:3000)
 ### IDE & Extensions Recommandées
 
 **VS Code** :
+
 ```json
 {
   "extensions": [
@@ -215,6 +231,7 @@ Accédez à [http://localhost:3000](http://localhost:3000)
 ```
 
 **IntelliJ** :
+
 - TypeScript & JavaScript
 - ESLint
 - Tailwind CSS
@@ -252,6 +269,7 @@ npm run build
 ```
 
 Cela :
+
 1. Compile TypeScript
 2. Exécute ESLint
 3. Optimise les images et assets
@@ -290,6 +308,7 @@ Accédez à [http://localhost:3000](http://localhost:3000)
 ### Option 1 : Vercel (Recommandé)
 
 **Avantages** :
+
 - Créateurs de Next.js
 - Déploiement instantané depuis Git
 - Prévisualisation automatique
@@ -304,6 +323,7 @@ Accédez à [http://localhost:3000](http://localhost:3000)
    - Accédez à Project Settings → Environment Variables
    - Ajoutez toutes les variables du `.env.production.local`
 4. **Déployer** :
+
    ```bash
    # Depuis GitHub (automatique)
    # ou via CLI
@@ -677,6 +697,7 @@ npm audit fix          # Corriger les failles
 ## 📧 Support & Contribution
 
 Pour des questions ou problèmes :
+
 1. Consultez la [documentation Next.js](https://nextjs.org/docs)
 2. Vérifiez les issues GitHub existantes
 3. Créez une nouvelle issue avec détails et logs

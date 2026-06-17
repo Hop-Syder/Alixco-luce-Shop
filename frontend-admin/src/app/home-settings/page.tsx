@@ -95,8 +95,17 @@ export default function HomeSettingsEditor() {
     const loadingToast = toast.loading('Enregistrement des modifications...');
 
     try {
+      // Les boutons de Hero sont verrouillés par demande
+      const heroPayload = {
+        ...settings.hero,
+        cta_primary_text: "Découvrir la Collection",
+        cta_primary_link: "/products",
+        cta_secondary_text: "En savoir plus",
+        cta_secondary_link: "/about",
+      };
+
       const response = await api.put('/page-settings/home', {
-        hero: settings.hero,
+        hero: heroPayload,
         promo: settings.promo,
       }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -221,23 +230,21 @@ export default function HomeSettingsEditor() {
                 <h4 className="text-sm font-bold text-white mb-4">Bouton Principal (CTA Or)</h4>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton <span className="text-stone-500 text-[10px]">(Verrouillé)</span></label>
                     <input
                       type="text"
-                      value={settings.hero.cta_primary_text}
-                      onChange={(e) => handleHeroChange('cta_primary_text', e.target.value)}
-                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
-                      required
+                      value="Découvrir la Collection"
+                      disabled
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none bg-[hsl(var(--surface-neutral))]/50 text-stone-500 cursor-not-allowed"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection <span className="text-stone-500 text-[10px]">(Verrouillé)</span></label>
                     <input
                       type="text"
-                      value={settings.hero.cta_primary_link}
-                      onChange={(e) => handleHeroChange('cta_primary_link', e.target.value)}
-                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
-                      required
+                      value="/products"
+                      disabled
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none bg-[hsl(var(--surface-neutral))]/50 text-stone-500 cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -247,23 +254,21 @@ export default function HomeSettingsEditor() {
                 <h4 className="text-sm font-bold text-white mb-4">Bouton Secondaire (CTA Sombre)</h4>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Libellé du bouton <span className="text-stone-500 text-[10px]">(Verrouillé)</span></label>
                     <input
                       type="text"
-                      value={settings.hero.cta_secondary_text}
-                      onChange={(e) => handleHeroChange('cta_secondary_text', e.target.value)}
-                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
-                      required
+                      value="En savoir plus"
+                      disabled
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none bg-[hsl(var(--surface-neutral))]/50 text-stone-500 cursor-not-allowed"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection</label>
+                    <label className="block text-xs font-semibold text-stone-400 mb-1">Lien de redirection <span className="text-stone-500 text-[10px]">(Verrouillé)</span></label>
                     <input
                       type="text"
-                      value={settings.hero.cta_secondary_link}
-                      onChange={(e) => handleHeroChange('cta_secondary_link', e.target.value)}
-                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none focus:ring-2 focus:ring-[hsl(var(--primary))] bg-[hsl(var(--surface-neutral))] text-white"
-                      required
+                      value="/about"
+                      disabled
+                      className="w-full border border-white/10 rounded-lg p-2.5 text-sm outline-none bg-[hsl(var(--surface-neutral))]/50 text-stone-500 cursor-not-allowed"
                     />
                   </div>
                 </div>

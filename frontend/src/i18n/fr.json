@@ -36,14 +36,14 @@
     "discover": "Découvrir la pièce"
   },
   "promo": {
-    "badge": "Offre Exclusive",
-    "title1": "Créations Uniques",
-    "title2": "Séries Limitées",
-    "description": "Découvrez notre collection capsule exclusive gravée sur bois précieux. Chaque pièce est numérotée et livrée avec son certificat d'authenticité.",
+    "badge": "Offre Limitée",
+    "title1": "Collection Éphémère",
+    "title2": "-20% sur la Décoration",
+    "description": "Découvrez des pièces gravées exclusives en édition très limitée. Offre valable jusqu'à épuisement des stocks.",
     "feature1": "Bois précieux labellisé",
     "feature2": "Numérotation unique",
     "feature3": "Certificat fourni",
-    "cta": "Voir la collection",
+    "cta": "Profiter de l'offre",
     "days": "Jours",
     "hours": "Heures",
     "minutes": "Minutes"

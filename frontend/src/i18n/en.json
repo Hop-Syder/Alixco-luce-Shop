@@ -36,14 +36,14 @@
     "discover": "Discover the piece"
   },
   "promo": {
-    "badge": "Exclusive Offer",
-    "title1": "Unique Creations",
-    "title2": "Limited Editions",
-    "description": "Discover our exclusive capsule collection engraved on precious wood. Each piece is numbered and delivered with its certificate of authenticity.",
+    "badge": "Limited Offer",
+    "title1": "Ephemeral Collection",
+    "title2": "-20% on Decoration",
+    "description": "Discover exclusive engraved pieces in a very limited edition. Offer valid while stocks last.",
     "feature1": "Certified precious wood",
     "feature2": "Unique numbering",
     "feature3": "Certificate included",
-    "cta": "View collection",
+    "cta": "Take advantage of the offer",
     "days": "Days",
     "hours": "Hours",
     "minutes": "Minutes"
