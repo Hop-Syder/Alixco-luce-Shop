@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "migrate:mongo": "tsx scripts/migrate-mongo-to-postgres.ts",
-    "create:admin": "tsx scripts/create-admin.ts"
+    "create:admin": "tsx scripts/create-admin.ts",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
