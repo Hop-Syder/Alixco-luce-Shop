@@ -84,6 +84,9 @@
     "loading": "Loading..."
   },
   "products": {
+    "subtitle": "Our Collection",
+    "title1": "Exclusive",
+    "title2": "Catalog",
     "not_found": "Creation not found",
     "back_to_catalog": "Back to catalog",
     "description": "Description",

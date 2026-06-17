@@ -84,6 +84,9 @@
     "loading": "Chargement..."
   },
   "products": {
+    "subtitle": "Notre Collection",
+    "title1": "Catalogue",
+    "title2": "Exclusif",
     "not_found": "Création introuvable",
     "back_to_catalog": "Retour au catalogue",
     "description": "Description",
