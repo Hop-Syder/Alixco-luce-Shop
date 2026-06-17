@@ -21,6 +21,13 @@
 @theme inline {
   --font-sans: 'Jost', sans-serif;
   --font-heading: 'Marcellus', serif;
+  --animate-shimmer: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 body {
