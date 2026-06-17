@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -iE \"^jose$|^bcryptjs$|^mongodb$|^cloudinary$\")",
+      "Bash(npm install *)",
+      "Bash(npx prisma *)",
+      "Bash(echo \"EXIT_CODE=$?\")"
+    ]
+  }
+}

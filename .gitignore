@@ -141,11 +141,4 @@ docker-compose.override.yml
 
 # ─── DIVERS ──────────────────────────────────────────────────
 
-*.bak
-*.tmp
-*.swp
-coverage/
-.nyc_output/
-hero-video
-work-0d7d44b3-2e99-4435-a3b0-fdf8be0d3449
-work-dbbf3c4a-d5dd-482e-8677-0c8dccc7accb
+.agents/

@@ -1,0 +1,136 @@
+/**
+ * @author @hopsyder
+ * @organization Nexus Partners
+ * @description Prisma schema for Alixco-luce Shop — gravure & découpe laser sur-mesure
+ * @created 2026-06-17
+ * @updated 2026-06-17
+ * 🌐 ceo.nexuspartners.xyz
+ * 📧 daoudaabassichristian@gmail.com
+ */
+
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String?   @unique
+  phone           String    @unique
+  full_name       String
+  role            String    @default("customer") // customer, artisan, admin
+  hashed_password String?
+  addresses       Address[]
+  orders          Order[]
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+}
+
+model Address {
+  id      String @id @default(uuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  street  String
+  city    String
+  country String  @default("Bénin")
+  details String?
+}
+
+// Catégories d'affichage de la page d'accueil (pas une FK pour Product.category)
+model Category {
+  id              String  @id @default(uuid())
+  title_fr        String
+  title_en        String
+  desc_fr         String
+  desc_en         String
+  img             String
+  order           Int     @default(0)
+  seo_title_fr    String?
+  seo_title_en    String?
+  seo_desc_fr     String?
+  seo_desc_en     String?
+  seo_keywords_fr String?
+  seo_keywords_en String?
+}
+
+model Product {
+  id              String      @id @default(uuid())
+  name_fr         String
+  name_en         String
+  price           Float
+  image           String
+  stock           Int         @default(0)
+  category        String      // slug libre, ex: "tableaux", "bijoux" — pas de FK
+  seo_title_fr    String?
+  seo_title_en    String?
+  seo_desc_fr     String?
+  seo_desc_en     String?
+  seo_keywords_fr String?
+  seo_keywords_en String?
+  orderItems      OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+// Mise en avant produits sur la page d'accueil (prix déjà formatés en texte)
+model FeaturedProduct {
+  id       String  @id @default(uuid())
+  name_fr  String
+  name_en  String
+  price_fr String
+  price_en String
+  badge_fr String?
+  badge_en String?
+  img      String
+  order    Int     @default(0)
+}
+
+model Order {
+  id              String      @id @default(uuid())
+  orderNumber     String      @unique
+  userId          String?
+  user            User?       @relation(fields: [userId], references: [id])
+  customerName    String
+  customerEmail   String
+  customerPhone   String
+  customerAddress String
+  total           Float
+  status          String      @default("pending") // pending, processing, shipped, delivered, cancelled
+  whatsappMessage String
+  items           OrderItem[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  notes     String  @default("")
+}
+
+model Testimonial {
+  id          String  @id @default(uuid())
+  name        String
+  role_fr     String
+  role_en     String
+  text_fr     String
+  text_en     String
+  rating      Int     @default(5)
+  is_featured Boolean @default(false)
+  is_approved Boolean @default(false)
+}
+
+// Table générique clé/valeur — remplace la collection Mongo "page_settings"
+// et la variable d'env WHATSAPP_NUMBER. Clés utilisées : "home_page", "whatsapp_number".
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
