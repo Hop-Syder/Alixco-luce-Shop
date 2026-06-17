@@ -1,18 +1,6 @@
 version: '3.8'
 
-services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: iroko_mobilier_postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: iroko_db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespassword
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    restart: always
-
-volumes:
-  postgres_data:
+# Plus de service de base de données local : PostgreSQL est hébergé sur Supabase
+# (voir frontend/.env.local : DATABASE_URL / DIRECT_URL). L'ancien service `mongodb`
+# (backend FastAPI, décommissionné) a été retiré.
+services: {}
